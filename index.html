@@ -67,8 +67,12 @@
                 <h1>TrovaTreno</h1>
             </header>
             <article class="content scrollable header">
-                <input type="text" name="numeroTreno" placeholder="Inserisci il numero del treno" />
-                <button type="button" id="btn-search">Cerca!</button>
+                <div>
+                    <br>
+                    <input type="text" name="numeroTreno" placeholder="Inserisci il numero del treno" />
+                    <button type="button" id="btn-search">Cerca!</button>
+                    <br>
+                </div>
             </article>
         </section>
         
@@ -96,10 +100,9 @@
                 </div>
 
                 <div id="ultima">
-                    <h2>Ultima fermata:</h2>
                     <p id="stazioneUltima"><span></span></p>
-                    <p id="arrivoProgrammatoUltima"><span></span></p>
-                    <p id="arrivoEffettivoUltima"><span></span></p>
+                    <p id="arrivoProgrammatoUltima">Programmato: <span></span></p>
+                    <p id="arrivoEffettivoUltima">Effettivo: <span></span></p>
                 </div>                
                 
                 <div id="arrivo">

@@ -8,10 +8,7 @@ $( document ).ready( function(){
 
         /* Catching value of the form with the 'name=numeroTreno' attribute set */
         numeroTreno = $( 'input[name=numeroTreno]' ).val();
-
-        /* Deleting user's input, once cought */
-        //$( 'input[name=numeroTreno]' ).val( '' );
-
+        console.log(numeroTreno);
         /* Def+init of a XMLHttpRequest object. Passing the needed JSON-object */
         xhr = new XMLHttpRequest( {mozSystem: true} );
 
@@ -39,6 +36,8 @@ $( document ).ready( function(){
                                                 .replace( /&/g, '&amp;' )
                                                 .replace( /'/g, '"' )
                                                 .replace( /<\?(.*)\?>/g, '' );
+                console.log(scrapedSource);
+                
                 /* ... hence parse it ...*/
                 scrapedSourceDoc = $.parseXML( scrapedSource );
 
@@ -55,10 +54,12 @@ $( document ).ready( function(){
                 /* ... then catch elements by their tag, id, class, etc. */
 
                 nomeTreno = $scrapedSource.find( 'h1' ).text();
-
+                console.log(nomeTreno);
+                
                 stazioni = $scrapedSource.find( '.corpocentrale h2' ).map(
                     function( i, el ) { return $( el ).text(); }
                 );
+				console.log(stazioni);
 				
 				if(stazioni.length<3){
 					stazionePartenza = stazioni[0];
@@ -74,7 +75,8 @@ $( document ).ready( function(){
                 orari = $scrapedSource.find( '.corpocentrale p strong' ).map(
                     function( i, el ) { return $( el ).text(); }
                 );
-
+                console.log(orari);
+                
                 partenzaProgrammata = orari[ 0 ];
 
                 partenzaEffettiva = orari[ 1 ];
@@ -84,7 +86,8 @@ $( document ).ready( function(){
                 arrivoPrevisto = orari[ 3 ];
 
                 binarioPrevistoPartenza = scrapedSource.match( /<!-- ORIGINE -->(.*?)Previsto:<br\/> (\d{1,2}|--)/ )[ 2 ];
-
+                console.log(binarioPrevistoPartenza);
+                
                 /* 
 		 * When more info's about the train is loaded, source changes,
 		 * wrapping the effective binary in a <strong> tag.
@@ -100,40 +103,44 @@ $( document ).ready( function(){
                     binarioRealeArrivo =
                        $scrapedSource.find( '.corpocentrale > strong' ).last().text();
                 }
-
+                console.log(binarioRealePartenza + ' ' + binarioRealeArrivo);
+                
                 binarioPrevistoArrivo = scrapedSource.match( /<!-- DESTINAZIONE -->(.*?)Previsto:<br\/> (\d{1,2}|--)/ )[ 2 ];
-
+                console.log(binarioPrevistoArrivo);
+                
                 situazioneCorrente =
 		   $scrapedSource.find( '.evidenziato > strong' ).text().replace( /<br\/>?/, '' ).replace( /&#039;/, '\'' );
-
+                console.log(situazioneCorrente);
+                
                 /* Replace text wrapped by span's, according to the scraped data's */
 
-                $( '#partenza > nomeTreno > span' ).text( nomeTreno );
+                $( '#nomeTreno > span' ).text( nomeTreno );
 
-                $( '#partenza > stazionePartenza > span' ).text( stazionePartenza );
+                $( '#stazionePartenza > span' ).text( stazionePartenza );
 
-                $( '#partenza > partenzaProgrammata > span' ).text( partenzaProgrammata );
+                $( '#partenzaProgrammata > span' ).text( partenzaProgrammata );
 
-                $( '#partenza > partenzaEffettiva > span' ).text( partenzaEffettiva );
+                $( '#partenzaEffettiva > span' ).text( partenzaEffettiva );
 
-                $( '#partenza > binarioPrevistoPartenza > span' ).text( binarioPrevistoPartenza );
+                $( '#binarioPrevistoPartenza > span' ).text( binarioPrevistoPartenza );
 
-                $( '#partenza > binarioRealePartenza > span' ).text( binarioRealePartenza );
+                $( '#binarioRealePartenza > span' ).text( binarioRealePartenza );
 				
-                $( '#arrivo > stazioneArrivo > span' ).text( stazioneArrivo );
+                $( '#stazioneArrivo > span' ).text( stazioneArrivo );
 
-                $( '#arrivo > arrivoProgrammato > span' ).text( arrivoProgrammato );
+                $( '#arrivoProgrammato > span' ).text( arrivoProgrammato );
 
-                $( '#arrivo > arrivoPrevisto > span' ).text( arrivoPrevisto );
+                $( '#arrivoPrevisto > span' ).text( arrivoPrevisto );
 
-                $( '#arrivo > binarioPrevistoArrivo > span' ).text( binarioPrevistoArrivo );
+                $( '#binarioPrevistoArrivo > span' ).text( binarioPrevistoArrivo );
                
-                $( '#arrivo > binarioRealeArrivo > span' ).text( binarioRealeArrivo );
+                $( '#binarioRealeArrivo > span' ).text( binarioRealeArrivo );
 				
-				if(orari>=6) {
-					$( '#ultima > stazioneUltima > span' ).text( "..." );
-					$( '#ultima > arrivoProgrammatoUltima> span' ).text( arrivoProgrammatoUltima );
-					$( '#ultima > arrivoEffettivoUltima > span' ).text( arrivoPrevistoUltima );
+				if(stazioni.length >= 3) {
+				    $('#ultima').prepend("<h2>Ultima fermata:</h2>");
+					$( '#stazioneUltima > span' ).text( stazioni[1] );
+					$( '#arrivoProgrammatoUltima> span' ).text( orari[2] );
+					$( '#arrivoEffettivoUltima > span' ).text( orari[3] );
 			    }
 		
 		$( '#situazioneCorrente > span' ).text( situazioneCorrente );
