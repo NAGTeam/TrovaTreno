@@ -2,7 +2,7 @@
 String.prototype.shrinkHTML = function() { return this.replace( /\s+/g, ' ' ); };
 
 $( document ).ready( function(){
-	if( localforage.getItem( 0 ) === null ) { initDB(); }
+	 initDB(); 
     /* Using jQuery event-handler for the 'btn-search' object */
     $( '#btn-search' ).click( function(){
 
