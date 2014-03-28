@@ -125,13 +125,12 @@ $( document ).ready( function(){
 		   $scrapedSource.find( '.evidenziato > strong' ).text().replace( /<br\/>?/, '' ).replace( /&#039;/, '\'' );
                 alert( situazioneCorrente );
 
-                t = { 'id' : numeroTreno,
-                      'stazionePartenza' : stazionePartenza,
-                      'stazioneArrivo' :  stazioneArrivo,
-                      'partenzaProgrammata' : partenzaProgrammata,
-                      'arrivoProgrammato' : arrivoProgrammato,
-                      'cercato' : Date.now()
-                };
+                t['id'] = numeroTreno;
+                t['stazionePartenza'] = stazionePartenza;
+                t['stazioneArrivo'] = stazioneArrivo;
+                t['partenzaProgrammata'] = partenzaProgrammata;
+                t['arrivoProgrammato'] = arrivoProgrammato;
+                t['cercato'] = Date.now();
 
                 alert( JSON.stringify(t) );
 
