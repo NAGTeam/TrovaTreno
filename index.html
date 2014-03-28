@@ -28,6 +28,10 @@
 		
         
         <style>
+            [data-type="list"] div p {
+                margin-left: 2rem;
+            }
+            
             [data-position="center"] { height: 100%; }
 
             [data-position="right"] {
@@ -88,36 +92,25 @@
                 </button>
                 <h1 id="nomeTreno"><span></span></h1>
             </header>
-            <article class="content scrollable header">
-            
+            <article class="content scrollable header">           
                 <div>
                     <p id="situazioneCorrente"><span></span></p>
                 </div>
 
-                <div id="partenza">
-                    <h2>Partenza:</h2>
-                    <p id="stazionePartenza"><span></span></p>
-                    <p id="partenzaProgrammata">Programmata: <span></span></p>
-                    <p id="partenzaEffettiva">Effettiva: <span></span></p>
-                    </ul>
-                    <p id="binarioPrevistoPartenza">Binario previsto: <span></span></p>
-                    <p id="binarioRealePartenza">Binario reale: <span></span></p>
-                </div>
+                <section data-type="list">
+                    <header>Partenza</header>
+                    <div id="partenza">
+                        <!-- ... -->
+                    </div>
 
-                <div id="ultima">
-                    <p id="stazioneUltima"><span></span></p>
-                    <p id="arrivoProgrammatoUltima">Programmato: <span></span></p>
-                    <p id="arrivoEffettivoUltima">Effettivo: <span></span></p>
-                </div>                
-                
-                <div id="arrivo">
-                    <h2>Arrivo:</h2>
-                    <p id="stazioneArrivo"><span></span></p>
-                    <p id="arrivoProgrammato">Programmato: <span></span></p>
-                    <p id="arrivoPrevisto">Previsto: <span></span></p>
-                    <p id="binarioPrevistoArrivo">Binario previsto: <span></span></p>
-                    <p id="binarioRealeArrivo">Binario reale: <span></span></p>
-                </div>
+                    <div id="ultima">
+                        <!-- ... -->
+                    </div>                
+                    <header>Arrivo</header>
+                    <div id="arrivo">
+                        <!-- ... -->
+                    </div>
+                </section>
 
             </article>
     </body>
