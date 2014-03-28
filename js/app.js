@@ -2,7 +2,11 @@
 String.prototype.shrinkHTML = function() { return this.replace( /\s+/g, ' ' ); };
 
 $( document ).ready( function(){
-
+	alert(localforage.get(0));
+	if(localforage.get(0)==null){
+		initDB();
+	}
+	
     /* Using jQuery event-handler for the 'btn-search' object */
     $( '#btn-search' ).click( function(){
 
@@ -111,6 +115,19 @@ $( document ).ready( function(){
                 situazioneCorrente =
 		   $scrapedSource.find( '.evidenziato > strong' ).text().replace( /<br\/>?/, '' ).replace( /&#039;/, '\'' );
                 console.log(situazioneCorrente);
+				
+				t={
+					'id' : numeroTreno,
+					'stazionePartenza' : stazionePartenza,
+					'stazioneArrivo' :  stazioneArrivo,
+					'partenzaProgrammata' : partenzaProgrammata,
+					'arrivoProgrammato' : arrivoProgrammato,
+					'cercato' : Date.now();
+				};
+				
+				alert(JSON.stringify(t));
+				
+				addTreno(t);
                 
                 /* Replace text wrapped by span's, according to the scraped data's */
 
