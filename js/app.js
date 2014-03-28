@@ -3,25 +3,32 @@
 $( document ).ready( function() {
 
     if ( !navigator.onLine ) { alert( 'Not online ...'); }
+	
+	$('#btn-search').click(function (){
+		
+		numeroTreno=$('input[nome=numeroTreno]').val();
 
-    myRequest = new XMLHttpRequest( {mozSystem: true} );
+		myRequest = new XMLHttpRequest( {mozSystem: true} );
+		
+		parameters='numeroTreno='+numeroTreno;
+		baseUrl = 'http://mobile.viaggiatreno.it/vt_pax_internet/mobile'+param;
 
-    myRequest.open( 'GET', 'http://mobile.viaggiatreno.it/vt_pax_internet/mobile' );
+		myRequest.open( 'POST', baseUrl,true);
 
-    myRequest.addEventListener( 'load', function() {
+		myRequest.addEventListener( 'load', function() {
 
-        if ( myRequest.status == 200 ) {
+			if ( myRequest.status == 200 ) {
 
-            alert( 'Content loaded!' );
+				alert( 'Content loaded!' );
 
-            console.log( myRequest.responseText );
-            $( '#src' ).text( myRequest.responseText );
-        }
+				console.log( myRequest.responseText );
+				//$( '#src' ).text( myRequest.responseText );
+			}
 
-    });
+		});
 
-    alert( 'Sending ...' );
+		alert( 'Sending ...' );
 
-    myRequest.send();
-
+		myRequest.send();
+	});
 });
