@@ -3,7 +3,7 @@
    "description": "...",
    "developer": {
       "name": "nag [, say /neg]"
-   }
+   },
    "launch_path": "/index.html",
    "type": "privileged",
    "permissions": {
