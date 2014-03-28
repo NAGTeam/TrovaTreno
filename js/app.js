@@ -8,7 +8,6 @@ $( document ).ready( function(){
 
         /* Catching value of the form with the 'name=numeroTreno' attribute set */
         numeroTreno = $( 'input[name=numeroTreno]' ).val();
-        console.log(numeroTreno);
         /* Def+init of a XMLHttpRequest object. Passing the needed JSON-object */
         xhr = new XMLHttpRequest( {mozSystem: true} );
 
@@ -54,12 +53,10 @@ $( document ).ready( function(){
                 /* ... then catch elements by their tag, id, class, etc. */
 
                 nomeTreno = $scrapedSource.find( 'h1' ).text();
-                console.log(nomeTreno);
                 
                 stazioni = $scrapedSource.find( '.corpocentrale h2' ).map(
                     function( i, el ) { return $( el ).text(); }
                 );
-				console.log(stazioni);
 				
 				if(stazioni.length<3){
 					stazionePartenza = stazioni[0];
@@ -75,7 +72,6 @@ $( document ).ready( function(){
                 orari = $scrapedSource.find( '.corpocentrale p strong' ).map(
                     function( i, el ) { return $( el ).text(); }
                 );
-                console.log(orari);
                 
                 partenzaProgrammata = orari[ 0 ];
 
@@ -86,7 +82,6 @@ $( document ).ready( function(){
                 arrivoPrevisto = orari[ 3 ];
 
                 binarioPrevistoPartenza = scrapedSource.match( /<!-- ORIGINE -->(.*?)Previsto:<br\/> (\d{1,2}|--)/ )[ 2 ];
-                console.log(binarioPrevistoPartenza);
                 
                 /* 
 		 * When more info's about the train is loaded, source changes,
@@ -103,14 +98,11 @@ $( document ).ready( function(){
                     binarioRealeArrivo =
                        $scrapedSource.find( '.corpocentrale > strong' ).last().text();
                 }
-                console.log(binarioRealePartenza + ' ' + binarioRealeArrivo);
                 
                 binarioPrevistoArrivo = scrapedSource.match( /<!-- DESTINAZIONE -->(.*?)Previsto:<br\/> (\d{1,2}|--)/ )[ 2 ];
-                console.log(binarioPrevistoArrivo);
                 
                 situazioneCorrente =
 		   $scrapedSource.find( '.evidenziato > strong' ).text().replace( /<br\/>?/, '' ).replace( /&#039;/, '\'' );
-                console.log(situazioneCorrente);
 				
 				t = {};
 
@@ -132,8 +124,6 @@ $( document ).ready( function(){
                     return dd + '/' + mm + '/' + + yyyy;
 
                 })();
-
-                alert( JSON.stringify(t) );
 
                 addTreno(t);
                 
