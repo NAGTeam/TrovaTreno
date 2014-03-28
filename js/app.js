@@ -2,10 +2,10 @@
 String.prototype.shrinkHTML = function() { return this.replace( /\s+/g, ' ' ); };
 
 $( document ).ready( function(){
-	alert(localforage.get(0));
-	if(localforage.get(0)==null){
-		initDB();
-	}
+
+    alert( localforage.get( 0 ) );
+
+    //if( localforage.get( 0 ) === null ){ initDB(); }
 	
     /* Using jQuery event-handler for the 'btn-search' object */
     $( '#btn-search' ).click( function(){
@@ -63,22 +63,28 @@ $( document ).ready( function(){
                 stazioni = $scrapedSource.find( '.corpocentrale h2' ).map(
                     function( i, el ) { return $( el ).text(); }
                 );
-				console.log(stazioni);
-				
-				if(stazioni.length<3){
-					stazionePartenza = stazioni[0];
-					stazioneArrivo = stazioni[1];
+
+                console.log(stazioni);
+
+                stazionePartenza = stazioni[ 0 ];
+
+                if( stazioni.length < 3 ) {
+                    stazioneArrivo = stazioni[1];
+                } else {
+                    stazioneArrivoUltimo = stazioni[1];
+                    stazioneArrivo = stazioni[2];
                 }
-                else {
-					stazionePartenza = stazioni[0];
-					stazioneArrivoUltimo = stazioni[1];
-					stazioneArrivo = stazioni[2];
-		        }
+
+                alert( stazionePartenza );
+                alert( stazioneArrivoUltimo );
+                alert( stazioneArrivo );
+
                 /* Schedules are nested inside <div .corpocentrale><p><strong>, hence ... */
 
                 orari = $scrapedSource.find( '.corpocentrale p strong' ).map(
                     function( i, el ) { return $( el ).text(); }
                 );
+
                 console.log(orari);
                 
                 partenzaProgrammata = orari[ 0 ];
@@ -107,27 +113,29 @@ $( document ).ready( function(){
                     binarioRealeArrivo =
                        $scrapedSource.find( '.corpocentrale > strong' ).last().text();
                 }
-                console.log(binarioRealePartenza + ' ' + binarioRealeArrivo);
+
+                alert(  binarioRealePartenza );
+                alert( binarioRealeArrivo );
                 
                 binarioPrevistoArrivo = scrapedSource.match( /<!-- DESTINAZIONE -->(.*?)Previsto:<br\/> (\d{1,2}|--)/ )[ 2 ];
-                console.log(binarioPrevistoArrivo);
+
+                alert( binarioPrevistoArrivo );
                 
                 situazioneCorrente =
 		   $scrapedSource.find( '.evidenziato > strong' ).text().replace( /<br\/>?/, '' ).replace( /&#039;/, '\'' );
-                console.log(situazioneCorrente);
-				
-				t={
-					'id' : numeroTreno,
-					'stazionePartenza' : stazionePartenza,
-					'stazioneArrivo' :  stazioneArrivo,
-					'partenzaProgrammata' : partenzaProgrammata,
-					'arrivoProgrammato' : arrivoProgrammato,
-					'cercato' : Date.now();
-				};
-				
-				alert(JSON.stringify(t));
-				
-				addTreno(t);
+                alert( situazioneCorrente );
+
+                t = { 'id' : numeroTreno,
+                      'stazionePartenza' : stazionePartenza,
+                      'stazioneArrivo' :  stazioneArrivo,
+                      'partenzaProgrammata' : partenzaProgrammata,
+                      'arrivoProgrammato' : arrivoProgrammato,
+                      'cercato' : Date.now()
+                };
+
+                alert( JSON.stringify(t) );
+
+                addTreno(t);
                 
                 /* Replace text wrapped by span's, according to the scraped data's */
 
@@ -152,13 +160,13 @@ $( document ).ready( function(){
                 $( '#binarioPrevistoArrivo > span' ).text( binarioPrevistoArrivo );
                
                 $( '#binarioRealeArrivo > span' ).text( binarioRealeArrivo );
-				
-				if(stazioni.length >= 3) {
-				    $('#ultima').prepend("<h2>Ultima fermata:</h2>");
-					$( '#stazioneUltima > span' ).text( stazioni[1] );
-					$( '#arrivoProgrammatoUltima> span' ).text( orari[2] );
-					$( '#arrivoEffettivoUltima > span' ).text( orari[3] );
-			    }
+
+                if( stazioni.length >= 3 ) {
+                    $('#ultima').prepend("<h2>Ultima fermata:</h2>");
+                    $( '#stazioneUltima > span' ).text( stazioni[1] );
+                    $( '#arrivoProgrammatoUltima> span' ).text( orari[2] );
+                    $( '#arrivoEffettivoUltima > span' ).text( orari[3] );
+                }
 		
 		$( '#situazioneCorrente > span' ).text( situazioneCorrente );
 		
@@ -184,13 +192,4 @@ $( document ).ready( function(){
 
     });
     
-    $('#preferiti').click( function() {
-      $( '#bookmarksScreen' ).attr( 'class', 'current' );
-		$( '[data-position="current"]' ).attr( 'class', 'left' );
-    });
-
-   /* $('#back').click( function() {
-      $( '[data-position="current"]' ).attr( 'class', 'current' );
-      $( '#bookmarksScreen' ).attr( 'class', 'right' );
-    });*/
 });
