@@ -6,11 +6,11 @@
         <title>TrovaTreno</title>
         
         <!-- Linking needed building blocks ... -->
-            <link rel="stylesheet" href="style/buttons.css" />
-            <link rel="stylesheet" href="style/headers.css" />
-            <link rel="stylesheet" href="style/input_areas.css" />
-            <link rel="stylesheet" href="style/scrolling.css" />
-            <link rel="stylesheet" href="style/lists.css" />
+        <link rel="stylesheet" href="style/buttons.css" />
+        <link rel="stylesheet" href="style/headers.css" />
+        <link rel="stylesheet" href="style/input_areas.css" />
+        <link rel="stylesheet" href="style/scrolling.css" />
+        <link rel="stylesheet" href="style/lists.css" />
         
         <!-- ... then some extra tricks for FirefoxOS ... -->
         <link rel="stylesheet" href="style/util.css" />
@@ -52,6 +52,13 @@
             [data-position="current"].current { animation: leftToCurrent 0.4s forwards; }
 
             [data-position="right"].right { animation: currentToRight 0.4s forwards; }
+            
+            /* ... and for styling our results' screen. */ 
+            h1 > span { text-align: center; }
+
+            input[name="numeroTreno"] { margin-bottom: 1rem; }
+
+            #situazioneCorrente { font-style: italic; }
         </style>
     </head>
     <body>
@@ -78,7 +85,7 @@
                     <p id="situazioneCorrente"><span></span></p>
                 </div>
 
-                <div>
+                <div id="partenza">
                     <h2>Partenza:</h2>
                     <p id="stazionePartenza"><span></span></p>
                     <p id="partenzaProgrammata">Programmata: <span></span></p>
@@ -88,7 +95,11 @@
                     <p id="binarioRealePartenza">Binario reale: <span></span></p>
                 </div>
 
-                <div>
+                <div id="ultimaFermata">
+                    <!-- ... -->
+                </div>                
+                
+                <div id="arrivo">
                     <h2>Arrivo:</h2>
                     <p id="stazioneArrivo"><span></span></p>
                     <p id="arrivoProgrammato">Programmato: <span></span></p>
