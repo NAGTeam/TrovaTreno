@@ -1,0 +1,255 @@
+/* ----------------------------------
+ * Edit mode
+ * ---------------------------------- */
+
+form[role="dialog"][data-type="edit"] {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  color: #fff;
+  white-space: nowrap;
+  pointer-events: none;
+  z-index: 100;
+  overflow: hidden;
+}
+
+/* HEADERS */
+form[role="dialog"][data-type="edit"] header {
+  display: flex;
+  align-items: center;
+  position: relative;
+  z-index: 10;
+  padding: 0;
+  height: 5rem;
+  color: #fff;
+  background-color: #f97c17;
+  border: none;
+  pointer-events: auto;
+}
+
+form[role="dialog"][data-type="edit"] header h1 {
+  flex: 1;
+  order: 2;
+  margin: 0;
+  padding: 0 0.2rem;
+  line-height: normal;
+  color: #fff;
+  font-size: 2.2rem;
+  font-weight: 200;
+  text-align: center;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
+}
+
+/* HEADERS: Buttons */
+form[role="dialog"][data-type="edit"] header button {
+  order: 1;
+  box-sizing: border-box;
+  position: relative;
+  width: auto;
+  min-width: 5rem;
+  height: 100%;
+  margin: 0;
+  padding: 0 1rem;
+  color: #fff;
+  font-size: 1.5rem;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 1.1em;
+  text-decoration: none;
+  text-overflow: clip;
+  text-shadow: none;
+  border: none;
+  border-radius: 0;
+  background: none;
+  overflow: hidden;
+}
+
+form[role="dialog"][data-type="edit"] header button:before,
+form[role="dialog"][data-type="edit"] header a:before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -1;
+}
+
+form[role="dialog"][data-type="edit"] button::-moz-focus-inner {
+  margin-top: -.2rem; /* To fix line-height bug (697451) */
+  padding: 0;
+  border: none;
+  outline: none;
+}
+
+
+/* HEADERS: Buttons pressed state */
+form[role="dialog"][data-type="edit"] header:first-child a:focus {
+  outline: none;
+}
+
+form[role="dialog"][data-type="edit"] header:first-child a:not([aria-disabled="true"]):active:before,
+form[role="dialog"][data-type="edit"] header:first-child button:not(:disabled):active:before,
+form[role="dialog"][data-type="edit"] header:first-child a:not([aria-disabled="true"]):hover:before,
+form[role="dialog"][data-type="edit"] header:first-child button:not(:disabled):hover:before {
+  background-color: #dc6a0e;
+}
+
+/* HEADERS: Buttons disabled state */
+form[role="dialog"][data-type="edit"] header:first-child a[disabled]::-moz-selection,
+form[role="dialog"][data-type="edit"] header:first-child button[disabled]::-moz-selection,
+form[role="dialog"][data-type="edit"] header:first-child a[aria-disabled="true"]::-moz-selection,
+form[role="dialog"][data-type="edit"] header:first-child button[aria-disabled="true"]::-moz-selection {
+  -moz-user-select: none;
+  pointer-events: none;
+}
+
+form[role="dialog"][data-type="edit"] header:first-child a[disabled]::-moz-selection,
+form[role="dialog"][data-type="edit"] header:first-child button[disabled]::-moz-selection,
+form[role="dialog"][data-type="edit"] header:first-child a[aria-disabled="true"]::-moz-selection,
+form[role="dialog"][data-type="edit"] header:first-child button[aria-disabled="true"]::-moz-selection {
+  opacity: 0.5;
+}
+
+form[role="dialog"][data-type="edit"] header:first-child a[disabled]:before,
+form[role="dialog"][data-type="edit"] header:first-child button[disabled]:before,
+form[role="dialog"][data-type="edit"] header:first-child a[aria-disabled="true"]:before,
+form[role="dialog"][data-type="edit"] header:first-child button[aria-disabled="true"]:before {
+  display: none;
+}
+
+
+/* HEADERS: Menu */
+form[role="dialog"][data-type="edit"] header menu[type="toolbar"] {
+  order: 3;
+  display: flex;
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  -moz-user-select: none;
+}
+
+/* HEADERS: Menu Icons */
+form[role="dialog"][data-type="edit"] header .icon {
+  display: inline-block;
+  position: relative;
+  width: 5rem;
+  height: 100%;
+  margin: 0 -1rem;
+  font-size: 0;
+  vertical-align: middle;
+  background: transparent no-repeat 50% 50% / 3rem auto;
+  overflow: hidden;
+}
+
+form[role="dialog"][data-type="edit"] header .icon-close {
+  background-image: url(edit_mode/images/icons/close.png);
+}
+
+
+/* HEADERS: Section Menu */
+form[role="dialog"][data-type="edit"] > menu {
+  order: 3;
+  display: flex;
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  margin: 0;
+  padding: 1.5rem 1rem;
+  white-space: nowrap;
+  pointer-events: auto;
+  border-top: solid 0.1rem rgba(255, 255, 255, 0.1);
+  background: url(edit_mode/images/ui/alpha.png);
+  overflow: hidden;
+}
+
+form[role="dialog"][data-type="edit"] > menu button {
+  -moz-box-sizing: border-box;
+  width: 100%;
+  height: 3.8rem;
+  margin: 0 0.5rem;
+  padding: 0 1.5rem;
+  color: #333;
+  font-size: 1.6rem;
+  font-weight: 500;
+  line-height: 3.8rem;
+  text-align: center;
+  vertical-align: middle;
+  white-space: nowrap;
+  text-decoration: none;
+  text-overflow: ellipsis;
+  border: 0.1rem solid #a6a6a6;
+  border-radius: 0.3rem;
+  outline: none;
+  background: #fafafa url(edit_mode/images/ui/default.png) repeat-x 0 100%/ auto 100%;
+  overflow: hidden;
+}
+
+/* HEADERS: Section Menu Buttons pressed state */
+form[role="dialog"][data-type="edit"] > menu button:active,
+form[role="dialog"][data-type="edit"] > menu button:hover,
+form[role="dialog"][data-type="edit"] > menu button.recommend:hover,
+form[role="dialog"][data-type="edit"] > menu button.recommend:active {
+  color: #333;
+  border-color: #008aaa;
+  background: #008aaa;
+}
+
+/* HEADERS: Section Menu Buttons Recommend */
+form[role="dialog"][data-type="edit"] > menu button.recommend {
+  border-color: #008eab;
+  background-color: #00caf2;
+  background-image: url(edit_mode/images/ui/recommend.png);
+}
+
+/* HEADERS: Section Menu Buttons Danger */
+form[role="dialog"][data-type="edit"] > menu button.danger {
+  color: #fff;
+  border-color: #820000;
+  background-color: #b70404;
+  background-image: url(edit_mode/images/ui/danger.png);
+  text-shadow: none;
+}
+
+/* HEADERS: Section Menu Buttons Danger Press */
+form[role="dialog"][data-type="edit"] > menu button.danger:hover,
+form[role="dialog"][data-type="edit"] > menu button.danger:active {
+  background-color: #890707;
+  background-image: url(edit_mode/images/ui/danger-press.png);
+}
+
+/* HEADERS: Section Menu Buttons Danger Disabled */
+form[role="dialog"][data-type="edit"] > menu button[disabled] {
+  color: #4d4d4d;
+  pointer-events: none;
+  border-color: #4d4d4d;
+  background: #5f5f5f;
+  text-shadow: none;
+}
+
+
+/* ----------------------------------
+ * Dark scheme
+ * ---------------------------------- */
+form[role="dialog"][data-type="edit"].skin-dark header:first-child {
+  background-color: #242d33;
+}
+
+form[role="dialog"][data-type="edit"].skin-dark header:first-child button:active:before,
+form[role="dialog"][data-type="edit"].skin-dark header:first-child button:hover:before,
+form[role="dialog"][data-type="edit"].skin-dark header:first-child menu[type="toolbar"] button:hover,
+form[role="dialog"][data-type="edit"].skin-dark header:first-child menu[type="toolbar"] button:active {
+  color: #fff;
+  background: #1d525e !important;
+}
+
+
+form[role="dialog"][data-type="edit"].skin-dark header .icon.icon-close {
+  background-image: url(edit_mode/images/icons/skin-dark/close.png);
+}
+
