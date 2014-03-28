@@ -24,11 +24,7 @@
 		<script src='js/db.js'></script>
         <script src="js/app.js"></script>
         
-        <style>
-            [data-type="list"] div p {
-                margin-left: 2rem;
-            }
-            
+        <style>            
             [data-position="center"] { height: 100%; }
 
             [data-position="right"] {
@@ -60,6 +56,10 @@
             /* ... and for styling our results' screen. */ 
             h1 > span { text-align: center; }
 
+            [data-type="list"] div p {
+                margin-left: 2rem;
+            }
+
             input[name="numeroTreno"] { margin-bottom: 1rem; }
 
             #situazioneCorrente { font-style: italic; }
@@ -77,8 +77,10 @@
                     <button type="button" id="btn-search">Cerca!</button>
                     <br>
                 </div>
-                <ul id="cronologia">
-                </ul>
+                <section data-type="list">
+                    <ul id="cronologia">
+                    </ul>
+                </section>
             </article>
         </section>
         
