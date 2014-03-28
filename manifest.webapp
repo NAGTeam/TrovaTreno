@@ -10,6 +10,6 @@
       "systemXHR": {}
    },
    "icons": {
-      "/style/icons/icon_60.png",
-      "/style/icons/icon_128.png"
+      "60": "/style/icons/icon_60.png",
+      "128": "/style/icons/icon_128.png"
    }
