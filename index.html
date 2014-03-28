@@ -13,7 +13,7 @@
         <link rel="stylesheet" href="building_blocks/style/lists.css" />
         
         <!-- ... then some extra tricks for FirefoxOS ... -->
-        <link rel="stylesheet" href="building_blocks/style/util.css" />
+        <link rel="stylesheet" href="building_blocks/util.css" />
         
         <!-- Transitions from brick ... -->
         <link rel="stylesheet" href="brick-1.0.1/brick-1.0.1.min.css" />
@@ -35,7 +35,38 @@
             </article>
         </section>
         
-        <!--<section role="region" id="resultsScreen" data-position="right">
-            <header class="fixed">-->
+        <section role="region" id="resultsScreen" data-position="right">
+            <header class="fixed">
+                <button type="button" class='btn-back'>
+                    <span class='icon icon-back'>Back</span>
+                </button>
+                <h1 id="nomeTreno"><span></span></h1>
+            </header>
+            <article class="content scrollable header">
+            
+                <div>
+                    <p id="situazioneCorrente"><span></span></p>
+                </div>
+
+                <div>
+                    <h2>Partenza:</h2>
+                    <p id="stazionePartenza"><span></span></p>
+                    <p id="partenzaProgrammata">Programmata: <span></span></p>
+                    <p id="partenzaEffettiva">Effettiva: <span></span></p>
+                    </ul>
+                    <p id="binarioPrevistoPartenza">Binario previsto: <span></span></p>
+                    <p id="binarioRealePartenza">Binario reale: <span></span></p>
+                </div>
+
+                <div>
+                    <h2>Arrivo:</h2>
+                    <p id="stazioneArrivo"><span></span></p>
+                    <p id="arrivoProgrammato">Programmato: <span></span></p>
+                    <p id="arrivoPrevisto">Previsto: <span></span></p>
+                    <p id="binarioPrevistoArrivo">Binario previsto: <span></span></p>
+                    <p id="binarioRealeArrivo">Binario reale: <span></span></p>
+                </div>
+
+            </article>
     </body>
 </html>
