@@ -1,44 +1,60 @@
-/* Storing the source from mobile.viaggiatreno.it */
+/* Adding a String method for uglyfing a HTML source -- useful for regex's matching */
+String.prototype.shrinkHTML = function() { return this.replace( /\s+/g, ' ' ); };
 
-$( document ).ready( function() {
+$( document ).ready( function(){
 
-    if ( !navigator.onLine ) { alert( 'Not online ...'); }
-	
-	$('#btn-search').click(function (){
-		
-		numeroTreno=$('input[nome=numeroTreno]').val();
+    /* Using jQuery event-handler for the 'btn-search' object */
+    $( '#btn-search' ).click( function(){
 
-		myRequest = new XMLHttpRequest( {mozSystem: true} );
-		
-		parameters='numeroTreno='+numeroTreno;
-		baseUrl = 'http://mobile.viaggiatreno.it/vt_pax_internet/mobile';
+        /* Catching value of the form with the 'name=numeroTreno' attribute set */
+        numeroTreno = $( 'input[name=numeroTreno]' ).val();
 
-		myRequest.open( 'POST', baseUrl,true);
+        /* Deleting user's input, once cought */
+        //$( 'input[name=numeroTreno]' ).val( '' );
 
-		myRequest.addEventListener( 'load', function() {
+        /* Def+init of a XMLHttpRequest object. Passing the needed JSON-object */
+        xhr = new XMLHttpRequest( {mozSystem: true} );
 
-			if ( myRequest.status == 200 ) {
+        /* Loading server-param's for the POST request */
+        parameters = "numeroTreno=" + numeroTreno;
 
-				alert( 'Content loaded!' );
+        /* Opening a POST request to 'viaggiatreno.it' */
+        baseUrl = 'http://mobile.viaggiatreno.it/vt_pax_internet/mobile/numero';
+        xhr.open('POST', baseUrl, true);
 
-				console.log( myRequest.responseText );
-				//$( '#src' ).text( myRequest.responseText );
-				scrapedSource =
+        /* Setting the correct headers for the POST request */
+        xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+        xhr.setRequestHeader('Content-length', parameters.length);
+        xhr.setRequestHeader('Connection', 'close');
+
+        /* Setting the function to run when the XMLHttpRequest's ready */
+        xhr.onreadystatechange = function() {
+
+            /* When request has been closed on success ... */
+            if(xhr.readyState == 4 && xhr.status == 200) {
+
+                /* ... format source for correctly being parsed by jQuery ... */
+                scrapedSource =
                    xhr.responseText.shrinkHTML().replace( /(<br>|<br \/>)/g, '<br/>')
                                                 .replace( /&/g, '&amp;' )
                                                 .replace( /'/g, '"' )
                                                 .replace( /<\?(.*)\?>/g, '' );
-				scrapedSourceDoc = $.parseXML( scrapedSource );
-				
-				$scrapedSource = $( scrapedSourceDoc );
-				
-				if ($scrapedSource.find( '.errore' ).text().length > 0) {
+                /* ... hence parse it ...*/
+                scrapedSourceDoc = $.parseXML( scrapedSource );
+
+                /* ... and cause jQuery to handle the parsing result ... */
+                $scrapedSource = $( scrapedSourceDoc );
+
+                /* ... */
+                if ($scrapedSource.find( '.errore' ).text().length > 0) {
                     alert( 'Il treno cercato non esiste' );
                     $( 'input[name=numeroTreno]' ).val( '' );
                     return;
                 }
-				
-				nomeTreno = $scrapedSource.find( 'h1' ).text();
+
+                /* ... then catch elements by their tag, id, class, etc. */
+
+                nomeTreno = $scrapedSource.find( 'h1' ).text();
 
                 stazioni = $scrapedSource.find( '.corpocentrale h2' ).map(
                     function( i, el ) { return $( el ).text(); }
@@ -47,41 +63,33 @@ $( document ).ready( function() {
 				if(stazioni.length<3){
 					stazionePartenza = stazioni[0];
 					stazioneArrivo = stazioni[1];
-                }else{
+                }
+                else {
 					stazionePartenza = stazioni[0];
 					stazioneArrivoUltimo = stazioni[1];
 					stazioneArrivo = stazioni[2];
-				
+		        }
+                /* Schedules are nested inside <div .corpocentrale><p><strong>, hence ... */
+
                 orari = $scrapedSource.find( '.corpocentrale p strong' ).map(
                     function( i, el ) { return $( el ).text(); }
                 );
-				partenzaProgrammata = orari[ 0 ];
+
+                partenzaProgrammata = orari[ 0 ];
 
                 partenzaEffettiva = orari[ 1 ];
-				
-				if( orari.length <6){
-				
-				
+
                 arrivoProgrammato = orari[ 2 ];
 
                 arrivoPrevisto = orari[ 3 ];
-				
-				}else{
-				
-				arrivoProgrammatoUltima = orari[2];
-				
-				arrivoPrevistoUltima = orari[3];
-					
-				arrivoProgrammato = orari[ 4 ];
 
-                arrivoPrevisto = orari[ 5 ];
-				
-				}
-				
-				console.log(orari);
-				
                 binarioPrevistoPartenza = scrapedSource.match( /<!-- ORIGINE -->(.*?)Previsto:<br\/> (\d{1,2}|--)/ )[ 2 ];
 
+                /* 
+		 * When more info's about the train is loaded, source changes,
+		 * wrapping the effective binary in a <strong> tag.
+		 * Otherwise, there's a placeholder couple of dashes.
+		 */
 
                 if ( $scrapedSource.find( '.corpocentrale > strong' ).length < 1 ) {
                     binarioRealePartenza = '--';
@@ -122,11 +130,11 @@ $( document ).ready( function() {
                
                 $( '#arrivo > binarioRealeArrivo > span' ).text( binarioRealeArrivo );
 				
-				if(orario>=6)
-					$( '#ultima > stazioneUltima > span' ).text(  );
+				if(orari>=6) {
+					$( '#ultima > stazioneUltima > span' ).text( "..." );
 					$( '#ultima > arrivoProgrammatoUltima> span' ).text( arrivoProgrammatoUltima );
 					$( '#ultima > arrivoEffettivoUltima > span' ).text( arrivoPrevistoUltima );
-
+			    }
 		
 		$( '#situazioneCorrente > span' ).text( situazioneCorrente );
 		
@@ -137,10 +145,13 @@ $( document ).ready( function() {
             }
 
         }
-        myRequest.send(parameters);
+
+        /* Sending parameter, then let the onreadystatechange() function running */
+        xhr.send(parameters);
 
     });
 
+    /* If back-button is clicked, come back to the initial screen ... */
     $( '.btn-back' ).click( function(){
 	$( 'input[name=numeroTreno]' ).val( '' );
 	$( '[data-position="current"]' ).attr( 'class', 'current' );
