@@ -136,36 +136,15 @@ $( document ).ready( function(){
 
                 addTreno(t);
                 
-                /* Replace text wrapped by span's, according to the scraped data's */
-
+                /* Appending some html code, according to the scraped datas */
                 $( '#nomeTreno > span' ).text( nomeTreno );
-
-                $( '#stazionePartenza > span' ).text( stazionePartenza );
-
-                $( '#partenzaProgrammata > span' ).text( partenzaProgrammata );
-
-                $( '#partenzaEffettiva > span' ).text( partenzaEffettiva );
-
-                $( '#binarioPrevistoPartenza > span' ).text( binarioPrevistoPartenza );
-
-                $( '#binarioRealePartenza > span' ).text( binarioRealePartenza );
+                $( '#situazioneCorrente > span' ).text( situazioneCorrente );
+                $( '#partenza').append("<p>" + stazionePartenza + "<br>Partenza programmata: " + partenzaProgrammata + "<br>Partenza Effettiva: " + partenzaEffettiva + "<br>Binario previsto: " + binarioPrevistoPartenza + "<br>Binario reale: " + binarioRealePartenza + "</p>");
+                $( '#arrivo').append("<p>" + stazioneArrivo + "<br>Arrivo programmato: " + arrivoProgrammato + "<br>Arrivo previsto: " + arrivoPrevisto + "<br>Binario previsto: " + binarioPrevistoArrivo + "<br>Binario reale: " + binarioRealeArrivo + "</p>");
 				
-                $( '#stazioneArrivo > span' ).text( stazioneArrivo );
-
-                $( '#arrivoProgrammato > span' ).text( arrivoProgrammato );
-
-                $( '#arrivoPrevisto > span' ).text( arrivoPrevisto );
-
-                $( '#binarioPrevistoArrivo > span' ).text( binarioPrevistoArrivo );
-               
-                $( '#binarioRealeArrivo > span' ).text( binarioRealeArrivo );
-
-                if( stazioni.length >= 3 ) {
-                    $('#ultima').prepend("<h2>Ultima fermata:</h2>");
-                    $( '#stazioneUltima > span' ).text( stazioni[1] );
-                    $( '#arrivoProgrammatoUltima> span' ).text( orari[2] );
-                    $( '#arrivoEffettivoUltima > span' ).text( orari[3] );
-                }
+				if(stazioni.length >= 3) {
+				    $('#ultima').append("<header>Ultima fermata</header><p>" + stazioni[1] + "<br>Arrivo programmato: " + orari[2] + "<br>Arrivo effettivo: " + orari[3] + "</p>");
+			    }
 		
 		$( '#situazioneCorrente > span' ).text( situazioneCorrente );
 		
@@ -184,10 +163,13 @@ $( document ).ready( function(){
 
     /* If back-button is clicked, come back to the initial screen ... */
     $( '.btn-back' ).click( function(){
-	$( 'input[name=numeroTreno]' ).val( '' );
-	$( '[data-position="current"]' ).attr( 'class', 'current' );
-	$( '[data-position="right"]' ).attr( 'class', 'right' );
-	$( '[data-position="left"]' ).attr( 'class', 'left');
+	    $( 'input[name=numeroTreno]' ).val( '' );
+	    $('#partenza > p').remove();
+	    $('#ultima > p').remove();
+	    $('#arrivo > p').remove();
+	    $( '[data-position="current"]' ).attr( 'class', 'current' );
+	    $( '[data-position="right"]' ).attr( 'class', 'right' );
+	    $( '[data-position="left"]' ).attr( 'class', 'left');
 
     });
     
