@@ -23,13 +23,42 @@
         <script src="brick-1.0.1/brick-1.0.1.min.js"></script>
         <script src="js/app.js"></script>
         
+        <style>
+            [data-position="center"] { height: 100%; }
+
+            [data-position="right"] {
+                position: absolute;
+                top: 0;
+                left: 0;
+                right: 0;
+                bottom: 0;
+                transform: translateX(100%);
+            }
+
+            [data-position="left"] {
+              position: absolute;
+              top: 0;
+              left: 0;
+              right: 0;
+              bottom: 0;
+              transform: translateX(-100%);
+            }
+            
+            [data-position="right"].current { animation: rightToCurrent 0.4s forwards; }
+
+            [data-position="current"].left { animation: currentToLeft 0.4s forwards; }
+              
+            [data-position="current"].current { animation: leftToCurrent 0.4s forwards; }
+
+            [data-position="right"].right { animation: currentToRight 0.4s forwards; }
+        </style>
     </head>
     <body>
         <section role="region" id="initialScreen" data-position="current">
             <header class="fixed">
                 <h1>TrovaTreno</h1>
             </header>
-            <article class="content header">
+            <article class="content scrollable header">
                 <input type="text" name="numeroTreno" placeholder="Inserisci il numero del treno" />
                 <button type="button" id="btn-search">Cerca!</button>
             </article>
