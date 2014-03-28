@@ -3,10 +3,6 @@ String.prototype.shrinkHTML = function() { return this.replace( /\s+/g, ' ' ); }
 
 $( document ).ready( function(){
 
-    alert( localforage.get( 0 ) );
-
-    //if( localforage.get( 0 ) === null ){ initDB(); }
-	
     /* Using jQuery event-handler for the 'btn-search' object */
     $( '#btn-search' ).click( function(){
 
@@ -63,28 +59,22 @@ $( document ).ready( function(){
                 stazioni = $scrapedSource.find( '.corpocentrale h2' ).map(
                     function( i, el ) { return $( el ).text(); }
                 );
-
-                console.log(stazioni);
-
-                stazionePartenza = stazioni[ 0 ];
-
-                if( stazioni.length < 3 ) {
-                    stazioneArrivo = stazioni[1];
-                } else {
-                    stazioneArrivoUltimo = stazioni[1];
-                    stazioneArrivo = stazioni[2];
+				console.log(stazioni);
+				
+				if(stazioni.length<3){
+					stazionePartenza = stazioni[0];
+					stazioneArrivo = stazioni[1];
                 }
-
-                alert( stazionePartenza );
-                alert( stazioneArrivoUltimo );
-                alert( stazioneArrivo );
-
+                else {
+					stazionePartenza = stazioni[0];
+					stazioneArrivoUltimo = stazioni[1];
+					stazioneArrivo = stazioni[2];
+		        }
                 /* Schedules are nested inside <div .corpocentrale><p><strong>, hence ... */
 
                 orari = $scrapedSource.find( '.corpocentrale p strong' ).map(
                     function( i, el ) { return $( el ).text(); }
                 );
-
                 console.log(orari);
                 
                 partenzaProgrammata = orari[ 0 ];
@@ -113,28 +103,14 @@ $( document ).ready( function(){
                     binarioRealeArrivo =
                        $scrapedSource.find( '.corpocentrale > strong' ).last().text();
                 }
-
-                alert(  binarioRealePartenza );
-                alert( binarioRealeArrivo );
+                console.log(binarioRealePartenza + ' ' + binarioRealeArrivo);
                 
                 binarioPrevistoArrivo = scrapedSource.match( /<!-- DESTINAZIONE -->(.*?)Previsto:<br\/> (\d{1,2}|--)/ )[ 2 ];
-
-                alert( binarioPrevistoArrivo );
+                console.log(binarioPrevistoArrivo);
                 
                 situazioneCorrente =
 		   $scrapedSource.find( '.evidenziato > strong' ).text().replace( /<br\/>?/, '' ).replace( /&#039;/, '\'' );
-                alert( situazioneCorrente );
-
-                t['id'] = numeroTreno;
-                t['stazionePartenza'] = stazionePartenza;
-                t['stazioneArrivo'] = stazioneArrivo;
-                t['partenzaProgrammata'] = partenzaProgrammata;
-                t['arrivoProgrammato'] = arrivoProgrammato;
-                t['cercato'] = Date.now();
-
-                alert( JSON.stringify(t) );
-
-                addTreno(t);
+                console.log(situazioneCorrente);
                 
                 /* Appending some html code, according to the scraped datas */
                 $( '#nomeTreno > span' ).text( nomeTreno );
@@ -143,14 +119,12 @@ $( document ).ready( function(){
                 $( '#arrivo').append("<p>" + stazioneArrivo + "<br>Arrivo programmato: " + arrivoProgrammato + "<br>Arrivo previsto: " + arrivoPrevisto + "<br>Binario previsto: " + binarioPrevistoArrivo + "<br>Binario reale: " + binarioRealeArrivo + "</p>");
 				
 				if(stazioni.length >= 3) {
-				    $('#ultima').append("<header>Ultima fermata</header><p>" + stazioni[1] + "<br>Arrivo programmato: " + orari[2] + "<br>Arrivo effettivo: " + orari[3] + "</p>");
+				    $('#ultima').append("<div><header>Ultima fermata</header><p>" + stazioni[1] + "<br>Arrivo programmato: " + orari[2] + "<br>Arrivo effettivo: " + orari[3] + "</p></div>");
 			    }
 		
-		$( '#situazioneCorrente > span' ).text( situazioneCorrente );
-		
-		$( '#resultsScreen' ).attr( 'class', 'current' );
-		
-		$( '[data-position="current"]' ).attr( 'class', 'left' );
+		        /* Transition ... */
+		        $( '#resultsScreen' ).attr( 'class', 'current' );
+		        $( '[data-position="current"]' ).attr( 'class', 'left' );
 
             }
 
@@ -165,12 +139,20 @@ $( document ).ready( function(){
     $( '.btn-back' ).click( function(){
 	    $( 'input[name=numeroTreno]' ).val( '' );
 	    $('#partenza > p').remove();
-	    $('#ultima > p').remove();
+	    $('#ultima > div').remove();
 	    $('#arrivo > p').remove();
 	    $( '[data-position="current"]' ).attr( 'class', 'current' );
 	    $( '[data-position="right"]' ).attr( 'class', 'right' );
 	    $( '[data-position="left"]' ).attr( 'class', 'left');
-
     });
     
+    $('#preferiti').click( function() {
+      $( '#bookmarksScreen' ).attr( 'class', 'current' );
+		$( '[data-position="current"]' ).attr( 'class', 'left' );
+    });
+
+   /* $('#back').click( function() {
+      $( '[data-position="current"]' ).attr( 'class', 'current' );
+      $( '#bookmarksScreen' ).attr( 'class', 'right' );
+    });*/
 });
