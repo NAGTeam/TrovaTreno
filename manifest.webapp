@@ -1,0 +1,15 @@
+{
+   "name": "TrovaTreno",
+   "description": "...",
+   "developer": {
+      "name": "nag [, say /neg]"
+   }
+   "launch_path": "/index.html",
+   "type": "privileged",
+   "permissions": {
+      "systemXHR": {}
+   },
+   "icons": {
+      "/style/icons/icon_60.png",
+      "/style/icons/icon_128.png"
+   }
