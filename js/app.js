@@ -11,7 +11,7 @@ $( document ).ready( function() {
 		myRequest = new XMLHttpRequest( {mozSystem: true} );
 		
 		parameters='numeroTreno='+numeroTreno;
-		baseUrl = 'http://mobile.viaggiatreno.it/vt_pax_internet/mobile'+param;
+		baseUrl = 'http://mobile.viaggiatreno.it/vt_pax_internet/mobile';
 
 		myRequest.open( 'POST', baseUrl,true);
 
@@ -29,6 +29,6 @@ $( document ).ready( function() {
 
 		alert( 'Sending ...' );
 
-		myRequest.send();
+		myRequest.send(parameters);
 	});
 });
