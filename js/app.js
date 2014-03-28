@@ -2,7 +2,7 @@
 String.prototype.shrinkHTML = function() { return this.replace( /\s+/g, ' ' ); };
 
 $( document ).ready( function(){
-
+	if( localforage.getItem( 0 ) === null ) { initDB(); }
     /* Using jQuery event-handler for the 'btn-search' object */
     $( '#btn-search' ).click( function(){
 
@@ -36,7 +36,7 @@ $( document ).ready( function(){
                                                 .replace( /&/g, '&amp;' )
                                                 .replace( /'/g, '"' )
                                                 .replace( /<\?(.*)\?>/g, '' );
-                console.log(scrapedSource);
+
                 
                 /* ... hence parse it ...*/
                 scrapedSourceDoc = $.parseXML( scrapedSource );
@@ -111,6 +111,31 @@ $( document ).ready( function(){
                 situazioneCorrente =
 		   $scrapedSource.find( '.evidenziato > strong' ).text().replace( /<br\/>?/, '' ).replace( /&#039;/, '\'' );
                 console.log(situazioneCorrente);
+				
+				t = {};
+
+                t['id'] = numeroTreno;
+                t['stazionePartenza'] = stazionePartenza;
+                t['stazioneArrivo'] = stazioneArrivo;
+                t['partenzaProgrammata'] = partenzaProgrammata;
+                t['arrivoProgrammato'] = arrivoProgrammato;
+                t['dataUltimaRicerca'] = ( function() {
+                    today = new Date();
+                    dd = today.getDate();
+                    mm = today.getMonth() +1;
+                    yyyy = today.getFullYear();
+
+                    if ( dd < 10 ) { dd = '0' + dd; }
+
+                    if ( mm < 10 ) { mm = '0' + mm; }
+
+                    return dd + '/' + mm + '/' + + yyyy;
+
+                })();
+
+                alert( JSON.stringify(t) );
+
+                addTreno(t);
                 
                 /* Appending some html code, according to the scraped datas */
                 $( '#nomeTreno > span' ).text( nomeTreno );
@@ -145,14 +170,4 @@ $( document ).ready( function(){
 	    $( '[data-position="right"]' ).attr( 'class', 'right' );
 	    $( '[data-position="left"]' ).attr( 'class', 'left');
     });
-    
-    $('#preferiti').click( function() {
-      $( '#bookmarksScreen' ).attr( 'class', 'current' );
-		$( '[data-position="current"]' ).attr( 'class', 'left' );
-    });
-
-   /* $('#back').click( function() {
-      $( '[data-position="current"]' ).attr( 'class', 'current' );
-      $( '#bookmarksScreen' ).attr( 'class', 'right' );
-    });*/
 });
