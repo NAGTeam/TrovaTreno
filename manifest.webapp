@@ -1,6 +1,6 @@
 {
    "name": "TrovaTreno",
-   "description": "...",
+   "description": "A simple app that helps you to find the informations about trains you need",
    "developer": { "name": "nag [, say /neg]" },
    "launch_path": "/index.html",
    "type": "privileged",
