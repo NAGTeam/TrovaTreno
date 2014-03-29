@@ -73,13 +73,18 @@ $( document ).ready( function(){
                     function( i, el ) { return $( el ).text(); }
                 );
                 
-                partenzaProgrammata = orari[ 0 ];
-
-                partenzaEffettiva = orari[ 1 ];
-
-                arrivoProgrammato = orari[ 2 ];
-
-                arrivoPrevisto = orari[ 3 ];
+                if(stazioni.length < 3) {
+                    partenzaProgrammata = orari[ 0 ];
+                    partenzaEffettiva = orari[ 1 ];
+                    arrivoProgrammato = orari[ 2 ];
+                    arrivoPrevisto = orari[ 3 ];
+                }
+                else {
+                    partenzaProgrammata = orari[ 0 ];
+                    partenzaEffettiva = orari[ 1 ];
+                    arrivoProgrammato = orari[ 4 ];
+                    arrivoPrevisto = orari[ 5 ]; 
+                }               
 
                 binarioPrevistoPartenza = scrapedSource.match( /<!-- ORIGINE -->(.*?)Previsto:<br\/> (\d{1,2}|--)/ )[ 2 ];
                 
@@ -92,7 +97,13 @@ $( document ).ready( function(){
                 if ( $scrapedSource.find( '.corpocentrale > strong' ).length < 1 ) {
                     binarioRealePartenza = '--';
                     binarioRealeArrivo = '--';
-                } else {
+                } 
+                else if ( $scrapedSource.find( '.corpocentrale > strong' ).length < 2 ) {
+                    binarioRealePartenza =
+                       $scrapedSource.find( '.corpocentrale > strong' ).text();
+                    binarioRealeArrivo = '--';
+                }
+                else {
                     binarioRealePartenza =
                        $scrapedSource.find( '.corpocentrale > strong' ).first().text();
                     binarioRealeArrivo =

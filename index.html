@@ -11,6 +11,8 @@
         <link rel="stylesheet" href="style/input_areas.css" />
         <link rel="stylesheet" href="style/scrolling.css" />
         <link rel="stylesheet" href="style/lists.css" />
+        <link rel="stylesheet" href="style/toolbars.css" />
+        <link rel="stylesheet" href="style/action_icons.css" />
         
         <!-- ... then some extra tricks for FirefoxOS ... -->
         <link rel="stylesheet" href="style/util.css" />
@@ -59,7 +61,7 @@
             [data-type="list"] div p {
                 margin-left: 2rem;
             }
-
+            
             input[name="numeroTreno"] { margin-bottom: 1rem; }
 
             #situazioneCorrente { font-style: italic; }
@@ -76,6 +78,9 @@
                     <input type="text" name="numeroTreno" placeholder="Inserisci il numero del treno" />
                     <button type="button" id="btn-search">Cerca!</button>
                     <br>
+                </div>
+                <div>
+                    <button type="button" id="btn-crono">Cronologia</button>
                 </div>
                 <section data-type="list">
                     <ul id="cronologia">
@@ -109,8 +114,18 @@
                     <div id="arrivo">
                         <!-- ... -->
                     </div>
+                    <p><br></p>
                 </section>
-
             </article>
+            <div role="toolbar">
+                <ul>
+                    <li><button class="icon icon-add">Add</button></li>
+                </ul>
+                <ul>
+                    <li><button class="action-icon email-flag">Flag</button></li>
+                    <li><button class="action-icon email-markread">Mark read</button></li>
+                    <li><button class="action-icon move">Move</button></li>
+                </ul>
+            </div>
     </body>
 </html>

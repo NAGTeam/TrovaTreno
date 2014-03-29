@@ -5,7 +5,8 @@ function initDB() {
 
 function addTreno( t ) {
     counter = parseInt(localforage.getItem(0));
-    localforage.setItem(0,++counter,function(){ console.log('incrementato'); } );
+    localforage.setItem(0,++counter,function(){ console.log('incrementato: ' + counter); } );
     localforage.setItem( ""+counter, t, function(){ console.log('added'); } );
+    console.log("Treno = ");
+    console.log(t);
 }
-
