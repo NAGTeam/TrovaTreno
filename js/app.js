@@ -2,7 +2,7 @@
 String.prototype.shrinkHTML = function() { return this.replace( /\s+/g, ' ' ); };
 
 $( document ).ready( function(){
-
+	 initDB(); 
     /* Using jQuery event-handler for the 'btn-search' object */
     $( '#btn-search' ).click( function(){
 
@@ -114,6 +114,29 @@ $( document ).ready( function(){
                 
                 situazioneCorrente =
 		   $scrapedSource.find( '.evidenziato > strong' ).text().replace( /<br\/>?/, '' ).replace( /&#039;/, '\'' );
+				
+				t = {};
+
+                t['id'] = numeroTreno;
+                t['stazionePartenza'] = stazionePartenza;
+                t['stazioneArrivo'] = stazioneArrivo;
+                t['partenzaProgrammata'] = partenzaProgrammata;
+                t['arrivoProgrammato'] = arrivoProgrammato;
+                t['dataUltimaRicerca'] = ( function() {
+                    today = new Date();
+                    dd = today.getDate();
+                    mm = today.getMonth() +1;
+                    yyyy = today.getFullYear();
+
+                    if ( dd < 10 ) { dd = '0' + dd; }
+
+                    if ( mm < 10 ) { mm = '0' + mm; }
+
+                    return dd + '/' + mm + '/' + + yyyy;
+
+                })();
+
+                addTreno(t);
                 
                 /* Appending some html code, according to the scraped datas */
                 $( '#nomeTreno > span' ).text( nomeTreno );
