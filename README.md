@@ -1,6 +1,8 @@
 TrovaTreno
 ==========
 
-A simple __FirefoxOS__ app that helps you to find the information you need about __trains__
+A simple __FirefoxOS__ app that helps you to find the information you need about __Italian trains__
 
-__Note:__ this is the stable version (_without_ the database part).
+__TODO:__
+\- Add a database in order to save the "history" of the searched trains
+\- ...
