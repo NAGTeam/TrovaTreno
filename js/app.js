@@ -52,7 +52,8 @@ $( document ).ready( function(){
 
                 /* ... then catch elements by their tag, id, class, etc. */
 
-                nomeTreno = $scrapedSource.find( 'h1' ).text();
+                var nomeTreno = $scrapedSource.find( 'h1' ).text();
+                console.log(nomeTreno);
                 
                 stazioni = $scrapedSource.find( '.corpocentrale h2' ).map(
                     function( i, el ) { return $( el ).text(); }
@@ -112,7 +113,7 @@ $( document ).ready( function(){
                 
                 binarioPrevistoArrivo = scrapedSource.match( /<!-- DESTINAZIONE -->(.*?)Previsto:<br\/> (\d{1,2}|--)/ )[ 2 ];
                 
-                situazioneCorrente =
+                var situazioneCorrente =
 		   $scrapedSource.find( '.evidenziato > strong' ).text().replace( /<br\/>?/, '' ).replace( /&#039;/, '\'' );
                 
                 /* Appending some html code, according to the scraped datas */
@@ -200,5 +201,15 @@ $( document ).ready( function(){
                 url: "http://twitter.com/giuscri"
             }
         });
-    };   
+    }; 
+    document.querySelector("#btn-send").onclick = function () {
+        new MozActivity({
+            name: "new",
+            data: {
+                type : "mail",
+                body: situazioneCorrente,
+                url: "mailto:?body=prova&subject=" + nomeTreno.textContent
+            }
+        });
+    };  
 });
