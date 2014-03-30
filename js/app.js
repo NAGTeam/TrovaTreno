@@ -149,13 +149,13 @@ $( document ).ready( function(){
 	    $( '[data-position="left"]' ).attr( 'class', 'left');
     });
     
-    /* trying adding an About screen ...*/
+    /* Button to About screen ...*/
     $( '#btn-about' ).click( function() {
 		$( '#aboutScreen' ).attr( 'class', 'current' );
 		$( '[data-position="current"]' ).attr( 'class', 'left' );
     });
     
-    /* ... and delegate the opening of the links to the browser*/
+    /* Delegating the opening of the links to the browser ...*/
     document.querySelector("#git-link").onclick = function () {
         new MozActivity({
             name: "view",
