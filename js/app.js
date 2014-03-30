@@ -154,22 +154,51 @@ $( document ).ready( function(){
 		$( '#aboutScreen' ).attr( 'class', 'current' );
 		$( '[data-position="current"]' ).attr( 'class', 'left' );
     });
-    /* ... and delegate the opening of the link to the browser */
-    $( '#git-link' ).click( function() {
-        var activity = new MozActivity({
-          name: 'browser',
-          data: {
-            type: 'webbrowser/browser',
-            link: 'https://github.com/nag-motherfuckers/TrovaTreno.git'
-          }
+    
+    /* ... and delegate the opening of the links to the browser*/
+    document.querySelector("#git-link").onclick = function () {
+        new MozActivity({
+            name: "view",
+            data: {
+                type: "url",
+                url: "https://github.com/nag-motherfuckers/TrovaTreno.git"
+            }
         });
-
-        activity.onsuccess = function() {
-          //dunno what it have to do...
-        };
-
-        activity.onerror = function() {
-          alert('Could not open browser');
-        };
-    });   
+    };
+    document.querySelector("#ffoshackathon").onclick = function () {
+        new MozActivity({
+            name: "view",
+            data: {
+                type: "url",
+                url: "http://www.mozillaitalia.org/home/2014/03/13/firefox-os-conference-hackaton-milano-27-28-marzo-2014/"
+            }
+        });
+    };      
+    document.querySelector("#aro94").onclick = function () {
+        new MozActivity({
+            name: "view",
+            data: {
+                type: "url",
+                url: "http://twitter.com/aro94"
+            }
+       });
+    };
+    document.querySelector("#nicokant").onclick = function () {
+        new MozActivity({
+            name: "view",
+            data: {
+                type: "url",
+                url: "http://twitter.com/nicokant"
+            }
+        });
+    }; 
+    document.querySelector("#giuscri").onclick = function () {
+        new MozActivity({
+            name: "view",
+            data: {
+                type: "url",
+                url: "http://twitter.com/giuscri"
+            }
+        });
+    };   
 });
