@@ -1,3 +1,5 @@
+var nomeTreno, stazionePartenza, stazioneArrivo, partenzaProgrammata, partenzaEffettiva, arrivoProgrammato, arrivoEffettivo, binarioRealePartenza, binarioRealeArrivo, binarioPrevistoPartenza, binarioPrevistoArrivo;
+
 /* Adding a String method for uglyfing a HTML source -- useful for regex's matching */
 String.prototype.shrinkHTML = function() { return this.replace( /\s+/g, ' ' ); };
 
@@ -52,7 +54,7 @@ $( document ).ready( function(){
 
                 /* ... then catch elements by their tag, id, class, etc. */
 
-                var nomeTreno = $scrapedSource.find( 'h1' ).text();
+                nomeTreno = $scrapedSource.find( 'h1' ).text();
                 console.log(nomeTreno);
                 
                 stazioni = $scrapedSource.find( '.corpocentrale h2' ).map(
@@ -60,13 +62,13 @@ $( document ).ready( function(){
                 );
 				
 				if(stazioni.length<3){
-					var stazionePartenza = stazioni[0];
-					var stazioneArrivo = stazioni[1];
+					stazionePartenza = stazioni[0];
+					stazioneArrivo = stazioni[1];
                 }
                 else {
-					var stazionePartenza = stazioni[0];
-					var stazioneArrivoUltimo = stazioni[1];
-					var stazioneArrivo = stazioni[2];
+					stazionePartenza = stazioni[0];
+					stazioneArrivoUltimo = stazioni[1];
+					stazioneArrivo = stazioni[2];
 		        }
                 /* Schedules are nested inside <div .corpocentrale><p><strong>, hence ... */
 
@@ -75,19 +77,19 @@ $( document ).ready( function(){
                 );
                 
                 if(stazioni.length < 3) {
-                    var partenzaProgrammata = orari[ 0 ];
-                    var partenzaEffettiva = orari[ 1 ];
-                    var arrivoProgrammato = orari[ 2 ];
-                    var arrivoPrevisto = orari[ 3 ];
+                    partenzaProgrammata = orari[ 0 ];
+                    partenzaEffettiva = orari[ 1 ];
+                    arrivoProgrammato = orari[ 2 ];
+                    arrivoPrevisto = orari[ 3 ];
                 }
                 else {
-                    var partenzaProgrammata = orari[ 0 ];
-                    var partenzaEffettiva = orari[ 1 ];
-                    var arrivoProgrammato = orari[ 4 ];
-                    var arrivoPrevisto = orari[ 5 ]; 
+                    partenzaProgrammata = orari[ 0 ];
+                    partenzaEffettiva = orari[ 1 ];
+                    arrivoProgrammato = orari[ 4 ];
+                    arrivoPrevisto = orari[ 5 ]; 
                 }               
 
-                var binarioPrevistoPartenza = scrapedSource.match( /<!-- ORIGINE -->(.*?)Previsto:<br\/> (\d{1,2}|--)/ )[ 2 ];
+                binarioPrevistoPartenza = scrapedSource.match( /<!-- ORIGINE -->(.*?)Previsto:<br\/> (\d{1,2}|--)/ )[ 2 ];
                 
                 /* 
 		 * When more info's about the train is loaded, source changes,
@@ -96,22 +98,22 @@ $( document ).ready( function(){
 		 */
 
                 if ( $scrapedSource.find( '.corpocentrale > strong' ).length < 1 ) {
-                    var binarioRealePartenza = '--';
-                    var binarioRealeArrivo = '--';
+                    binarioRealePartenza = '--';
+                    binarioRealeArrivo = '--';
                 } 
                 else if ( $scrapedSource.find( '.corpocentrale > strong' ).length < 2 ) {
-                    var binarioRealePartenza =
+                    binarioRealePartenza =
                        $scrapedSource.find( '.corpocentrale > strong' ).text();
-                    var binarioRealeArrivo = '--';
+                    binarioRealeArrivo = '--';
                 }
                 else {
-                    var binarioRealePartenza =
+                    binarioRealePartenza =
                        $scrapedSource.find( '.corpocentrale > strong' ).first().text();
-                    var binarioRealeArrivo =
+                    binarioRealeArrivo =
                        $scrapedSource.find( '.corpocentrale > strong' ).last().text();
                 }
                 
-                var binarioPrevistoArrivo = scrapedSource.match( /<!-- DESTINAZIONE -->(.*?)Previsto:<br\/> (\d{1,2}|--)/ )[ 2 ];
+                binarioPrevistoArrivo = scrapedSource.match( /<!-- DESTINAZIONE -->(.*?)Previsto:<br\/> (\d{1,2}|--)/ )[ 2 ];
                 
                 var situazioneCorrente =
 		   $scrapedSource.find( '.evidenziato > strong' ).text().replace( /<br\/>?/, '' ).replace( /&#039;/, '\'' );
@@ -203,12 +205,13 @@ $( document ).ready( function(){
         });
     }; 
     document.querySelector("#btn-send").onclick = function () {
-        var testo = 
+        console.log(stazionePartenza);
+        var testo = "-SITUAZIONE:" + situazioneCorrente.textContent + " -PARTENZA: " + stazionePartenza + " Partenza programmata: " + partenzaProgrammata + " Partenza effettiva: " + partenzaEffettiva + " Binario previsto: " + binarioPrevistoPartenza + " Binario reale: " + binarioRealePartenza + " -ARRIVO: " + stazioneArrivo + " Arrivo programmato: " + arrivoProgrammato + " Arrivo effettivo: " + arrivoEffettivo + " Binario previsto: " + binarioPrevistoArrivo + " Binario reale: " + binarioRealeArrivo;
         new MozActivity({
             name: "new",
             data: {
                 type : "mail",
-                url: "mailto:?body=" + situazioneCorrente.textContent + "&subject=" + nomeTreno.textContent
+                url: "mailto:?body=" + testo + "&subject=" + nomeTreno
             }
         });
     };  
