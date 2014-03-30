@@ -204,8 +204,9 @@ $( document ).ready( function(){
             }
         });
     }; 
+    
+    /* Sending trains' information by email ... */
     document.querySelector("#btn-send").onclick = function () {
-        console.log(stazionePartenza);
         var testo = "-SITUAZIONE:" + situazioneCorrente.textContent + " -PARTENZA: " + stazionePartenza + " Partenza programmata: " + partenzaProgrammata + " Partenza effettiva: " + partenzaEffettiva + " Binario previsto: " + binarioPrevistoPartenza + " Binario reale: " + binarioRealePartenza + " -ARRIVO: " + stazioneArrivo + " Arrivo programmato: " + arrivoProgrammato + " Arrivo effettivo: " + arrivoEffettivo + " Binario previsto: " + binarioPrevistoArrivo + " Binario reale: " + binarioRealeArrivo;
         new MozActivity({
             name: "new",
