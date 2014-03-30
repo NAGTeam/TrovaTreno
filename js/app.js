@@ -60,13 +60,13 @@ $( document ).ready( function(){
                 );
 				
 				if(stazioni.length<3){
-					stazionePartenza = stazioni[0];
-					stazioneArrivo = stazioni[1];
+					var stazionePartenza = stazioni[0];
+					var stazioneArrivo = stazioni[1];
                 }
                 else {
-					stazionePartenza = stazioni[0];
-					stazioneArrivoUltimo = stazioni[1];
-					stazioneArrivo = stazioni[2];
+					var stazionePartenza = stazioni[0];
+					var stazioneArrivoUltimo = stazioni[1];
+					var stazioneArrivo = stazioni[2];
 		        }
                 /* Schedules are nested inside <div .corpocentrale><p><strong>, hence ... */
 
@@ -75,19 +75,19 @@ $( document ).ready( function(){
                 );
                 
                 if(stazioni.length < 3) {
-                    partenzaProgrammata = orari[ 0 ];
-                    partenzaEffettiva = orari[ 1 ];
-                    arrivoProgrammato = orari[ 2 ];
-                    arrivoPrevisto = orari[ 3 ];
+                    var partenzaProgrammata = orari[ 0 ];
+                    var partenzaEffettiva = orari[ 1 ];
+                    var arrivoProgrammato = orari[ 2 ];
+                    var arrivoPrevisto = orari[ 3 ];
                 }
                 else {
-                    partenzaProgrammata = orari[ 0 ];
-                    partenzaEffettiva = orari[ 1 ];
-                    arrivoProgrammato = orari[ 4 ];
-                    arrivoPrevisto = orari[ 5 ]; 
+                    var partenzaProgrammata = orari[ 0 ];
+                    var partenzaEffettiva = orari[ 1 ];
+                    var arrivoProgrammato = orari[ 4 ];
+                    var arrivoPrevisto = orari[ 5 ]; 
                 }               
 
-                binarioPrevistoPartenza = scrapedSource.match( /<!-- ORIGINE -->(.*?)Previsto:<br\/> (\d{1,2}|--)/ )[ 2 ];
+                var binarioPrevistoPartenza = scrapedSource.match( /<!-- ORIGINE -->(.*?)Previsto:<br\/> (\d{1,2}|--)/ )[ 2 ];
                 
                 /* 
 		 * When more info's about the train is loaded, source changes,
@@ -96,22 +96,22 @@ $( document ).ready( function(){
 		 */
 
                 if ( $scrapedSource.find( '.corpocentrale > strong' ).length < 1 ) {
-                    binarioRealePartenza = '--';
-                    binarioRealeArrivo = '--';
+                    var binarioRealePartenza = '--';
+                    var binarioRealeArrivo = '--';
                 } 
                 else if ( $scrapedSource.find( '.corpocentrale > strong' ).length < 2 ) {
-                    binarioRealePartenza =
+                    var binarioRealePartenza =
                        $scrapedSource.find( '.corpocentrale > strong' ).text();
-                    binarioRealeArrivo = '--';
+                    var binarioRealeArrivo = '--';
                 }
                 else {
-                    binarioRealePartenza =
+                    var binarioRealePartenza =
                        $scrapedSource.find( '.corpocentrale > strong' ).first().text();
-                    binarioRealeArrivo =
+                    var binarioRealeArrivo =
                        $scrapedSource.find( '.corpocentrale > strong' ).last().text();
                 }
                 
-                binarioPrevistoArrivo = scrapedSource.match( /<!-- DESTINAZIONE -->(.*?)Previsto:<br\/> (\d{1,2}|--)/ )[ 2 ];
+                var binarioPrevistoArrivo = scrapedSource.match( /<!-- DESTINAZIONE -->(.*?)Previsto:<br\/> (\d{1,2}|--)/ )[ 2 ];
                 
                 var situazioneCorrente =
 		   $scrapedSource.find( '.evidenziato > strong' ).text().replace( /<br\/>?/, '' ).replace( /&#039;/, '\'' );
@@ -203,12 +203,12 @@ $( document ).ready( function(){
         });
     }; 
     document.querySelector("#btn-send").onclick = function () {
+        var testo = 
         new MozActivity({
             name: "new",
             data: {
                 type : "mail",
-                body: situazioneCorrente,
-                url: "mailto:?body=prova&subject=" + nomeTreno.textContent
+                url: "mailto:?body=" + situazioneCorrente.textContent + "&subject=" + nomeTreno.textContent
             }
         });
     };  
