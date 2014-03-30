@@ -151,8 +151,8 @@ $( document ).ready( function(){
     
     /* trying adding an About screen ...*/
     $( '#btn-about' ).click( function() {
-        $( '#initialScreen' ).hide();
-        $( '#aboutScreen' ).show();
+		$( '#aboutScreen' ).attr( 'class', 'current' );
+		$( '[data-position="current"]' ).attr( 'class', 'left' );
     });
     /* ... and delegate the opening of the link to the browser */
     $( '#git-link' ).click( function() {
