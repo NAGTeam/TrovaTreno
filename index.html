@@ -68,6 +68,9 @@
     <body>
         <section role="region" id="initialScreen" data-position="current">
             <header class="fixed">
+                <menu type="toolbar">
+                    <button type="button" id="btn-about"><span>About</span></a>
+                </menu>
                 <h1>TrovaTreno</h1>
             </header>
             <article class="content scrollable header">
@@ -118,5 +121,27 @@
                     <li><button class="action-icon move">Move</button></li>
                 </ul>
             </div>
+        </section>
+        
+        <section role="region" id="aboutScreen" hidden>
+            <header class="fixed">
+                <h1>About</h1>
+            </header>
+            <article class="content scrollable header">
+                <div>
+                    <h1>TrovaTreno</h1>
+                    <h2>Version: 0.1</h2>
+                    <h2>Dev: nag</h2>
+                </div>
+                <div>
+                    <p>Follow the project <a href="#" id="git-link">on GitHub</a>!</p>
+                </div>
+                <div>
+                    <h1>Contacts</h1>
+                    <p><strong>Niccolò</strong>: <a href="http://twitter.com/nicokant">@nicokant</a><br>
+                    <strong>Aronne</strong>: <a href="http://twitter.com/aro94">@aro94</a><br>
+                    <strong>Giuseppe</strong>: <a href="http://twitter.com/giuscri">@giuscri</a>
+                </div>
+            </article>
     </body>
 </html>

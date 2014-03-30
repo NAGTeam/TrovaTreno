@@ -148,4 +148,28 @@ $( document ).ready( function(){
 	    $( '[data-position="right"]' ).attr( 'class', 'right' );
 	    $( '[data-position="left"]' ).attr( 'class', 'left');
     });
+    
+    /* trying adding an About screen ...*/
+    $( '#btn-about' ).click( function() {
+        $( '#initialScreen' ).hide();
+        $( '#aboutScreen' ).show();
+    });
+    /* ... and delegate the opening of the link to the browser */
+    $( '#git-link' ).click( function() {
+        var activity = new MozActivity({
+          name: 'browser',
+          data: {
+            type: 'webbrowser/browser',
+            link: 'https://github.com/nag-motherfuckers/TrovaTreno.git'
+          }
+        });
+
+        activity.onsuccess = function() {
+          //dunno what it have to do...
+        };
+
+        activity.onerror = function() {
+          alert('Could not open browser');
+        };
+    });   
 });
