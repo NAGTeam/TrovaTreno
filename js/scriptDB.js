@@ -15,6 +15,9 @@ function addTrain(JSONTrain){
 
 function getTrains(){
 	count=parseInt(localStorage.getItem('counter'));
-	for(i=1; i<=count;i++)
-		console.log(JSON.parse(localStorage.getItem(i+"")));
+	for(i=1; i<=count;i++) {
+	    oggetto = JSON.parse(localStorage.getItem(i+""));
+		console.log(oggetto);
+		$( '#cronologia' ).append("<li><a href='#' id='oggetto'>" + oggetto.id + "</a></li>");
+    }
 }
