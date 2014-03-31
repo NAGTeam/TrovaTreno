@@ -1,4 +1,4 @@
-var nomeTreno, stazionePartenza, stazioneArrivo, partenzaProgrammata, partenzaEffettiva, arrivoProgrammato, arrivoEffettivo, binarioRealePartenza, binarioRealeArrivo, binarioPrevistoPartenza, binarioPrevistoArrivo;
+var nomeTreno, stazionePartenza, stazioneArrivo, partenzaProgrammata, partenzaEffettiva, arrivoProgrammato, arrivoPrevisto, binarioRealePartenza, binarioRealeArrivo, binarioPrevistoPartenza, binarioPrevistoArrivo;
 
 /* Adding a String method for uglyfing a HTML source -- useful for regex's matching */
 String.prototype.shrinkHTML = function() { return this.replace( /\s+/g, ' ' ); };
@@ -76,15 +76,20 @@ $( document ).ready( function(){
                     function( i, el ) { return $( el ).text(); }
                 );
                 
-                if(stazioni.length < 3) {
-                    partenzaProgrammata = orari[ 0 ];
+                partenzaProgrammata = orari[ 0 ];
+                
+                if (orari[ 1 ] == "") {
+                    partenzaEffettiva = "--";
+                }
+                else {
                     partenzaEffettiva = orari[ 1 ];
+                }
+                
+                if(stazioni.length < 3) {
                     arrivoProgrammato = orari[ 2 ];
                     arrivoPrevisto = orari[ 3 ];
                 }
                 else {
-                    partenzaProgrammata = orari[ 0 ];
-                    partenzaEffettiva = orari[ 1 ];
                     arrivoProgrammato = orari[ 4 ];
                     arrivoPrevisto = orari[ 5 ]; 
                 }               
@@ -152,13 +157,13 @@ $( document ).ready( function(){
 	    $( '[data-position="left"]' ).attr( 'class', 'left');
     });
     
-    /* Button to About screen ...*/
+    /* Button to About screen ... */
     $( '#btn-about' ).click( function() {
 		$( '#aboutScreen' ).attr( 'class', 'current' );
 		$( '[data-position="current"]' ).attr( 'class', 'left' );
     });
     
-    /* Delegating the opening of the links to the browser ...*/
+    /* Delegating the opening of the links to the browser ... */
     document.querySelector("#git-link").onclick = function () {
         new MozActivity({
             name: "view",
@@ -207,7 +212,8 @@ $( document ).ready( function(){
     
     /* Sending trains' information by email ... */
     document.querySelector("#btn-send").onclick = function () {
-        var testo = "-SITUAZIONE:" + situazioneCorrente.textContent + " -PARTENZA: " + stazionePartenza + " Partenza programmata: " + partenzaProgrammata + " Partenza effettiva: " + partenzaEffettiva + " Binario previsto: " + binarioPrevistoPartenza + " Binario reale: " + binarioRealePartenza + " -ARRIVO: " + stazioneArrivo + " Arrivo programmato: " + arrivoProgrammato + " Arrivo effettivo: " + arrivoEffettivo + " Binario previsto: " + binarioPrevistoArrivo + " Binario reale: " + binarioRealeArrivo;
+        var testo = "-SITUAZIONE:" + situazioneCorrente.textContent + " -PARTENZA: " + stazionePartenza + " Partenza programmata: " + partenzaProgrammata + " Partenza effettiva: " + partenzaEffettiva + " Binario previsto: " + binarioPrevistoPartenza + " Binario reale: " + binarioRealePartenza + " -ARRIVO: " + stazioneArrivo + " Arrivo programmato: " + arrivoProgrammato + " Arrivo previsto: " + arrivoPrevisto + " Binario previsto: " + binarioPrevistoArrivo + " Binario reale: " + binarioRealeArrivo;
+        console.log(testo);
         new MozActivity({
             name: "new",
             data: {
