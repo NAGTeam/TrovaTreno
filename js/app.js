@@ -97,7 +97,6 @@ scrape = function(parameters) {
 				stazione : stazioneArrivo
 			};
 			addTrain(train);
-			getTrains();
             binarioPrevistoPartenza = scrapedSource.match( /<!-- ORIGINE -->(.*?)Previsto:<br\/> (\d{1,2}|--)/ )[ 2 ];
                 
             /* 
@@ -150,13 +149,7 @@ scrape = function(parameters) {
 $( document ).ready( function(){
 	console.log('ready');
 	initDB();
-	
-	/* Printing the database ... */
-	/*for(i=1; i<=count;i++) {
-	    oggetto = JSON.parse(localStorage.getItem(i+""));
-		console.log(oggetto);
-		$( '#cronologia' ).append("<li><a href='#' id='oggetto'>" + oggetto.stazionePartenza + oggetto.partenza + "<br>" + oggetto.stazione + "</a></li>");
-    }*/	
+	getTrains();
 
     /* Using jQuery event-handler for the 'btn-search' object */
     $( '#btn-search' ).click( function(){
@@ -184,6 +177,8 @@ $( document ).ready( function(){
 	    $('#partenza > p').remove();
 	    $('#ultima > div').remove();
 	    $('#arrivo > p').remove();
+		$('#cronologia').empty();
+		getTrains();
 	    $( '[data-position="current"]' ).attr( 'class', 'current' );
 	    $( '[data-position="right"]' ).attr( 'class', 'right' );
 	    $( '[data-position="left"]' ).attr( 'class', 'left');
