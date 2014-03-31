@@ -40,6 +40,6 @@ function getTrains(){
 	count=parseInt(localStorage.getItem('counter'));
 	for(i=1; i<=count;i++) {
 	    oggetto = JSON.parse(localStorage.getItem(i+""));
-		$( '#cronologia' ).append("<li><a href='#' id='oggetto'>" + oggetto.stazionePartenza + oggetto.partenza + "<br>" + oggetto.stazione + "</a></li>");
+		$( '#cronologia' ).append("<li><p>" + oggetto.stazionePartenza + oggetto.partenza + "</p><p>Direzione: " + oggetto.stazione + "</p></li>");
     }
 }

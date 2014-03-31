@@ -249,13 +249,9 @@ $( document ).ready( function(){
         });
     };
     
-    document.querySelector("#cronologia > li").onclick = function () {
+    document.getElementById("#oggetto").addEventListener('click', function () {
         console.log("Clicked!");
-        num = this.text().split(" ")[1];
-        console.log(num);
-        val = "numeroTreno=" + num;
-        scrape(val);
-    };
+    });
     
     
       
