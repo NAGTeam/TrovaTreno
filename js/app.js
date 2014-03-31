@@ -170,6 +170,14 @@ $( document ).ready( function(){
          */
         $('#cronologia > li').remove();
     });
+	
+	$('li').click(function(){
+		console.log('clicked');
+		numeroTreno= $(this).attr('id');
+		console.log(numeroTreno);
+		parameters = "numeroTreno=" + numeroTreno;
+		scrape(parameters);
+	});
 
     /* If back-button is clicked, come back to the initial screen ... */
     $( '.btn-back' ).click( function(){
