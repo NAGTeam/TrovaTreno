@@ -78,8 +78,16 @@ scrape = function(parameters) {
                 arrivoPrevisto = orari[ 5 ]; 
             }               
 				
-    		train= {id : nomeTreno,
-    			stazionePartenza : stazionePartenza,
+    		numeroTreno="";
+			for(i=0;i<=nomeTreno.length;i++){
+				chari=nomeTreno.charAt(i);
+				if(!isNaN(chari))
+					numeroTreno=numeroTreno+chari;
+			}
+			numeroTreno=parseInt(numeroTreno);
+			console.log(numeroTreno);
+			train= {id : numeroTreno,
+				stazionePartenza : stazionePartenza,
 				partenza : partenzaProgrammata,
 				stazione : stazioneArrivo
 			};
