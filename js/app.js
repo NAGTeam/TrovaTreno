@@ -1,4 +1,4 @@
-var nomeTreno, stazionePartenza, stazioneArrivo, partenzaProgrammata, partenzaEffettiva, arrivoProgrammato, arrivoEffettivo, binarioRealePartenza, binarioRealeArrivo, binarioPrevistoPartenza, binarioPrevistoArrivo;
+var nomeTreno, stazionePartenza, stazioneArrivo, partenzaProgrammata, partenzaEffettiva, arrivoProgrammato, arrivoPrevisto, binarioRealePartenza, binarioRealeArrivo, binarioPrevistoPartenza, binarioPrevistoArrivo;
 
 /* Adding a String method for uglyfing a HTML source -- useful for regex's matching */
 String.prototype.shrinkHTML = function() { return this.replace( /\s+/g, ' ' ); };
@@ -64,16 +64,21 @@ scrape = function(parameters) {
             orari = $scrapedSource.find( '.corpocentrale p strong' ).map(
                 function( i, el ) { return $( el ).text(); }
             );
+            
+            partenzaProgrammata = orari[ 0 ];
+                
+            if (orari[ 1 ] == "") {
+                partenzaEffettiva = "--";
+            }
+            else {
+                partenzaEffettiva = orari[ 1 ];
+            }
                 
             if(stazioni.length < 3) {
-                partenzaProgrammata = orari[ 0 ];
-                partenzaEffettiva = orari[ 1 ];
                 arrivoProgrammato = orari[ 2 ];
                 arrivoPrevisto = orari[ 3 ];
             }
             else {
-                partenzaProgrammata = orari[ 0 ];
-                partenzaEffettiva = orari[ 1 ];
                 arrivoProgrammato = orari[ 4 ];
                 arrivoPrevisto = orari[ 5 ]; 
             }               
@@ -224,7 +229,7 @@ $( document ).ready( function(){
     
     /* Sending trains' information by email ... */
     document.querySelector("#btn-send").onclick = function () {
-        var testo = "-SITUAZIONE:" + situazioneCorrente.textContent + " -PARTENZA: " + stazionePartenza + " Partenza programmata: " + partenzaProgrammata + " Partenza effettiva: " + partenzaEffettiva + " Binario previsto: " + binarioPrevistoPartenza + " Binario reale: " + binarioRealePartenza + " -ARRIVO: " + stazioneArrivo + " Arrivo programmato: " + arrivoProgrammato + " Arrivo effettivo: " + arrivoEffettivo + " Binario previsto: " + binarioPrevistoArrivo + " Binario reale: " + binarioRealeArrivo;
+        var testo = "-SITUAZIONE:" + situazioneCorrente.textContent + " -PARTENZA: " + stazionePartenza + " Partenza programmata: " + partenzaProgrammata + " Partenza effettiva: " + partenzaEffettiva + " Binario previsto: " + binarioPrevistoPartenza + " Binario reale: " + binarioRealePartenza + " -ARRIVO: " + stazioneArrivo + " Arrivo programmato: " + arrivoProgrammato + " Arrivo previsto: " + arrivoPrevisto + " Binario previsto: " + binarioPrevistoArrivo + " Binario reale: " + binarioRealeArrivo;
         new MozActivity({
             name: "new",
             data: {

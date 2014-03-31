@@ -69,6 +69,9 @@
     <body>
         <section role="region" id="initialScreen" data-position="current">
             <header class="fixed">
+                <menu type="toolbar">
+                    <button type="button" id="btn-about"><span>?</span></a>
+                </menu>
                 <h1>TrovaTreno</h1>
             </header>
             <article class="content scrollable header">
@@ -92,6 +95,9 @@
                     <span class='icon icon-back'>Back</span>
                 </button>
                 <h1 id="nomeTreno"><span></span></h1>
+                <menu type="toolbar">
+                    <button type="button" id="btn-send"><span class='icon icon-send'>Share</span></a>
+                </menu>
             </header>
             <article class="content scrollable header">           
                 <div>
@@ -111,18 +117,40 @@
                     <div id="arrivo">
                         <!-- ... -->
                     </div>
-                    <p><br></p>
                 </section>
             </article>
-            <div role="toolbar">
-                <ul>
-                    <li><button class="icon icon-add">Add</button></li>
-                </ul>
-                <ul>
-                    <li><button class="action-icon email-flag">Flag</button></li>
-                    <li><button class="action-icon email-markread">Mark read</button></li>
-                    <li><button class="action-icon move">Move</button></li>
-                </ul>
-            </div>
+        </section>
+        
+        <section role="region" id="aboutScreen" data-position="right">
+            <header class="fixed">
+                <button type="button" class='btn-back'>
+                    <span class='icon icon-back'>Back</span>
+                </button>
+                <h1>About</h1>
+            </header>
+            <article class="content scrollable header">
+                <h1 style="text-align: center">TrovaTreno</h1>
+                <section data-type="list">
+                <div>
+                    <p><em>An app that helps you to find the information you need about <strong>Italian trains</strong></em></p>
+                    <p>With this app we won the Firefox OS Hackathon! (for more information click <a href="#" id="ffoshackathon">here</a>)</p>
+                <header>Version</header>
+                <div>
+                    <p>0.1b</p> 
+                </div>
+                <header>Developers</header>
+                <div>
+                    <p><strong>nag</strong><br> [, say /neg]</p>
+                    <p>Ok but, why "nag"?<br>Well, try reading the strong chars below...</p>
+                    <p><strong>N</strong>iccolò: <a href="#" id="nicokant">@nicokant</a><br>
+                    <strong>A</strong>ronne: <a href="#" id="aro94">@aro94</a><br>
+                    <strong>G</strong>iuseppe: <a href="#" id="giuscri">@giuscri</a>
+                    <p>Have you seen that??<br>NAG is just an acronym!</p>
+                </div>
+                <header>Project</header>
+                <div>
+                    <p>Follow <a href="#" id='git-link'>the project</a> on GitHub!</p>
+                </div>
+            </article>
     </body>
 </html>
