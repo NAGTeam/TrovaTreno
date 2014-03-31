@@ -150,6 +150,13 @@ scrape = function(parameters) {
 $( document ).ready( function(){
 	console.log('ready');
 	initDB();
+	
+	/* Printing the database ... */
+	/*for(i=1; i<=count;i++) {
+	    oggetto = JSON.parse(localStorage.getItem(i+""));
+		console.log(oggetto);
+		$( '#cronologia' ).append("<li><a href='#' id='oggetto'>" + oggetto.stazionePartenza + oggetto.partenza + "<br>" + oggetto.stazione + "</a></li>");
+    }*/	
 
     /* Using jQuery event-handler for the 'btn-search' object */
     $( '#btn-search' ).click( function(){
@@ -161,6 +168,14 @@ $( document ).ready( function(){
         parameters = "numeroTreno=" + numeroTreno;
         
         scrape(parameters);
+        
+        /* remove all items under #cronologia in order to
+         * have a list without doubles.
+         * Actually the function that prints the element in the DB
+         * uses "append()" method. This will cause the doubles
+         * in the list.
+         */
+        $('#cronologia > li').remove();
     });
 
     /* If back-button is clicked, come back to the initial screen ... */
