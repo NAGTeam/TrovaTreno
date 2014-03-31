@@ -1,8 +1,12 @@
+var nomeTreno, stazionePartenza, stazioneArrivo, partenzaProgrammata, partenzaEffettiva, arrivoProgrammato, arrivoEffettivo, binarioRealePartenza, binarioRealeArrivo, binarioPrevistoPartenza, binarioPrevistoArrivo;
+
 /* Adding a String method for uglyfing a HTML source -- useful for regex's matching */
 String.prototype.shrinkHTML = function() { return this.replace( /\s+/g, ' ' ); };
 
 $( document ).ready( function(){
-	 initDB(); 
+	console.log('ready');
+	initDB();
+
     /* Using jQuery event-handler for the 'btn-search' object */
     $( '#btn-search' ).click( function(){
 
@@ -53,6 +57,7 @@ $( document ).ready( function(){
                 /* ... then catch elements by their tag, id, class, etc. */
 
                 nomeTreno = $scrapedSource.find( 'h1' ).text();
+                console.log(nomeTreno);
                 
                 stazioni = $scrapedSource.find( '.corpocentrale h2' ).map(
                     function( i, el ) { return $( el ).text(); }
@@ -85,7 +90,14 @@ $( document ).ready( function(){
                     arrivoProgrammato = orari[ 4 ];
                     arrivoPrevisto = orari[ 5 ]; 
                 }               
-
+				
+				train= {id : nomeTreno,
+					stazionePartenza : stazionePartenza,
+					partenza : partenzaProgrammata,
+					stazione : stazioneArrivo
+				};
+				addTrain(train);
+				getTrains();
                 binarioPrevistoPartenza = scrapedSource.match( /<!-- ORIGINE -->(.*?)Previsto:<br\/> (\d{1,2}|--)/ )[ 2 ];
                 
                 /* 
@@ -112,31 +124,8 @@ $( document ).ready( function(){
                 
                 binarioPrevistoArrivo = scrapedSource.match( /<!-- DESTINAZIONE -->(.*?)Previsto:<br\/> (\d{1,2}|--)/ )[ 2 ];
                 
-                situazioneCorrente =
+                var situazioneCorrente =
 		   $scrapedSource.find( '.evidenziato > strong' ).text().replace( /<br\/>?/, '' ).replace( /&#039;/, '\'' );
-				
-				t = {};
-
-                t['id'] = numeroTreno;
-                t['stazionePartenza'] = stazionePartenza;
-                t['stazioneArrivo'] = stazioneArrivo;
-                t['partenzaProgrammata'] = partenzaProgrammata;
-                t['arrivoProgrammato'] = arrivoProgrammato;
-                t['dataUltimaRicerca'] = ( function() {
-                    today = new Date();
-                    dd = today.getDate();
-                    mm = today.getMonth() +1;
-                    yyyy = today.getFullYear();
-
-                    if ( dd < 10 ) { dd = '0' + dd; }
-
-                    if ( mm < 10 ) { mm = '0' + mm; }
-
-                    return dd + '/' + mm + '/' + + yyyy;
-
-                })();
-
-                addTreno(t);
                 
                 /* Appending some html code, according to the scraped datas */
                 $( '#nomeTreno > span' ).text( nomeTreno );
@@ -158,7 +147,6 @@ $( document ).ready( function(){
 
         /* Sending parameter, then let the onreadystatechange() function running */
         xhr.send(parameters);
-
     });
 
     /* If back-button is clicked, come back to the initial screen ... */
@@ -171,4 +159,69 @@ $( document ).ready( function(){
 	    $( '[data-position="right"]' ).attr( 'class', 'right' );
 	    $( '[data-position="left"]' ).attr( 'class', 'left');
     });
+    
+    /* Button to About screen ...*/
+    $( '#btn-about' ).click( function() {
+		$( '#aboutScreen' ).attr( 'class', 'current' );
+		$( '[data-position="current"]' ).attr( 'class', 'left' );
+    });
+    
+    /* Delegating the opening of the links to the browser ...*/
+    document.querySelector("#git-link").onclick = function () {
+        new MozActivity({
+            name: "view",
+            data: {
+                type: "url",
+                url: "https://github.com/nag-motherfuckers/TrovaTreno.git"
+            }
+        });
+    };
+    document.querySelector("#ffoshackathon").onclick = function () {
+        new MozActivity({
+            name: "view",
+            data: {
+                type: "url",
+                url: "http://www.mozillaitalia.org/home/2014/03/13/firefox-os-conference-hackaton-milano-27-28-marzo-2014/"
+            }
+        });
+    };      
+    document.querySelector("#aro94").onclick = function () {
+        new MozActivity({
+            name: "view",
+            data: {
+                type: "url",
+                url: "http://twitter.com/aro94"
+            }
+       });
+    };
+    document.querySelector("#nicokant").onclick = function () {
+        new MozActivity({
+            name: "view",
+            data: {
+                type: "url",
+                url: "http://twitter.com/nicokant"
+            }
+        });
+    }; 
+    document.querySelector("#giuscri").onclick = function () {
+        new MozActivity({
+            name: "view",
+            data: {
+                type: "url",
+                url: "http://twitter.com/giuscri"
+            }
+        });
+    }; 
+    
+    /* Sending trains' information by email ... */
+    document.querySelector("#btn-send").onclick = function () {
+        var testo = "-SITUAZIONE:" + situazioneCorrente.textContent + " -PARTENZA: " + stazionePartenza + " Partenza programmata: " + partenzaProgrammata + " Partenza effettiva: " + partenzaEffettiva + " Binario previsto: " + binarioPrevistoPartenza + " Binario reale: " + binarioRealePartenza + " -ARRIVO: " + stazioneArrivo + " Arrivo programmato: " + arrivoProgrammato + " Arrivo effettivo: " + arrivoEffettivo + " Binario previsto: " + binarioPrevistoArrivo + " Binario reale: " + binarioRealeArrivo;
+        new MozActivity({
+            name: "new",
+            data: {
+                type : "mail",
+                url: "mailto:?body=" + testo + "&subject=" + nomeTreno
+            }
+        });
+    };  
 });
