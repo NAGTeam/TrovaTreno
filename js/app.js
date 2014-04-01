@@ -253,12 +253,5 @@ $( document ).ready( function(){
                 url: "mailto:?body=" + testo + "&subject=" + nomeTreno
             }
         });
-    };
-    
-    document.getElementById("#oggetto").addEventListener('click', function () {
-        console.log("Clicked!");
-    });
-    
-    
-      
+    };   
 });
