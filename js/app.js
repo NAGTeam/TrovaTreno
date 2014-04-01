@@ -156,7 +156,6 @@ scrape = function(parameters) {
 
 
 $( document ).ready( function(){
-	console.log('ready');
 	initDB();
 	getTrains();
 
