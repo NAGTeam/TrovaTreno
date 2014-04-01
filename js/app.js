@@ -9,7 +9,15 @@ scrape = function(parameters) {
     /* Opening a POST request to 'viaggiatreno.it' */
     baseUrl = 'http://mobile.viaggiatreno.it/vt_pax_internet/mobile/numero';
     xhr.open('POST', baseUrl, true);
-
+	xhr.timeout=5750;
+	xhr.addEventListener('error', function(){
+		alert('Nessuna Connessione');
+	});
+	
+	xhr.addEventListener('timeout', function(){
+		alert('Nessuna Connessione');
+	});
+	
     /* Setting the correct headers for the POST request */
     xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
     xhr.setRequestHeader('Content-length', parameters.length);
@@ -144,6 +152,7 @@ scrape = function(parameters) {
     /* Sending parameter, then let the onreadystatechange() function running */
     xhr.send(parameters);
 };
+
 
 $( document ).ready( function(){
 	initDB();
