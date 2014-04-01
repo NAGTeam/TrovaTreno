@@ -1,161 +1,178 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <meta charset="utf-8" />
-        <meta name="viewport" content="width=device-width, user-scalable=no" />
-        <title>TrovaTreno</title>
-        
-        <!-- Linking needed building blocks ... -->
-        <link rel="stylesheet" href="style/buttons.css" />
-        <link rel="stylesheet" href="style/headers.css" />
-        <link rel="stylesheet" href="style/input_areas.css" />
-        <link rel="stylesheet" href="style/scrolling.css" />
-        <link rel="stylesheet" href="style/lists.css" />
-        <link rel="stylesheet" href="style/toolbars.css" />
-        <link rel="stylesheet" href="style/action_icons.css" />
-        
-        <!-- ... then some extra tricks for FirefoxOS ... -->
-        <link rel="stylesheet" href="style/util.css" />
-        
-        <!-- Transitions ... -->
-        <link rel="stylesheet" href="style/transitions.css" />
-        
-        <!-- Linking scripts ... -->
-        <script src="js/jquery-2.1.0.min.js"></script>
-		<script src='js/scriptDB.js'></script>
-        <script src="js/app.js"></script>
-        
-        <style>            
-            [data-position="center"] { height: 100%; }
 
-            [data-position="right"] {
-                position: absolute;
-                top: 0;
-                left: 0;
-                right: 0;
-                bottom: 0;
-                transform: translateX(100%);
-            }
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, user-scalable=no" />
+    <title>TrovaTreno</title>
 
-            [data-position="left"] {
-              position: absolute;
-              top: 0;
-              left: 0;
-              right: 0;
-              bottom: 0;
-              transform: translateX(-100%);
-            }
-            
-            [data-position="right"].current { animation: rightToCurrent 0.4s forwards; }
+    <!-- Linking needed building blocks ... -->
+    <link rel="stylesheet" href="style/buttons.css" />
+    <link rel="stylesheet" href="style/headers.css" />
+    <link rel="stylesheet" href="style/input_areas.css" />
+    <link rel="stylesheet" href="style/scrolling.css" />
+    <link rel="stylesheet" href="style/lists.css" />
+    <link rel="stylesheet" href="style/toolbars.css" />
+    <link rel="stylesheet" href="style/action_icons.css" />
 
-            [data-position="current"].left { animation: currentToLeft 0.4s forwards; }
-              
-            [data-position="current"].current { animation: leftToCurrent 0.4s forwards; }
+    <!-- ... then some extra tricks for FirefoxOS ... -->
+    <link rel="stylesheet" href="style/util.css" />
 
-            [data-position="right"].right { animation: currentToRight 0.4s forwards; }
-            
-            /* ... and for styling our results' screen. */ 
-            h1 > span { text-align: center; }
+    <!-- Transitions ... -->
+    <link rel="stylesheet" href="style/transitions.css" />
 
-            [data-type="list"] div p {
-                margin-left: 2rem;
-            }
-            
-            [data-type="list"] div h2 {
-                margin-left: 2rem;
-            }
-            
-            input[name="numeroTreno"] { margin-bottom: 1rem; }
+    <!-- Linking scripts ... -->
+    <script src="js/jquery-2.1.0.min.js"></script>
+    <script src='js/scriptDB.js'></script>
+    <script src="js/app.js"></script>
 
-            #situazioneCorrente { font-style: italic; }
-        </style>
-    </head>
-    <body>
-        <section role="region" id="initialScreen" data-position="current">
-            <header class="fixed">
-                <menu type="toolbar">
-                    <button type="button" id="btn-about"><span>?</span></a>
-                </menu>
-                <h1>TrovaTreno</h1>
-            </header>
-            <article class="content scrollable header">
-                <div>
-                    <br>
-                    <input type="text" name="numeroTreno" placeholder="Inserisci il numero del treno" />
-                    <button type="button" id="btn-search">Cerca!</button>
-                    <br>
+    <style>
+    [data-position="center"] {
+        height: 100%;
+    }
+    [data-position="right"] {
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        transform: translateX(100%);
+    }
+    [data-position="left"] {
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        transform: translateX(-100%);
+    }
+    [data-position="right"].current {
+        animation: rightToCurrent 0.4s forwards;
+    }
+    [data-position="current"].left {
+        animation: currentToLeft 0.4s forwards;
+    }
+    [data-position="current"].current {
+        animation: leftToCurrent 0.4s forwards;
+    }
+    [data-position="right"].right {
+        animation: currentToRight 0.4s forwards;
+    }
+    /* ... and for styling our results' screen. */
+    h1 > span {
+        text-align: center;
+    }
+    [data-type="list"] div p {
+        margin-left: 2rem;
+    }
+    [data-type="list"] div h2 {
+        margin-left: 2rem;
+    }
+    input[name="numeroTreno"] {
+        margin-bottom: 1rem;
+    }
+    #situazioneCorrente {
+        font-style: italic;
+    }
+    </style>
+</head>
+
+<body>
+    <section role="region" id="initialScreen" data-position="current">
+        <header class="fixed">
+            <menu type="toolbar">
+                <button type="button" id="btn-about"><span>?</span>
+                    </a>
+            </menu>
+            <h1>TrovaTreno</h1>
+        </header>
+        <article class="content scrollable header">
+            <div>
+                <br>
+                <input type="text" name="numeroTreno" placeholder="Inserisci il numero del treno" />
+                <button type="button" id="btn-search">Cerca!</button>
+                <br>
+            </div>
+            <section data-type="list">
+                <header>Cronologia</header>
+                <ul id="cronologia">
+                    <!-- ... -->
+                </ul>
+            </section>
+        </article>
+    </section>
+
+    <section role="region" id="resultsScreen" data-position="right">
+        <header class="fixed">
+            <button type="button" class='btn-back'>
+                <span class='icon icon-back'>Back</span>
+            </button>
+            <h1 id="nomeTreno"><span></span></h1>
+            <menu type="toolbar">
+                <button type="button" id="btn-send"><span class='icon icon-send'>Share</span>
+                    </a>
+            </menu>
+        </header>
+        <article class="content scrollable header" id="info">
+            <div>
+                <p id="situazioneCorrente"><span></span>
+                </p>
+            </div>
+
+            <section data-type="list">
+                <header>Partenza</header>
+                <div id="partenza">
+                    <!-- ... -->
                 </div>
-                <section data-type="list">
-                    <header>Cronologia</header>
-                    <ul id="cronologia">
-                        <!-- ... -->
-                    </ul>
-                </section>
-            </article>
-        </section>
-        
-        <section role="region" id="resultsScreen" data-position="right">
-            <header class="fixed">
-                <button type="button" class='btn-back'>
-                    <span class='icon icon-back'>Back</span>
-                </button>
-                <h1 id="nomeTreno"><span></span></h1>
-                <menu type="toolbar">
-                    <button type="button" id="btn-send"><span class='icon icon-send'>Share</span></a>
-                </menu>
-            </header>
-            <article class="content scrollable header" id="info">           
-                <div>
-                    <p id="situazioneCorrente"><span></span></p>
+
+                <div id="ultima">
+                    <!-- ... -->
                 </div>
+                <header>Arrivo</header>
+                <div id="arrivo">
+                    <!-- ... -->
+                </div>
+            </section>
+        </article>
+    </section>
 
-                <section data-type="list">
-                    <header>Partenza</header>
-                    <div id="partenza">
-                        <!-- ... -->
-                    </div>
-
-                    <div id="ultima">
-                        <!-- ... -->
-                    </div>                
-                    <header>Arrivo</header>
-                    <div id="arrivo">
-                        <!-- ... -->
-                    </div>
-                </section>
-            </article>
-        </section>
-        
-        <section role="region" id="aboutScreen" data-position="right">
-            <header class="fixed">
-                <button type="button" class='btn-back'>
-                    <span class='icon icon-back'>Back</span>
-                </button>
-                <h1>About</h1>
-            </header>
-            <article class="content scrollable header">
-                <h1 style="text-align: center">TrovaTreno</h1>
-                <section data-type="list">
+    <section role="region" id="aboutScreen" data-position="right">
+        <header class="fixed">
+            <button type="button" class='btn-back'>
+                <span class='icon icon-back'>Back</span>
+            </button>
+            <h1>About</h1>
+        </header>
+        <article class="content scrollable header">
+            <h1 style="text-align: center">TrovaTreno</h1>
+            <section data-type="list">
                 <div>
-                    <p><em>An app that helps you to find the information you need about <strong>Italian trains</strong></em></p>
+                    <p><em>An app that helps you to find the information you need about <strong>Italian trains</strong></em>
+                    </p>
                     <p>With this app we won the Firefox OS Hackathon! (for more information click <a href="#" id="ffoshackathon">here</a>)</p>
-                <header>Version</header>
-                <div>
-                    <p>1.0</p>
-                </div>
-                <header>Developers</header>
-                <div>
-                    <p><strong>nag</strong><br> [, say /neg]</p>
-                    <p>Ok but, why "nag"?<br>Well, try reading the strong chars below...</p>
-                    <p><strong>N</strong>iccolò: <a href="#" id="nicokant">@nicokant</a><br>
-                    <strong>A</strong>ronne: <a href="#" id="aro94">@aro94</a><br>
-                    <strong>G</strong>iuseppe: <a href="#" id="giuscri">@giuscri</a>
-                    <p>Have you seen that??<br>NAG is just an acronym!</p>
-                </div>
-                <header>Project</header>
-                <div>
-                    <p>Follow <a href="#" id='git-link'>the project</a> on GitHub!</p>
-                </div>
-            </article>
-    </body>
+                    <header>Version</header>
+                    <div>
+                        <p>1.0</p>
+                    </div>
+                    <header>Developers</header>
+                    <div>
+                        <p><strong>nag</strong>
+                            <br>[, say /neg]</p>
+                        <p>Ok but, why "nag"?
+                            <br>Well, try reading the strong chars below...</p>
+                        <p><strong>N</strong>iccolo': <a href="#" id="nicokant">@nicokant</a>
+                            <br>
+                            <strong>A</strong>ronne: <a href="#" id="aro94">@aro94</a>
+                            <br>
+                            <strong>G</strong>iuseppe: <a href="#" id="giuscri">@giuscri</a>
+                            <p>Have you seen that??
+                                <br>NAG is just an acronym!</p>
+                    </div>
+                    <header>Project</header>
+                    <div>
+                        <p>Follow <a href="#" id='git-link'>the project</a> on GitHub!</p>
+                    </div>
+        </article>
+</body>
+
 </html>
