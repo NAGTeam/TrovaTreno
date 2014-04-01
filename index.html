@@ -12,7 +12,7 @@
         <link rel="stylesheet" href="style/scrolling.css" />
         <link rel="stylesheet" href="style/lists.css" />
         <link rel="stylesheet" href="style/toolbars.css" />
-        <link rel="stylesheet" href="style/icons.css" />
+        <link rel="stylesheet" href="style/action_icons.css" />
         
         <!-- ... then some extra tricks for FirefoxOS ... -->
         <link rel="stylesheet" href="style/util.css" />
@@ -22,6 +22,7 @@
         
         <!-- Linking scripts ... -->
         <script src="js/jquery-2.1.0.min.js"></script>
+		<script src='js/scriptDB.js'></script>
         <script src="js/app.js"></script>
         
         <style>            
@@ -84,6 +85,12 @@
                     <button type="button" id="btn-search">Cerca!</button>
                     <br>
                 </div>
+                <section data-type="list">
+                    <header>Cronologia</header>
+                    <ul id="cronologia">
+                        <!-- ... -->
+                    </ul>
+                </section>
             </article>
         </section>
         
@@ -115,7 +122,6 @@
                     <div id="arrivo">
                         <!-- ... -->
                     </div>
-                    <p><br></p>
                 </section>
             </article>
         </section>
@@ -135,7 +141,7 @@
                     <p>With this app we won the Firefox OS Hackathon! (for more information click <a href="#" id="ffoshackathon">here</a>)</p>
                 <header>Version</header>
                 <div>
-                    <p>0.1b</p> 
+                    <p>1.0</p>
                 </div>
                 <header>Developers</header>
                 <div>
