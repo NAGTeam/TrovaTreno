@@ -90,7 +90,6 @@ scrape = function(parameters) {
 					numeroTreno=numeroTreno+chari;
 			}
 			numeroTreno=parseInt(numeroTreno);
-			console.log(numeroTreno);
 			train= {id : numeroTreno,
 				stazionePartenza : stazionePartenza,
 				partenza : partenzaProgrammata,
@@ -147,7 +146,6 @@ scrape = function(parameters) {
 };
 
 $( document ).ready( function(){
-	console.log('ready');
 	initDB();
 	getTrains();
 
