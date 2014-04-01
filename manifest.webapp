@@ -7,10 +7,14 @@
     "launch_path": "/index.html",
     "type": "privileged",
     "permissions": {
-        "systemXHR": {}
+        "systemXHR": {
+            "description": "Used to retrive trains data from mobile.viaggiatreno.it"
+        }
     },
     "icons": {
         "60": "/style/icons/icon_60.png",
-        "128": "/style/icons/icon_128.png"
+        "128": "/style/icons/icon_128.png",
+        "90": "/style/icons/icon_90.png",
+        "120": "/style/icons/icon_120.png"
     }
 }
