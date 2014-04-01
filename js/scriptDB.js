@@ -8,7 +8,6 @@ function addTrain(JSONTrain){
 	count=parseInt(localStorage.getItem('counter'));
 	add=true;
 	for(i=1; i<=count;i++){
-		console.log('start loop');
 		array=[];
 		array[i]=JSON.parse(localStorage.getItem(i+""));
 		numEstratto = (array[i])['id'];
@@ -32,6 +31,6 @@ function getTrains(){
 	count=parseInt(localStorage.getItem('counter'));
 	for(i=1; i<=count;i++) {
 	    oggetto = JSON.parse(localStorage.getItem(i+""));
-		$( '#cronologia' ).append("<li id='"+oggetto.id+"'><a href='#'><p>" + oggetto.stazionePartenza + oggetto.partenza + "</p><p>Direzione: " + oggetto.stazione + "</p></a></li>");
-    }
+		$( '#cronologia' ).prepend("<li ><a href='#' id='"+oggetto.id+"' class='history'><p>" + oggetto.stazionePartenza + oggetto.partenza + "</p><p>Direzione: " + oggetto.stazione + "</p></a></li>");
+	}	
 }

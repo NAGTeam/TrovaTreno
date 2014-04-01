@@ -9,6 +9,7 @@ scrape = function(parameters) {
     /* Opening a POST request to 'viaggiatreno.it' */
     baseUrl = 'http://mobile.viaggiatreno.it/vt_pax_internet/mobile/numero';
     xhr.open('POST', baseUrl, true);
+	
 	xhr.timeout=5750;
 	xhr.addEventListener('error', function(){
 		alert('Nessuna Connessione');
@@ -52,7 +53,6 @@ scrape = function(parameters) {
 
             /* ... then catch elements by their tag, id, class, etc. */
             nomeTreno = $scrapedSource.find( 'h1' ).text();
-            console.log(nomeTreno);
                 
             stazioni = $scrapedSource.find( '.corpocentrale h2' ).map(
                 function( i, el ) { return $( el ).text(); }
@@ -98,6 +98,7 @@ scrape = function(parameters) {
 					numeroTreno=numeroTreno+chari;
 			}
 			numeroTreno=parseInt(numeroTreno);
+			console.log(numeroTreno);
 			train= {id : numeroTreno,
 				stazionePartenza : stazionePartenza,
 				partenza : partenzaProgrammata,
@@ -155,6 +156,7 @@ scrape = function(parameters) {
 
 
 $( document ).ready( function(){
+	console.log('ready');
 	initDB();
 	getTrains();
 
@@ -170,10 +172,8 @@ $( document ).ready( function(){
         scrape(parameters);
     });
 	
-	$('li').click(function(){
-		console.log('clicked');
+	$(document).on('click','.history',function(){
 		numeroTreno= $(this).attr('id');
-		console.log(numeroTreno);
 		parameters = "numeroTreno=" + numeroTreno;
 		scrape(parameters);
 	});
