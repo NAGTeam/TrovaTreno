@@ -161,14 +161,6 @@ $( document ).ready( function(){
         parameters = "numeroTreno=" + numeroTreno;
         
         scrape(parameters);
-        
-        /* remove all items under #cronologia in order to
-         * have a list without doubles.
-         * Actually the function that prints the element in the DB
-         * uses "append()" method. This will cause the doubles
-         * in the list.
-         */
-        $('#cronologia > li').remove();
     });
 	
 	$('li').click(function(){
@@ -185,7 +177,13 @@ $( document ).ready( function(){
 	    $('#partenza > p').remove();
 	    $('#ultima > div').remove();
 	    $('#arrivo > p').remove();
-		$('#cronologia').empty();
+        /* remove all items under #cronologia in order to
+         * have a list without doubles.
+         * Actually the function that prints the element in the DB
+         * uses "append()" method. This will cause the doubles
+         * in the list.
+         */
+        $('#cronologia > li').remove();
 		getTrains();
 	    $( '[data-position="current"]' ).attr( 'class', 'current' );
 	    $( '[data-position="right"]' ).attr( 'class', 'right' );
