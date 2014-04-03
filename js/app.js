@@ -1,4 +1,4 @@
-var nomeTreno, stazionePartenza, stazioneArrivo, partenzaProgrammata, partenzaEffettiva, arrivoProgrammato, arrivoPrevisto, binarioRealePartenza, binarioRealeArrivo, binarioPrevistoPartenza, binarioPrevistoArrivo;
+var nomeTreno, stazionePartenza, stazioneArrivo, partenzaProgrammata, partenzaEffettiva, arrivoProgrammato, arrivoPrevisto, binarioRealePartenza, binarioRealeArrivo, binarioPrevistoPartenza, binarioPrevistoArrivo, situazioneCorrente;
 
 /* Adding a String method for uglyfing a HTML source -- useful for regex's matching */
 String.prototype.shrinkHTML = function () {
@@ -153,7 +153,7 @@ scrape = function (parameters) {
 
             binarioPrevistoArrivo = scrapedSource.match(/<!-- DESTINAZIONE -->(.*?)Previsto:<br\/> (\d{1,2}|--)/)[2];
 
-            var situazioneCorrente =
+            situazioneCorrente =
                 $scrapedSource.find('.evidenziato > strong')
                 .text()
                 .replace(/<br\/>?/, '')
@@ -306,7 +306,7 @@ $(document)
         /* Sending trains' information by email ... */
         document.querySelector("#btn-send")
             .onclick = function () {
-                var testo = "-SITUAZIONE:" + situazioneCorrente.textContent + " -PARTENZA: " + stazionePartenza + " Partenza programmata: " + partenzaProgrammata + " Partenza effettiva: " + partenzaEffettiva + " Binario previsto: " + binarioPrevistoPartenza + " Binario reale: " + binarioRealePartenza + " -ARRIVO: " + stazioneArrivo + " Arrivo programmato: " + arrivoProgrammato + " Arrivo previsto: " + arrivoPrevisto + " Binario previsto: " + binarioPrevistoArrivo + " Binario reale: " + binarioRealeArrivo;
+                var testo = "-SITUAZIONE:" + situazioneCorrente + " -PARTENZA: " + stazionePartenza + " Partenza programmata: " + partenzaProgrammata + " Partenza effettiva: " + partenzaEffettiva + " Binario previsto: " + binarioPrevistoPartenza + " Binario reale: " + binarioRealePartenza + " -ARRIVO: " + stazioneArrivo + " Arrivo programmato: " + arrivoProgrammato + " Arrivo previsto: " + arrivoPrevisto + " Binario previsto: " + binarioPrevistoArrivo + " Binario reale: " + binarioRealeArrivo;
                 new MozActivity({
                     name: "new",
                     data: {
