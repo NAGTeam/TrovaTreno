@@ -17,10 +17,12 @@ scrape = function (parameters) {
     xhr.timeout = 5750;
     xhr.addEventListener('error', function () {
         alert('Nessuna Connessione');
+        return;
     });
 
     xhr.addEventListener('timeout', function () {
         alert('Nessuna Connessione');
+        return;
     });
 
     /* Setting the correct headers for the POST request */
