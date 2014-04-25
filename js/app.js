@@ -16,12 +16,12 @@ scrape = function (parameters) {
 
     xhr.timeout = 5750;
     xhr.addEventListener('error', function () {
-        alert('Nessuna Connessione');
+        alert('Offline');
         return;
     });
 
     xhr.addEventListener('timeout', function () {
-        alert('Nessuna Connessione');
+        alert('Offline');
         return;
     });
 

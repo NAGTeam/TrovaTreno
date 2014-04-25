@@ -1,21 +1,33 @@
 {
-    "name": "TrovaTreno",
-    "description": "A simple app that helps you to find the information you need about Italian trains",
-    "version": "1.1",
-    "developer": {
-        "name": "nag"
-    },
-    "launch_path": "/index.html",
-    "type": "privileged",
-    "permissions": {
-        "systemXHR": {
-            "description": "Used to retrive trains data from mobile.viaggiatreno.it"
-        }
-    },
-    "icons": {
-        "60": "/style/icons/icon_60.png",
-        "128": "/style/icons/icon_128.png",
-        "90": "/style/icons/icon_90.png",
-        "120": "/style/icons/icon_120.png"
+  "name": "TrovaTreno",
+  "description": "TrovaTreno allows you to search Italian train schedules and to view the trend in real time.",
+  "version": "1.1",
+  "developer": {
+    "name": "nag"
+  },
+  "launch_path": "/index.html",
+  "type": "privileged",
+  "permissions": {
+    "systemXHR": {
+      "description": "Used to retrive trains data from mobile.viaggiatreno.it"
     }
+  },
+  "icons": {
+    "60": "/style/icons/icon_60.png",
+    "90": "/style/icons/icon_90.png",
+    "120": "/style/icons/icon_120.png",
+    "128": "/style/icons/icon_128.png"
+  },
+  "default-locale": "en",
+  "locales": {
+    "it-IT": {
+      "description": "TrovaTreno permette la ricerca degli orari dei treni italiani e la consultazione dell'andamento in tempo reale."
+    },
+    "en": {
+      "description": "TrovaTreno allows you to search Italian train schedules and to view the trend in real time."
+    },
+    "en-US": {
+      "description": "TrovaTreno allows you to search Italian train schedules and to view the trend in real time."
+    }
+  }
 }
