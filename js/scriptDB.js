@@ -7,6 +7,8 @@ function initDB(){
 function addTrain(JSONTrain){
 	count=parseInt(localStorage.getItem('counter'));
 	add=true;
+	if(JSONTrain['id'] === undefined)
+	return;
 	for(i=1; i<=count;i++){
 		array=[];
 		array[i]=JSON.parse(localStorage.getItem(i+""));
@@ -31,6 +33,22 @@ function getTrains(){
 	count=parseInt(localStorage.getItem('counter'));
 	for(i=1; i<=count;i++) {
 	    oggetto = JSON.parse(localStorage.getItem(i+""));
-		$( '#cronologia' ).prepend("<li ><a href='#' id='"+oggetto.id+"' class='history'><p>" + oggetto.stazionePartenza + oggetto.partenza + "</p><p>Direzione: " + oggetto.stazione + "</p></a></li>");
+		$( '#cronologia' ).prepend("<li><a href='#' id='"+oggetto.id+"' class='history'><p>" + oggetto.stazionePartenza + oggetto.partenza + "</p><p>Direzione: " + oggetto.stazione + "</p></a></li>");
 	}	
+}
+
+function ClearData(){
+	if(confirm("Cancellare tutta la cronologia?")){
+		localStorage.clear();
+		initDB();
+	}
+}
+
+function removeTrain(id){
+	count=parseInt(localStorage.getItem('counter'));
+	for(i=1; i<=count;i++) {
+	    oggetto = JSON.parse(localStorage.getItem(i+""));
+		if(oggetto.id === id)
+			localStorage.removeItem(i+"");
+	}
 }

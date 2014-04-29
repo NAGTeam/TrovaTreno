@@ -176,6 +176,12 @@ $( document ).ready( function(){
 		parameters = "numeroTreno=" + numeroTreno;
 		scrape(parameters);
 	});
+	
+	$('#clear').click( function(){
+		ClearData();
+		$('#cronologia').empty();
+		getTrains();
+	});
 
     /* If back-button is clicked, come back to the initial screen ... */
     $( '.btn-back' ).click( function(){
