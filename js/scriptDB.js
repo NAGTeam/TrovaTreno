@@ -11,14 +11,16 @@ function addTrain(JSONTrain){
 	return;
 	for(i=1; i<=count;i++){
 		array=[];
-		array[i]=JSON.parse(localStorage.getItem(i+""));
-		numEstratto = (array[i])['id'];
-		numTreno = JSONTrain['id'];
-		if(numEstratto !== numTreno){
-			add=true;
-		}else{
-			add=false;
-			break;
+		if(JSON.parse(localStorage.getItem(i)) != null){
+			array[i]=JSON.parse(localStorage.getItem(i));
+			numEstratto = (array[i])['id'];
+			numTreno = JSONTrain['id'];
+			if(numEstratto !== numTreno){
+				add=true;
+			}else{
+				add=false;
+				break;
+			}
 		}
 	}
 	if(add){
@@ -32,9 +34,11 @@ function addTrain(JSONTrain){
 function getTrains(){
 	count=parseInt(localStorage.getItem('counter'));
 	for(i=1; i<=count;i++) {
-	    oggetto = JSON.parse(localStorage.getItem(i+""));
-		$( '#cronologia' ).prepend("<li><a href='#' id='"+oggetto.id+"' class='history'><p>" + oggetto.stazionePartenza + oggetto.partenza + "</p><p>Direzione: " + oggetto.stazione + "</p></a></li>");
-	}	
+		if(JSON.parse(localStorage.getItem(i+""))!= null){
+			oggetto = JSON.parse(localStorage.getItem(i+""));
+			$( '#cronologia' ).prepend("<li><a href='#' id='"+oggetto.id+"' class='history'><p>" + oggetto.stazionePartenza + oggetto.partenza + "</p><p>Direzione: " + oggetto.stazione + "</p></a></li>");
+		}	
+	}
 }
 
 function ClearData(){
@@ -47,8 +51,15 @@ function ClearData(){
 function removeTrain(id){
 	count=parseInt(localStorage.getItem('counter'));
 	for(i=1; i<=count;i++) {
-	    oggetto = JSON.parse(localStorage.getItem(i+""));
-		if(oggetto.id === id)
-			localStorage.removeItem(i+"");
+		if(JSON.parse(localStorage.getItem(i+"")) != null){
+			oggetto = JSON.parse(localStorage.getItem(i+""));
+			console.log(oggetto);
+			console.log(oggetto.id);
+			if(oggetto.id+"" === id){
+				localStorage.removeItem(i+"");
+				console.log('removed');
+				break;
+			}
+		}
 	}
 }

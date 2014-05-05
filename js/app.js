@@ -172,9 +172,15 @@ $( document ).ready( function(){
     });
 	
 	$(document).on('click','.history',function(){
-		numeroTreno= $(this).attr('id');
+		/*numeroTreno= $(this).attr('id');
 		parameters = "numeroTreno=" + numeroTreno;
-		scrape(parameters);
+		scrape(parameters);*/
+		console.log('clicked');
+		toRemove= $(this).attr('id');
+		console.log(toRemove);
+		removeTrain(toRemove);
+		$('#cronologia').empty();
+		getTrains();
 	});
 	
 	$('#clear').click( function(){
