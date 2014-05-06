@@ -3,6 +3,8 @@ var nomeTreno, stazionePartenza, stazioneArrivo, partenzaProgrammata, partenzaEf
 /* Adding a String method for uglyfing a HTML source -- useful for regex's matching */
 String.prototype.shrinkHTML = function() { return this.replace( /\s+/g, ' ' ); };
 
+var deleteMode=false;
+
 scrape = function(parameters) {
     /* Def+init of a XMLHttpRequest object. Passing the needed JSON-object */
     xhr = new XMLHttpRequest( {mozSystem: true} );
@@ -162,6 +164,9 @@ $( document ).ready( function(){
     /* Using jQuery event-handler for the 'btn-search' object */
     $( '#btn-search' ).click( function(){
 
+		/*if it's in delete mode, switch back to normal mode*/
+		deleteMode=false;
+		
         /* Catching value of the form with the 'name=numeroTreno' attribute set */
         numeroTreno = $( 'input[name=numeroTreno]' ).val();
 
@@ -171,20 +176,31 @@ $( document ).ready( function(){
         scrape(parameters);
     });
 	
-	$(document).on('click','.history',function(){
-		numeroTreno= $(this).attr('id');
-		parameters = "numeroTreno=" + numeroTreno;
-		scrape(parameters);
+	$('#del_item').click(function(){
+		if(!deleteMode){
+			if(confirm('enter delete mode?'))
+				deleteMode=true;
+			else deleteMode=false;
+		}
+		else{
+			alert('normal');
+			deleteMode=false;
+		}
 	});
 	
-	$('#del_item').on('click', '.history', function() { 
-        console.log('delete!');
-		toRemove= $(this).attr('id');
-		console.log(toRemove);
-		removeTrain(toRemove);
-		$('#cronologia').empty();
-		getTrains();
-    });
+	$(document).on('click','.history',function(){
+		if(deleteMode){
+			toRemove= $(this).attr('id');
+			console.log(toRemove);
+			removeTrain(toRemove);
+			$('#cronologia').empty();
+			getTrains();
+		}else{
+			numeroTreno= $(this).attr('id');
+			parameters = "numeroTreno=" + numeroTreno;
+			scrape(parameters);
+		}
+	});
 	
 	$('#clear').click( function(){
 		ClearData();
@@ -213,6 +229,7 @@ $( document ).ready( function(){
     
     /* Button to About screen ...*/
     $( '#btn-about' ).click( function() {
+		deleteMode=false;
 		$( '#aboutScreen' ).attr( 'class', 'current' );
 		$( '[data-position="current"]' ).attr( 'class', 'left' );
     });
