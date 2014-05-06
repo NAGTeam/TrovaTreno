@@ -177,14 +177,14 @@ $( document ).ready( function(){
 		scrape(parameters);
 	});
 	
-	/*$(el).addEventListener('MozSwipeGesture', SimpleGestureEvent.DIRECTION_LEFT, 0.0, 0) 
-        console.log('swipe!!');
+	$('#del_item').on('click', '.history', function() { 
+        console.log('delete!');
 		toRemove= $(this).attr('id');
 		console.log(toRemove);
 		removeTrain(toRemove);
 		$('#cronologia').empty();
 		getTrains();
-    });*/
+    });
 	
 	$('#clear').click( function(){
 		ClearData();

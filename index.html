@@ -64,6 +64,12 @@
             input[name="numeroTreno"] { margin-bottom: 1rem; }
 
             #situazioneCorrente { font-style: italic; }
+            
+            #a { float: left; }
+            
+            #b { float: right; }
+            
+            #del_item { float: right; }
         </style>
     </head>
     <body>
@@ -82,7 +88,7 @@
                     <br>
                 </div>
                 <section data-type="list">
-                    <header>Cronologia <span><a id='clear' href='#'>Svuota</a></span></header>
+                    <header><div id='a'>Cronologia</div><span id='b'><a id='clear' href='#'>Svuota</a></span></header>
                     <ul id="cronologia">
                         <!-- ... -->
                     </ul>

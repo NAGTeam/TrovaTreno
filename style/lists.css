@@ -36,8 +36,7 @@
 [data-type="list"] header > span {
   text-align: right;
   font-size: 1rem;
-  position: relative;
-  margin-left: 9.8rem;
+  display: block;
 }
 
 [data-type="list"] header > span > a {
@@ -61,8 +60,7 @@
 
 [data-type="list"] li > a > img {
   position: relative;
-  margin-top: 2rem;
-  margin-left: 25rem;
+  margin-top: 2.7rem;
 }
 
 [data-type="list"] li:last-child {
