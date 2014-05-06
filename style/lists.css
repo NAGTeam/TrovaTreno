@@ -33,6 +33,18 @@
   white-space: nowrap;
 }
 
+[data-type="list"] header > span {
+  text-align: right;
+  font-size: 1rem;
+  position: relative;
+  margin-left: 8.5rem;
+}
+
+[data-type="list"] header > span > a {
+  text-decoration: none;
+  color: #C80815;
+}
+
 /* List items */
 [data-type="list"] li {
   width: 100%;
