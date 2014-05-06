@@ -1,4 +1,4 @@
-var nomeTreno, stazionePartenza, stazioneArrivo, partenzaProgrammata, partenzaEffettiva, arrivoProgrammato, arrivoPrevisto, binarioRealePartenza, binarioRealeArrivo, binarioPrevistoPartenza, binarioPrevistoArrivo;
+var nomeTreno, stazionePartenza, stazioneArrivo, partenzaProgrammata, partenzaEffettiva, arrivoProgrammato, arrivoPrevisto, binarioRealePartenza, binarioRealeArrivo, binarioPrevistoPartenza, binarioPrevistoArrivo, el;
 
 /* Adding a String method for uglyfing a HTML source -- useful for regex's matching */
 String.prototype.shrinkHTML = function() { return this.replace( /\s+/g, ' ' ); };
@@ -172,16 +172,19 @@ $( document ).ready( function(){
     });
 	
 	$(document).on('click','.history',function(){
-		/*numeroTreno= $(this).attr('id');
+		numeroTreno= $(this).attr('id');
 		parameters = "numeroTreno=" + numeroTreno;
-		scrape(parameters);*/
-		console.log('clicked');
+		scrape(parameters);
+	});
+	
+	/*$(el).addEventListener('MozSwipeGesture', SimpleGestureEvent.DIRECTION_LEFT, 0.0, 0) 
+        console.log('swipe!!');
 		toRemove= $(this).attr('id');
 		console.log(toRemove);
 		removeTrain(toRemove);
 		$('#cronologia').empty();
 		getTrains();
-	});
+    });*/
 	
 	$('#clear').click( function(){
 		ClearData();
