@@ -178,23 +178,25 @@ $( document ).ready( function(){
 	
 	$('#del_item').click(function(){
 		if(!deleteMode){
-			if(confirm('enter delete mode?'))
 				deleteMode=true;
-			else deleteMode=false;
+				$('#div1').prepend("<p style='text-align: center'>MODALITA' MODIFICA ATTIVA</p>");
 		}
 		else{
-			alert('normal');
+			alert('Si è tornati alla modalità normale');
 			deleteMode=false;
+			$('#div1 > p').remove();
 		}
 	});
 	
 	$(document).on('click','.history',function(){
 		if(deleteMode){
-			toRemove= $(this).attr('id');
-			console.log(toRemove);
-			removeTrain(toRemove);
-			$('#cronologia').empty();
-			getTrains();
+		    if(confirm('Eliminare il treno dalla cronologia? Questa operazione è irreversibile')) {
+			    toRemove= $(this).attr('id');
+			    console.log(toRemove);
+			    removeTrain(toRemove);
+			    $('#cronologia').empty();
+			    getTrains();
+			}
 		}else{
 			numeroTreno= $(this).attr('id');
 			parameters = "numeroTreno=" + numeroTreno;
