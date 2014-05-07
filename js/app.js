@@ -176,7 +176,12 @@ scrapeItalo = function(parameters) {
             scrapedSource = xhr.responseText;
             console.log(scrapedSource);
             console.log(numeroTreno);
-            console.log("found!");  
+            console.log("found!"); 
+            
+            table_header = $scrapedSource.find('.table_header');
+            console.log(table_header);
+            nomeTreno = table_header.match(/<h2>(.*?)<\/h2>/);
+            console.log(nomeTreno);
         }
     }
     else { 
