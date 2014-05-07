@@ -156,6 +156,20 @@ scrape = function(parameters) {
     xhr.send(parameters);
 };
 
+function switchMode(alerting){
+	if(!deleteMode && alerting){
+		deleteMode=true;
+		$('#div1').prepend("<p style='text-align: center; color: red;'>MODALITA' MODIFICA ATTIVA</p>");
+		$('.history').append('<img style="float:right; position:relative; top:-40px;" class="deletable" src="/style/icons/delete.png"/>');
+	}
+	else{
+		if(alerting)
+			alert('Si è tornati alla modalità normale');
+		deleteMode=false;
+		$('#div1 > p').remove();
+		$('.deletable').remove();
+	}
+}
 
 $( document ).ready( function(){
 	initDB();
@@ -165,7 +179,7 @@ $( document ).ready( function(){
     $( '#btn-search' ).click( function(){
 
 		/*if it's in delete mode, switch back to normal mode*/
-		deleteMode=false;
+		switchMode(false);
 		
         /* Catching value of the form with the 'name=numeroTreno' attribute set */
         numeroTreno = $( 'input[name=numeroTreno]' ).val();
@@ -176,22 +190,8 @@ $( document ).ready( function(){
         scrape(parameters);
     });
 	
-	function switchMode(){
-		if(!deleteMode){
-			deleteMode=true;
-			$('#div1').prepend("<p style='text-align: center; color: red;'>MODALITA' MODIFICA ATTIVA</p>");
-			$('.history').append('<img style="float:right; position:relative; top:-50px;" class="deletable" src="/style/icons/delete.png">');
-		}
-		else{
-			alert('Si è tornati alla modalità normale');
-			deleteMode=false;
-			$('#div1 > p').remove();
-			$('.deletable').remove();
-		}
-	}
-	
 	$('#del_item').click(function(){
-		switchMode();
+		switchMode(true);
 	});
 	
 	$(document).on('click','.history',function(){
