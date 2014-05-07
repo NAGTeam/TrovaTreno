@@ -36,7 +36,7 @@ function getTrains(){
 	for(i=1; i<=count;i++) {
 		if(JSON.parse(localStorage.getItem(i+""))!= null){
 			oggetto = JSON.parse(localStorage.getItem(i+""));
-			$( '#cronologia' ).prepend("<li><a href='#' id='"+oggetto.id+"' class='history'><p style='font-size: 1.5rem;'>" + oggetto.stazionePartenza + oggetto.partenza + "</p><p style='font-size: 1.5rem;'>Direzione: " + oggetto.stazione + "</p></a></li>");
+			$( '#cronologia' ).prepend("<li><a href='#' id='"+oggetto.id+"' class='history'><p style='font-size: 1.5rem; float:left;'>" + oggetto.stazionePartenza + oggetto.partenza + "</p><p style='font-size: 1.5rem; float:left;'>Direzione: " + oggetto.stazione + "</p></a></li>");
 		}	
 	}
 }

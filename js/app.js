@@ -176,16 +176,22 @@ $( document ).ready( function(){
         scrape(parameters);
     });
 	
-	$('#del_item').click(function(){
+	function switchMode(){
 		if(!deleteMode){
-				deleteMode=true;
-				$('#div1').prepend("<p style='text-align: center; color: red;'>MODALITA' MODIFICA ATTIVA</p>");
+			deleteMode=true;
+			$('#div1').prepend("<p style='text-align: center; color: red;'>MODALITA' MODIFICA ATTIVA</p>");
+			$('.history').append('<img style="float:right; position:relative; top:-50px;" class="deletable" src="style\icons\delete.png">');
 		}
 		else{
 			alert('Si è tornati alla modalità normale');
 			deleteMode=false;
 			$('#div1 > p').remove();
+			$('.deletable').remove();
 		}
+	}
+	
+	$('#del_item').click(function(){
+		switchMode();
 	});
 	
 	$(document).on('click','.history',function(){
