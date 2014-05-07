@@ -179,7 +179,7 @@ $( document ).ready( function(){
 	$('#del_item').click(function(){
 		if(!deleteMode){
 				deleteMode=true;
-				$('#div1').prepend("<p style='text-align: center'>MODALITA' MODIFICA ATTIVA</p>");
+				$('#div1').prepend("<p style='text-align: center; color: red;'>MODALITA' MODIFICA ATTIVA</p>");
 		}
 		else{
 			alert('Si è tornati alla modalità normale');
