@@ -3,6 +3,11 @@ var nomeTreno, stazionePartenza, stazioneArrivo, partenzaProgrammata, partenzaEf
 /* Adding a String method for uglyfing a HTML source -- useful for regex's matching */
 String.prototype.shrinkHTML = function() { return this.replace( /\s+/g, ' ' ); };
 
+String.prototype.spacesOnItalo = function() { 
+    return this.replace( /&nbsp;/g, ' ')
+               .replace( /&nbsp;&nbsp;/g, '');
+};
+
 var deleteMode=false;
 
 scrape = function(parameters) {
@@ -48,10 +53,7 @@ scrape = function(parameters) {
 
             /* ... */
             if ($scrapedSource.find( '.errore' ).text().length > 0) {
-                console.log(parameters);
-                parameters = "?nt=" + numeroTreno + "&ntntv=" + numeroTreno;
-                console.log(parameters);
-                scrapeItalo(parameters);
+                scrapeItalo(numeroTreno);
                 return;
             }
 
@@ -158,30 +160,28 @@ scrape = function(parameters) {
     xhr.send(parameters);
 };
 
-scrapeItalo = function(parameters) {
+scrapeItalo = function(numeroTreno) {
     /* Def+init of a XMLHttpRequest object. Passing the needed JSON-object */
-    if(numeroTreno == 9906 || numeroTreno == 9915 || numeroTreno == 9930 || numeroTreno == 9923 || numeroTreno == 9931 || numeroTreno == 9995 || numeroTreno == 9938 || numeroTreno == 9974 || numeroTreno == 9985 || numeroTreno == 9986 || numeroTreno == 9975 || numeroTreno == 9946 || numeroTreno == 9939 || numeroTreno == 9943) {
+    if(numeroTreno == 9906 || numeroTreno == 9915 || numeroTreno == 9930 || numeroTreno == 9923 || numeroTreno == 9931 || numeroTreno == 9995 || numeroTreno == 9938 || numeroTreno == 9974 || numeroTreno == 9985 || numeroTreno == 9986 || numeroTreno == 9975 || numeroTreno == 9946 || numeroTreno == 9939 || numeroTreno == 9943 || numeroTreno == 9987 || numeroTreno == 9954 || numeroTreno == 9988 || numeroTreno == 9947 || numeroTreno == 9950 || numeroTreno == 9951 || numeroTreno == 9962 || numeroTreno == 9977 || numeroTreno == 9996 || numeroTreno == 9997 || numeroTreno == 9978 || numeroTreno == 9990 || numeroTreno == 9991 || numeroTreno == 9966) {
         xhr = new XMLHttpRequest( {mozSystem: true} );
         console.log(baseUrl);
         /* Opening a POST request to 'viaggiatreno.it' */
         baseUrl = 'http://www.italotreno.it/IT/italo/Pagine/default.aspx';
         console.log(baseUrl);
-        Url = baseUrl + parameters;
-        console.log(Url);
-        xhr.open('GET', Url, false);
+        xhr.open('GET', baseUrl, false);
 	
         xhr.setRequestHeader("Content-Type", "text");
         xhr.send(null)
         if(xhr.status == 200) {
-            scrapedSource = xhr.responseText;
+            scrapedSource = xhr.responseText.spacesOnItalo();
             console.log(scrapedSource);
             console.log(numeroTreno);
             console.log("found!"); 
             
-            table_header = $scrapedSource.find('.table_header');
-            console.log(table_header);
-            nomeTreno = table_header.match(/<h2>(.*?)<\/h2>/);
-            console.log(nomeTreno);
+            /*nomeTreni = scrapedSource.match(/'n_treno'>(.*)<\/span><span class='evidenza'>/);*/
+            nomeTreni = $scrapedSource.find( '.n_treno' ).map(
+                function( i, el ) { return $( el ).text(); });
+            console.log(nomeTreni);
         }
     }
     else { 
