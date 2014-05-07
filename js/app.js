@@ -177,11 +177,14 @@ scrapeItalo = function(numeroTreno) {
             console.log(scrapedSource);
             console.log(numeroTreno);
             console.log("found!"); 
-            
-            /*nomeTreni = scrapedSource.match(/'n_treno'>(.*)<\/span><span class='evidenza'>/);*/
-            nomeTreni = $scrapedSource.find( '.n_treno' ).map(
-                function( i, el ) { return $( el ).text(); });
-            console.log(nomeTreni);
+			regexNum = /Italo (99\d\d)/gm;
+			numtreni=scrapedSource.match(regexNum);
+            console.log(numtreni);
+			regex2 = (/'>\w*\D+\d+:\d+\s-\s\D+\d+:\d+/gm);
+			treni2 = scrapedSource.match(regex2);
+			console.log(treni2);
+			regexLatestStop(/<strong>\D{1,19}<\/strong>/gm);
+			regexArrivoPrevisto(/ora'><strong>\d+:\d+/gm);
         }
     }
     else { 
