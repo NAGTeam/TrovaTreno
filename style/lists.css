@@ -33,6 +33,17 @@
   white-space: nowrap;
 }
 
+[data-type="list"] header > span {
+  text-align: right;
+  font-size: 1rem;
+  display: block;
+}
+
+[data-type="list"] header > span > a {
+  text-decoration: none;
+  color: #C80815;
+}
+
 /* List items */
 [data-type="list"] li {
   width: 100%;
@@ -45,6 +56,11 @@
   display: block;
   position: relative;
   z-index: 1;
+}
+
+[data-type="list"] li > a > img {
+  position: relative;
+  margin-top: 2.7rem;
 }
 
 [data-type="list"] li:last-child {
