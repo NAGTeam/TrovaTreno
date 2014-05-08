@@ -179,12 +179,31 @@ scrapeItalo = function(numeroTreno) {
             console.log("found!"); 
 			regexNum = /Italo (99\d\d)/gm;
 			numtreni=scrapedSource.match(regexNum);
+			searchIndex=-1;
+			for(i=0;i<numtreni.length;i++){
+				numtreni[i]=numtreni[i].slice(6,10);
+				if(numtreni[i] === numeroTreno){
+					searchIndex=i;
+				}
+			}
+			if(searchIndex === -1){
+				alert('Nessun Treno trovato');
+				return;
+			}
+			
             console.log(numtreni);
-			regex2 = (/'>\w*\D+\d+:\d+\s-\s\D+\d+:\d+/gm);
+			regex2 = /'>\w*\D+\d+:\d+\s-\s\D+\d+:\d+/gm;
 			treni2 = scrapedSource.match(regex2);
-			console.log(treni2);
-			regexLatestStop(/<strong>\D{1,19}<\/strong>/gm);
-			regexArrivoPrevisto(/ora'><strong>\d+:\d+/gm);
+			console.log(treni2[searchIndex]);
+			regexLatestStop = /<strong>\D{1,19}<\/strong>/gm;
+			regexArrivoPrevisto = /ora'><strong>\d+:\d+/gm;
+			treniLatestStop = scrapedSource.match(regexLatestStop);
+			console.log(treniLatestStop[searchIndex]);
+			treniArrivo = scrapedSource.match(regexArrivoPrevisto);
+			console.log(treniArrivo[searchIndex]); 
+			regexStato = /<span class='evidenza'>\s[I|R|A].*<\/span>/gm;
+			treniStato = scrapedSource.match(regexStato);
+			console.log(treniStato[searchIndex]); 
         }
     }
     else { 
