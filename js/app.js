@@ -167,16 +167,12 @@ scrapeItalo = function(numeroTreno) {
  
         /* Opening a POST request to 'viaggiatreno.it' */
         baseUrl = 'http://www.italotreno.it/IT/italo/Pagine/default.aspx';
-        console.log(baseUrl);
         xhr.open('GET', baseUrl, false);
 	
         xhr.setRequestHeader("Content-Type", "text");
         xhr.send(null)
         if(xhr.status == 200) {
             scrapedSource = xhr.responseText.spacesOnItalo();
-            console.log(scrapedSource);
-            console.log(numeroTreno);
-            console.log("found!"); 
 			regexNum = /Italo (99\d\d)/gm;
 			numtreni=scrapedSource.match(regexNum);
 			searchIndex=-1;
@@ -191,7 +187,6 @@ scrapeItalo = function(numeroTreno) {
 				return;
 			}
 			
-            console.log(numtreni);
 			regex2 = /'>\w*\D+\d+:\d+\s-\s\D+\d+:\d+/gm;
 			treni2 = scrapedSource.match(regex2);
 			treni2[searchIndex] = treni2[searchIndex].slice(2,treni2[searchIndex].length);
@@ -204,7 +199,7 @@ scrapeItalo = function(numeroTreno) {
 			regexLatestStop = /<strong>\D{1,19}<\/strong>/gm;
 			treniLatestStop = scrapedSource.match(regexLatestStop)
 			treniLatestStop[searchIndex]=treniLatestStop[searchIndex].slice(8,treniLatestStop[searchIndex].search('</strong>'));
-			console.log(treniLatestStop[searchIndex]);
+			console.log(treniLatestStop[searchIndex].toUpperCase());
 			
 			regexArrivoPrevisto = /ora'><strong>\d+:\d+/gm;
 			treniArrivo = scrapedSource.match(regexArrivoPrevisto);
@@ -216,18 +211,27 @@ scrapeItalo = function(numeroTreno) {
 			treniStato[searchIndex]=treniStato[searchIndex].slice(24, treniStato[searchIndex].search(' </span>'));
 			console.log(treniStato[searchIndex]); 
 			
+			/* Adding the train to the database ... */
 			train= {id : numtreni[searchIndex],
-				stazionePartenza : trenoCaratt[1],
+				stazionePartenza : trenoCaratt[1].toUpperCase(),
 				partenza : trenoCaratt[2],
-				stazione : trenoCaratt[3]
+				stazione : trenoCaratt[3].toUpperCase()
 			};
 			addTrain(train);
 			
+			/* In order to have the train state in correct italian language ... */
+			if(treniStato[searchIndex] == "IN ORARIO") {
+			    treniStato[searchIndex] = "Il treno viaggia " + treniStato[searchIndex];
+			}
+			else {
+			    treniStato[searchIndex] = "Il treno viaggia con un " + treniStato[searchIndex];
+			}
+			
 			$( '#nomeTreno > span' ).text( 'Italo '+numtreni[searchIndex] );
-            $( '#situazioneCorrente > span' ).text( treniStato[searchIndex] );
-            $( '#partenza').append("<p>" + trenoCaratt[1] + "<br>Partenza programmata: " + trenoCaratt[2] + "</p>");
-            $( '#arrivo').append("<p>" + trenoCaratt[3] + "<br>Arrivo programmato: " + trenoCaratt[4] + "</p>");
-			$('#ultima').append("<div><header>Prossima Fermata</header><p>" + treniLatestStop[searchIndex] + "<br>Arrivo programmato: " + treniArrivo[searchIndex] + "</p></div>");
+            $( '#situazioneCorrente > span' ).text( "Il treno viaggia con un " + treniStato[searchIndex].toLowerCase() );
+            $( '#partenza').append("<p>" + trenoCaratt[1].toUpperCase() + "<br>Partenza programmata: " + trenoCaratt[2] + "</p>");
+            $( '#arrivo').append("<p>" + trenoCaratt[3].toUpperCase() + "<br>Arrivo programmato: " + trenoCaratt[4] + "</p>");
+			$('#ultima').append("<div><header>Prossima Fermata</header><p>" + treniLatestStop[searchIndex].toUpperCase() + "<br>Arrivo programmato: " + treniArrivo[searchIndex] + "</p></div>");
 			
 			 /* Transition ... */
 	        $( '#resultsScreen' ).attr( 'class', 'current' );
@@ -235,7 +239,6 @@ scrapeItalo = function(numeroTreno) {
         }
     }
     else { 
-        console.log("not found"); 
         alert( 'Il treno cercato non esiste' );
         $( 'input[name=numeroTreno]' ).val( '' );
         return;
