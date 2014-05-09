@@ -1,194 +1,198 @@
 <!DOCTYPE html>
 <html>
 
-<head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, user-scalable=no" />
-    <title>TrovaTreno</title>
+	<head>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, user-scalable=no" />
+		<title>TrovaTreno</title>
 
-    <!-- Linking needed building blocks ... -->
-    <link rel="stylesheet" href="style/buttons.css" />
-    <link rel="stylesheet" href="style/headers.css" />
-    <link rel="stylesheet" href="style/input_areas.css" />
-    <link rel="stylesheet" href="style/scrolling.css" />
-    <link rel="stylesheet" href="style/lists.css" />
-    <link rel="stylesheet" href="style/toolbars.css" />
-    <link rel="stylesheet" href="style/action_icons.css" />
+		<!-- Linking needed building blocks ... -->
+		<link rel="stylesheet" href="style/buttons.css" />
+		<link rel="stylesheet" href="style/headers.css" />
+		<link rel="stylesheet" href="style/input_areas.css" />
+		<link rel="stylesheet" href="style/scrolling.css" />
+		<link rel="stylesheet" href="style/lists.css" />
+		<link rel="stylesheet" href="style/toolbars.css" />
+		<link rel="stylesheet" href="style/action_icons.css" />
 
-    <!-- ... then some extra tricks for FirefoxOS ... -->
-    <link rel="stylesheet" href="style/util.css" />
+		<!-- ... then some extra tricks for FirefoxOS ... -->
+		<link rel="stylesheet" href="style/util.css" />
 
-    <!-- Transitions ... -->
-    <link rel="stylesheet" href="style/transitions.css" />
+		<!-- Transitions ... -->
+		<link rel="stylesheet" href="style/transitions.css" />
 
-    <!-- Linking scripts ... -->
-    <script src="js/jquery-2.1.0.min.js"></script>
-    <script src='js/scriptDB.js'></script>
-    <script src="js/app.js"></script>
+		<!-- Linking scripts ... -->
+		<script src="js/jquery-2.1.0.min.js"></script>
+		<script src='js/scriptDB.js'></script>
+		<script src="js/app.js"></script>
 
-    <style>
-    [data-position="center"] {
-        height: 100%;
-    }
-    [data-position="right"] {
-        position: absolute;
-        top: 0;
-        left: 0;
-        right: 0;
-        bottom: 0;
-        transform: translateX(100%);
-    }
-    [data-position="left"] {
-        position: absolute;
-        top: 0;
-        left: 0;
-        right: 0;
-        bottom: 0;
-        transform: translateX(-100%);
-    }
-    [data-position="right"].current {
-        animation: rightToCurrent 0.4s forwards;
-    }
-    [data-position="current"].left {
-        animation: currentToLeft 0.4s forwards;
-    }
-    [data-position="current"].current {
-        animation: leftToCurrent 0.4s forwards;
-    }
-    [data-position="right"].right {
-        animation: currentToRight 0.4s forwards;
-    }
-    /* ... and for styling our results' screen. */
-    h1 > span {
-        text-align: center;
-    }
-    [data-type="list"] div p {
-        margin-left: 2rem;
-    }
-    [data-type="list"] div h2 {
-        margin-left: 2rem;
-    }
-    input[name="numeroTreno"] {
-        margin-bottom: 1rem;
-    }
-    #situazioneCorrente {
-        font-style: italic;
-    }
-    #a { 
-        float: left; 
-    }
-    #b { 
-        float: right; 
-    }
-    #del_item { 
-        float: right; 
-    }
-    </style>
-</head>
+		<style>
+			[data-position="center"] {
+				height: 100%;
+			}
+			[data-position="right"] {
+				position: absolute;
+				top: 0;
+				left: 0;
+				right: 0;
+				bottom: 0;
+				transform: translateX(100%);
+			}
+			[data-position="left"] {
+				position: absolute;
+				top: 0;
+				left: 0;
+				right: 0;
+				bottom: 0;
+				transform: translateX(-100%);
+			}
+			[data-position="right"].current {
+				animation: rightToCurrent 0.4s forwards;
+			}
+			[data-position="current"].left {
+				animation: currentToLeft 0.4s forwards;
+			}
+			[data-position="current"].current {
+				animation: leftToCurrent 0.4s forwards;
+			}
+			[data-position="right"].right {
+				animation: currentToRight 0.4s forwards;
+			}
+			/* ... and for styling our results' screen. */
+			h1 > span {
+				text-align: center;
+			}
+			[data-type="list"] div p {
+				margin-left: 2rem;
+			}
+			[data-type="list"] div h2 {
+				margin-left: 2rem;
+			}
+			input[name="numeroTreno"] {
+				margin-bottom: 1rem;
+			}
+			#situazioneCorrente {
+				font-style: italic;
+			}
+			#a { 
+				float: left; 
+			}
+			#b { 
+				float: right; 
+			}
+			#del_item { 
+				float: right; 
+			}
+		</style>
+	</head>
 
-<body>
-    <section role="region" id="initialScreen" data-position="current">
-        <header class="fixed">
-            <button></button>
-            <menu type="toolbar">
-                <button type="button" id="btn-about"><span>?</span></button>
-            </menu>
-            <h1>TrovaTreno</h1>
-        </header>
-        <article class="content scrollable header">
-            <div id='div1'>
-                <input type="text" name="numeroTreno" placeholder="Inserisci il numero del treno" />
-                <button type="button" id="btn-search">Cerca!</button>
-                <br>
-            </div>
-            <section data-type="list">
-                <header>
-                    <div id='a'>Cronologia <a id='clear' href='#'>[Svuota]</a></div>
-                    <span id='b'>
-                        <a id='del_item' href='#'>[Edit]</a>
-                    </span>
-                </header>
-                <ul id="cronologia">
-                    <!-- ... -->
-                </ul>
-            </section>
-        </article>
-    </section>
+	<body>
+		<section role="region" id="initialScreen" data-position="current">
+			<header class="fixed">
+				<button></button>
+				<menu type="toolbar">
+					<button type="button" id="btn-about"><span>?</span></button>
+				</menu>
+				<h1>TrovaTreno</h1>
+			</header>
+			<article class="content scrollable header">
+				<div id='div1'>
+					<input type="text" name="numeroTreno" placeholder="Inserisci il numero del treno" />
+					<button type="button" id="btn-search">Cerca!</button>
+					<br>
+				</div>
+				<section data-type="list">
+					<header>
+						<div id='a'>Cronologia <a id='clear' href='#'>[Svuota]</a></div>
+						<span id='b'>
+							<a id='del_item' href='#'>[Edit]</a>
+						</span>
+					</header>
+					<ul id="cronologia">
+						<!-- ... -->
+					</ul>
+				</section>
+			</article>
+		</section>
 
-    <section role="region" id="resultsScreen" data-position="right">
-        <header class="fixed">
-            <button type="button" class='btn-back'>
-                <span class='icon icon-back'>Back</span>
-            </button>
-            <h1 id="nomeTreno"><span></span></h1>
-            <menu type="toolbar">
-                <button type="button" id="btn-send"><span class='icon icon-send'>Share</span>
+		<section role="region" id="resultsScreen" data-position="right">
+			<header class="fixed">
+				<button type="button" class='btn-back'>
+					<span class='icon icon-back'>Back</span>
+				</button>
+				<h1 id="nomeTreno"><span></span></h1>
+				<menu type="toolbar">
+					<button type="button" id="btn-send"><span class='icon icon-send'>Share</span>
                     </button>
-            </menu>
-        </header>
-        <article class="content scrollable header" id="info">
-            <div>
-                <p id="situazioneCorrente"><span></span>
-                </p>
-            </div>
+				</menu>
+			</header>
+			<article class="content scrollable header" id="info">
+				<div>
+					<p id="situazioneCorrente"><span></span>
+					</p>
+				</div>
 
-            <section data-type="list">
-                <header>Partenza</header>
-                <div id="partenza">
-                    <!-- ... -->
-                </div>
+				<section data-type="list">
+					<header>Partenza</header>
+					<div id="partenza">
+						<!-- ... -->
+					</div>
 
-                <div id="ultima">
-                    <!-- ... -->
-                </div>
-                <header>Arrivo</header>
-                <div id="arrivo">
-                    <!-- ... -->
-                </div>
-            </section>
-        </article>
-    </section>
+					<div id="ultima">
+						<!-- ... -->
+					</div>
+					<header>Arrivo</header>
+					<div id="arrivo">
+						<!-- ... -->
+					</div>
+				</section>
+			</article>
+		</section>
 
-    <section role="region" id="aboutScreen" data-position="right">
-        <header class="fixed">
-            <button type="button" class='btn-back'>
-                <span class='icon icon-back'>Back</span>
-            </button>
-            <h1>About</h1>
-            <menu type="toolbar">
-                <button type="button" id="btn-about"></button>
-            </menu>
-        </header>
-        <article class="content scrollable header">
-            <h1 style="text-align: center">TrovaTreno</h1>
-            <section data-type="list">
-                <div>
-                    <p><em>Applicazione che permette di trovare tutte le informazioni riguardo i <strong>treni italiani</strong>, anche Italo!</em>
-                    </p>
-                    <p>Con questa applicazione abbiamo vinto l'Hackathon di Milano su Firefox OS! (per maggiori informazioni sull'evento clicca <a href="#" id="ffoshackathon">qui</a>)</p>
-                    <header>Versione</header>
-                    <div>
-                        <p>1.2</p>
-                    </div>
-                    <header>Developers</header>
-                    <div>
-                        <p><strong>nag</strong>
-                            <br>[, say /neg]</p>
-                        <p>Ok ma, perchè proprio "nag"?
-                            <br>Beh, prova a leggere i caratteri in grassetto...</p>
-                        <p><strong>N</strong>iccolo': <a href="#" id="nicokant">@nicokant</a>
-                            <br>
-                            <strong>A</strong>ronne: <a href="#" id="aro94">@aro94</a>
-                            <br>
-                            <strong>G</strong>iuseppe: <a href="#" id="giuscri">@giuscri</a>
-                            <p>Hai visto?
-                                <br>NAG è solo un acronimo!</p>
-                    </div>
-                    <header>Progetto</header>
-                    <div>
-                        <p>Segui <a href="#" id='git-link'>il progetto</a> su GitHub!</p>
-                    </div>
-        </article>
-</body>
+		<section role="region" id="aboutScreen" data-position="right">
+			<header class="fixed">
+				<button type="button" class='btn-back'>
+					<span class='icon icon-back'>Back</span>
+				</button>
+				<h1>About</h1>
+				<menu type="toolbar">
+					<button type="button" id="btn-about"></button>
+				</menu>
+			</header>
+			<article class="content scrollable header">
+				<h1 style="text-align: center">TrovaTreno</h1>
+				<section data-type="list">
+					<div>
+						<p><em>Applicazione che permette di trovare tutte le informazioni riguardo i <strong>treni italiani</strong>, anche Italo!</em>
+						</p>
+						<p>Con questa applicazione abbiamo vinto l'Hackathon di Milano su Firefox OS! (per maggiori informazioni sull'evento clicca <a href="#" id="ffoshackathon">qui</a>)</p>
+						<header>Versione</header>
+						<div>
+							<p>1.2</p>
+						</div>
+						<header>Developers</header>
+						<div>
+							<p><strong>nag</strong>
+								<br>[, say /neg]</p>
+							<p>Ok ma, perchè proprio "nag"?
+								<br>Beh, prova a leggere i caratteri in grassetto...</p>
+							<p><strong>N</strong>iccolo': <a href="#" id="nicokant">@nicokant</a>
+								<br>
+								<strong>A</strong>ronne: <a href="#" id="aro94">@aro94</a>
+								<br>
+								<strong>G</strong>iuseppe: <a href="#" id="giuscri">@giuscri</a>
+                            <p>
+								Hai visto?
+                                <br>NAG è solo un acronimo!
+							</p>
+						</div>
+						<header>Progetto</header>
+						<div>
+							<p>Segui <a href="#" id='git-link'>il progetto</a> su GitHub!</p>
+						</div>
+					</div>
+				</section>
+			</article>
+	</body>
 
 </html>
