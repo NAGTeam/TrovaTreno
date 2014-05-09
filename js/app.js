@@ -53,8 +53,8 @@ scrape = function(parameters) {
 
             /* ... */
             if ($scrapedSource.find( '.errore' ).text().length > 0) {
-                scrapeItalo(numeroTreno);
-                return;
+				alert('Nessun Treno trovato');
+				return;
             }
 
             /* ... then catch elements by their tag, id, class, etc. */
