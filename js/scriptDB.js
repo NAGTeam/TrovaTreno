@@ -36,7 +36,13 @@ function getTrains(){
 	for(i=1; i<=count;i++) {
 		if(JSON.parse(localStorage.getItem(i+""))!= null){
 			oggetto = JSON.parse(localStorage.getItem(i+""));
-			$( '#cronologia' ).prepend("<li><a href='#' id='"+oggetto.id+"' class='history'><p style='font-size: 1.5rem;'>" + oggetto.stazionePartenza + oggetto.partenza + "</p><p style='font-size: 1.5rem;'>Direzione: " + oggetto.stazione + "</p></a></li>");
+			console.log(oggetto.compagnia); /*CONSOLE LOGGGG*/
+			if (oggetto.compagnia === "trenitalia") {
+			    $( '#cronologia' ).prepend("<li><a href='#' id='"+oggetto.id+"' class='history'><p style='font-size: 1.5rem;'><img style='float:left; position:relative;' src='style/icons/trenitalia.jpeg'/>" + oggetto.stazionePartenza + oggetto.partenza + "</p><p style='font-size: 1.5rem;'>Direzione: " + oggetto.stazione + "</p></a></li>");
+		    }
+		    else {
+		        $( '#cronologia' ).prepend("<li><a href='#' id='"+oggetto.id+"' class='history'><p style='font-size: 1.5rem;'><img style='float:left; position:relative;' src='style/icons/italo.png'/>" + oggetto.stazionePartenza + oggetto.partenza + "</p><p style='font-size: 1.5rem;'>Direzione: " + oggetto.stazione + "</p></a></li>");
+		    }
 		}	
 	}
 }
@@ -53,11 +59,8 @@ function removeTrain(id){
 	for(i=1; i<=count;i++) {
 		if(JSON.parse(localStorage.getItem(i+"")) != null){
 			oggetto = JSON.parse(localStorage.getItem(i+""));
-			console.log(oggetto);
-			console.log(oggetto.id);
 			if(oggetto.id+"" === id){
 				localStorage.removeItem(i+"");
-				console.log('removed');
 				break;
 			}
 		}

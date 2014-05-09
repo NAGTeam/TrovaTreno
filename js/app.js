@@ -108,7 +108,8 @@ scrape = function(parameters) {
 			train= {id : numeroTreno,
 				stazionePartenza : stazionePartenza,
 				partenza : partenzaProgrammata,
-				stazione : stazioneArrivo
+				stazione : stazioneArrivo,
+				compagnia: "trenitalia"
 			};
 			addTrain(train);
             binarioPrevistoPartenza = scrapedSource.match( /<!-- ORIGINE -->(.*?)Previsto:<br\/> (\d{1,2}|--)/ )[ 2 ];
@@ -162,7 +163,7 @@ scrape = function(parameters) {
 
 scrapeItalo = function(numeroTreno) {
     /* Def+init of a XMLHttpRequest object. Passing the needed JSON-object */
-    if(numeroTreno <= 9999 || numeroTreno >= 9900){
+    if(numeroTreno <= 9999 && numeroTreno >= 9900){
         xhr = new XMLHttpRequest( {mozSystem: true} );
  
         /* Opening a POST request to 'viaggiatreno.it' */
@@ -215,7 +216,8 @@ scrapeItalo = function(numeroTreno) {
 			train= {id : numtreni[searchIndex],
 				stazionePartenza : trenoCaratt[1].toUpperCase(),
 				partenza : trenoCaratt[2],
-				stazione : trenoCaratt[3].toUpperCase()
+				stazione : trenoCaratt[3].toUpperCase(),
+				compagnia: "italo"
 			};
 			addTrain(train);
 			
@@ -261,7 +263,7 @@ $( document ).ready( function(){
         /* Loading server-param's for the POST request */
         parameters = "numeroTreno=" + numeroTreno;
         
-		if(numeroTreno <= 9999 || numeroTreno >= 9900){
+		if(numeroTreno <= 9999 && numeroTreno >= 9900){
 			scrapeItalo(numeroTreno);
 		}else{
 			scrape(parameters);

@@ -39,6 +39,12 @@
   display: block;
 }
 
+[data-type="list"] header > div > a {
+  font-size: 1rem;
+  text-decoration: none;
+  color: #C80815;
+}
+
 [data-type="list"] header > span > a {
   text-decoration: none;
   color: #C80815;
@@ -60,7 +66,7 @@
 
 [data-type="list"] li > a > img {
   position: relative;
-  margin-top: 2.7rem;
+  margin-top: -3rem;
 }
 
 [data-type="list"] li:last-child {
