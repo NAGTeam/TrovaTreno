@@ -35,7 +35,7 @@ scrape = function(parameters) {
     xhr.onreadystatechange = function() {
 
         /* When request has been closed on success ... */
-        if(xhr.readyState == 4 && xhr.status == 200) {
+        if(xhr.readyState === 4 && xhr.status === 200) {
 
             /* ... format source for correctly being parsed by jQuery ... */
             scrapedSource =
@@ -81,7 +81,7 @@ scrape = function(parameters) {
             
             partenzaProgrammata = orari[ 0 ];
                 
-            if (orari[ 1 ] == "") {
+            if (orari[ 1 ] === "") {
                 partenzaEffettiva = "--";
             }
             else {
@@ -156,7 +156,7 @@ scrape = function(parameters) {
 	        $( '[data-position="current"]' ).attr( 'class', 'left' );
 
         }
-    }
+    };
     /* Sending parameter, then let the onreadystatechange() function running */
     xhr.send(parameters);
 };
@@ -171,8 +171,8 @@ scrapeItalo = function(numeroTreno) {
         xhr.open('GET', baseUrl, false);
 	
         xhr.setRequestHeader("Content-Type", "text");
-        xhr.send(null)
-        if(xhr.status == 200) {
+        xhr.send(null);
+        if(xhr.status === 200) {
             scrapedSource = xhr.responseText.spacesOnItalo();
 			regexNum = /Italo (99\d\d)/gm;
 			numtreni=scrapedSource.match(regexNum);
@@ -198,7 +198,7 @@ scrapeItalo = function(numeroTreno) {
 			console.log(trenoCaratt);
 			
 			regexLatestStop = /<strong>\D{1,19}<\/strong>/gm;
-			treniLatestStop = scrapedSource.match(regexLatestStop)
+			treniLatestStop = scrapedSource.match(regexLatestStop);
 			treniLatestStop[searchIndex]=treniLatestStop[searchIndex].slice(8,treniLatestStop[searchIndex].search('</strong>'));
 			console.log(treniLatestStop[searchIndex].toUpperCase());
 			
