@@ -394,4 +394,10 @@ $( document ).ready( function(){
             }
         });
     };   
+    
+    /* Check if not Firefox OS */
+      if (navigator.userAgent.indexOf("Android") > -1 || navigator.userAgent.indexOf("Mobile") === -1) {
+        $('.scrollable').css('overflow','auto');
+        alert(1)
+      }
 });
