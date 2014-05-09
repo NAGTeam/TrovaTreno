@@ -162,7 +162,7 @@ scrape = function(parameters) {
 
 scrapeItalo = function(numeroTreno) {
     /* Def+init of a XMLHttpRequest object. Passing the needed JSON-object */
-    if(numeroTreno == 9906 || numeroTreno == 9915 || numeroTreno == 9930 || numeroTreno == 9923 || numeroTreno == 9931 || numeroTreno == 9995 || numeroTreno == 9938 || numeroTreno == 9974 || numeroTreno == 9985 || numeroTreno == 9986 || numeroTreno == 9975 || numeroTreno == 9946 || numeroTreno == 9939 || numeroTreno == 9943 || numeroTreno == 9987 || numeroTreno == 9954 || numeroTreno == 9988 || numeroTreno == 9947 || numeroTreno == 9950 || numeroTreno == 9951 || numeroTreno == 9962 || numeroTreno == 9977 || numeroTreno == 9996 || numeroTreno == 9997 || numeroTreno == 9978 || numeroTreno == 9990 || numeroTreno == 9991 || numeroTreno == 9966) {
+    if(numeroTreno <= 9999 || numeroTreno >= 9900){
         xhr = new XMLHttpRequest( {mozSystem: true} );
  
         /* Opening a POST request to 'viaggiatreno.it' */
@@ -261,7 +261,7 @@ $( document ).ready( function(){
         /* Loading server-param's for the POST request */
         parameters = "numeroTreno=" + numeroTreno;
         
-		if(numeroTreno == 9906 || numeroTreno == 9915 || numeroTreno == 9930 || numeroTreno == 9923 || numeroTreno == 9931 || numeroTreno == 9995 || numeroTreno == 9938 || numeroTreno == 9974 || numeroTreno == 9985 || numeroTreno == 9986 || numeroTreno == 9975 || numeroTreno == 9946 || numeroTreno == 9939 || numeroTreno == 9943 || numeroTreno == 9987 || numeroTreno == 9954 || numeroTreno == 9988 || numeroTreno == 9947 || numeroTreno == 9950 || numeroTreno == 9951 || numeroTreno == 9962 || numeroTreno == 9977 || numeroTreno == 9996 || numeroTreno == 9997 || numeroTreno == 9978 || numeroTreno == 9990 || numeroTreno == 9991 || numeroTreno == 9966){
+		if(numeroTreno <= 9999 || numeroTreno >= 9900){
 			scrapeItalo(numeroTreno);
 		}else{
 			scrape(parameters);
