@@ -55,14 +55,22 @@ function ClearData(){
 
 function removeTrain(id){
 	count=parseInt(localStorage.getItem('counter'));
-	for(i=1; i<=count;i++) {
-		if(JSON.parse(localStorage.getItem(i+"")) !== null){
-			oggetto = JSON.parse(localStorage.getItem(i+""));
-			if(oggetto.id+"" === id){
-				localStorage.removeItem(i+"");
-				break;
-			}
-		}
+	if(count === 1) {
+	    localStorage.clear();
+	    initDB();
+	    deleteMode = false;
+        $('#div1 > p').remove();
+	}
+	else {
+	    for(i=1; i<=count;i++) {
+		    if(JSON.parse(localStorage.getItem(i+"")) !== null){
+			    oggetto = JSON.parse(localStorage.getItem(i+""));
+			    if(oggetto.id+"" === id){
+				    localStorage.removeItem(i+"");
+				    break;
+			    }
+		    }
+	    }
 	}
 }
 

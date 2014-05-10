@@ -110,7 +110,6 @@ scrape = function(parameters) {
           numeroTreno = numeroTreno + chari;
       }
       numeroTreno = parseInt(numeroTreno);
-      console.log(numeroTreno);
       train = {id: numeroTreno,
         stazionePartenza: stazionePartenza,
         partenza: partenzaProgrammata,
@@ -197,26 +196,21 @@ scrapeItalo = function(numeroTreno) {
       regex2 = /'>\w*\D+\d+:\d+\s-\s\D+\d+:\d+/gm;
       treni2 = scrapedSource.match(regex2);
       treni2[searchIndex] = treni2[searchIndex].slice(2, treni2[searchIndex].length);
-      console.log(treni2[searchIndex]);
 
       regexScomponi = /(\D+)\s*(\d+:\d+)\s*-\s*(\D+)\s*(\d+:\d+)/;
       trenoCaratt = treni2[searchIndex].match(regexScomponi);
-      console.log(trenoCaratt);
 
       regexLatestStop = /<strong>\D{1,19}<\/strong>/gm;
       treniLatestStop = scrapedSource.match(regexLatestStop);
       treniLatestStop[searchIndex] = treniLatestStop[searchIndex].slice(8, treniLatestStop[searchIndex].search('</strong>'));
-      console.log(treniLatestStop[searchIndex].toUpperCase());
 
       regexArrivoPrevisto = /ora'><strong>\d+:\d+/gm;
       treniArrivo = scrapedSource.match(regexArrivoPrevisto);
       treniArrivo[searchIndex] = treniArrivo[searchIndex].slice(13, 18);
-      console.log(treniArrivo[searchIndex]);
 
       regexStato = /<span class='evidenza'>\s[I|R|A].*<\/span>/gm;
       treniStato = scrapedSource.match(regexStato);
       treniStato[searchIndex] = treniStato[searchIndex].slice(24, treniStato[searchIndex].search(' </span>'));
-      console.log(treniStato[searchIndex]);
 
       /* Adding the train to the database ... */
       train = {id: numtreni[searchIndex],
@@ -299,7 +293,6 @@ $(document).ready(function() {
     if (deleteMode) {
       if (confirm('Eliminare il treno dalla cronologia? Questa operazione è irreversibile')) {
         toRemove = $(this).attr('id');
-        console.log(toRemove);
         removeTrain(toRemove);
         $('#cronologia').empty();
         getTrains();
