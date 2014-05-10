@@ -1,0 +1,56 @@
+[data-position="center"] {
+	height: 100%;
+}
+[data-position="right"] {
+	position: absolute;
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	transform: translateX(100%);
+}
+[data-position="left"] {
+	position: absolute;
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	transform: translateX(-100%);
+}
+[data-position="right"].current {
+	animation: rightToCurrent 0.4s forwards;
+}
+[data-position="current"].left {
+	animation: currentToLeft 0.4s forwards;
+}
+[data-position="current"].current {
+	animation: leftToCurrent 0.4s forwards;
+}
+[data-position="right"].right {
+	animation: currentToRight 0.4s forwards;
+}
+/* ... and for styling our results screen. */
+h1 > span {
+	text-align: center;
+}
+[data-type="list"] div p {
+	margin-left: 2rem;
+}
+[data-type="list"] div h2 {
+	margin-left: 2rem;
+}
+input[name="numeroTreno"] {
+	margin-bottom: 1rem;
+}
+#situazioneCorrente {
+	font-style: italic;
+}
+#a { 
+	float: left; 
+}
+#b { 
+	float: right; 
+}
+#del_item { 
+	float: right; 
+}
