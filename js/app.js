@@ -22,10 +22,12 @@ scrape = function(parameters) {
   xhr.timeout = 5750;
   xhr.addEventListener('error', function() {
     alert('Nessuna Connessione');
+	return false;
   });
 
   xhr.addEventListener('timeout', function() {
     alert('Nessuna Connessione');
+	return false;
   });
 
   /* Setting the correct headers for the POST request */
@@ -56,7 +58,7 @@ scrape = function(parameters) {
       /* ... */
       if ($scrapedSource.find('.errore').text().length > 0) {
         alert('Nessun Treno trovato');
-        return;
+        return false;
       }
 
       /* ... then catch elements by their tag, id, class, etc. */
@@ -155,15 +157,16 @@ scrape = function(parameters) {
       if (stazioni.length >= 3) {
         $('#ultima').append("<div><header>Ultima fermata</header><p>" + stazioni[1] + "<br>Arrivo programmato: " + orari[2] + "<br>Arrivo effettivo: " + orari[3] + "</p></div>");
       }
-
+		return true;
       /* Transition ... */
-      $('#resultsScreen').attr('class', 'current');
-      $('[data-position="current"]').attr('class', 'left');
+      //$('#resultsScreen').attr('class', 'current');
+      //$('[data-position="current"]').attr('class', 'left');
 
     }
   };
   /* Sending parameter, then let the onreadystatechange() function running */
   xhr.send(parameters);
+  
 };
 
 scrapeItalo = function(numeroTreno) {
@@ -190,7 +193,7 @@ scrapeItalo = function(numeroTreno) {
       }
       if (searchIndex === -1) {
         alert('Nessun Treno trovato');
-        return;
+        return false;
       }
 
       regex2 = /'>\w*\D+\d+:\d+\s-\s\D+\d+:\d+/gm;
@@ -234,16 +237,17 @@ scrapeItalo = function(numeroTreno) {
       $('#partenza').append("<p>" + trenoCaratt[1].toUpperCase() + "<br>Partenza programmata: " + trenoCaratt[2] + "</p>");
       $('#arrivo').append("<p>" + trenoCaratt[3].toUpperCase() + "<br>Arrivo programmato: " + trenoCaratt[4] + "</p>");
       $('#ultima').append("<div><header>Prossima Fermata</header><p>" + treniLatestStop[searchIndex].toUpperCase() + "<br>Arrivo programmato: " + treniArrivo[searchIndex] + "</p></div>");
-
+		
+		return true;
       /* Transition ... */
-      $('#resultsScreen').attr('class', 'current');
-      $('[data-position="current"]').attr('class', 'left');
+      //$('#resultsScreen').attr('class', 'current');
+      //$('[data-position="current"]').attr('class', 'left');
     }
   }
   else {
     alert('Il treno cercato non esiste');
     $('input[name=numeroTreno]').val('');
-    return;
+    return false;
   }
 };
 
@@ -263,12 +267,18 @@ $(document).ready(function() {
 
     /* Loading server-param's for the POST request */
     parameters = "numeroTreno=" + numeroTreno;
+	done=false;
 
     if (numeroTreno <= 9999 && numeroTreno >= 9900) {
-      scrapeItalo(numeroTreno);
-    } else {
-      scrape(parameters);
+      done=scrapeItalo(numeroTreno);
+	  if(done)
+		document.querySelector('x-deck').nextCard();
+    } else{
+      done=scrape(parameters);
+	  if(done)
+		document.querySelector('x-deck').nextCard();
     }
+	
   });
 
   function switchMode(alerting) {
@@ -299,6 +309,7 @@ $(document).ready(function() {
         editMode();
       }
     } else {
+	  document.querySelector('x-deck').nextCard();
       numeroTreno = $(this).attr('id');
       parameters = "numeroTreno=" + numeroTreno;
       scrape(parameters);
@@ -327,16 +338,18 @@ $(document).ready(function() {
     $('#cronologia > li').remove();
     getTrains();
     editMode();
-    $('[data-position="current"]').attr('class', 'current');
-    $('[data-position="right"]').attr('class', 'right');
-    $('[data-position="left"]').attr('class', 'left');
+	document.querySelector('x-deck').showCard(0);
+    //$('[data-position="current"]').attr('class', 'current');
+    //$('[data-position="right"]').attr('class', 'right');
+    //$('[data-position="left"]').attr('class', 'left');
   });
 
   /* Button to About screen ...*/
   $('#btn-about').click(function() {
     deleteMode = false;
-    $('#aboutScreen').attr('class', 'current');
-    $('[data-position="current"]').attr('class', 'left');
+	document.querySelector('x-deck').showCard(2);
+    //$('#aboutScreen').attr('class', 'current');
+    //$('[data-position="current"]').attr('class', 'left');
   });
 
   /* Delegating the opening of the links to the browser ...*/
