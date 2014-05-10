@@ -11,7 +11,7 @@ function addTrain(JSONTrain){
 	return;
 	for(i=1; i<=count;i++){
 		array=[];
-		if(JSON.parse(localStorage.getItem(i)) != null){
+		if(JSON.parse(localStorage.getItem(i)) !== null){
 			array[i]=JSON.parse(localStorage.getItem(i));
 			numEstratto = (array[i])['id'];
 			numTreno = JSONTrain['id'];
@@ -34,7 +34,7 @@ function addTrain(JSONTrain){
 function getTrains(){
 	count=parseInt(localStorage.getItem('counter'));
 	for(i=1; i<=count;i++) {
-		if(JSON.parse(localStorage.getItem(i+""))!= null){
+		if(JSON.parse(localStorage.getItem(i+"")) !== null){
 			oggetto = JSON.parse(localStorage.getItem(i+""));
 			console.log(oggetto.compagnia); /*CONSOLE LOGGGG*/
 			if (oggetto.compagnia === "trenitalia") {
@@ -57,7 +57,7 @@ function ClearData(){
 function removeTrain(id){
 	count=parseInt(localStorage.getItem('counter'));
 	for(i=1; i<=count;i++) {
-		if(JSON.parse(localStorage.getItem(i+"")) != null){
+		if(JSON.parse(localStorage.getItem(i+"")) !== null){
 			oggetto = JSON.parse(localStorage.getItem(i+""));
 			if(oggetto.id+"" === id){
 				localStorage.removeItem(i+"");
