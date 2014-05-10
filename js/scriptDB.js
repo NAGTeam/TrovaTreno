@@ -36,7 +36,6 @@ function getTrains(){
 	for(i=1; i<=count;i++) {
 		if(JSON.parse(localStorage.getItem(i+"")) !== null){
 			oggetto = JSON.parse(localStorage.getItem(i+""));
-			console.log(oggetto.compagnia); /*CONSOLE LOGGGG*/
 			if (oggetto.compagnia === "trenitalia") {
 			    $( '#cronologia' ).prepend("<li><a href='#' id='"+oggetto.id+"' class='history'><p style='font-size: 1.5rem;'><img style='float:left; position:relative;' src='style/icons/trenitalia.jpeg'/>" + oggetto.stazionePartenza + oggetto.partenza + "</p><p style='font-size: 1.5rem;'>Direzione: " + oggetto.stazione + "</p></a></li>");
 		    }
@@ -66,3 +65,19 @@ function removeTrain(id){
 		}
 	}
 }
+
+function editMode() {
+    count=parseInt(localStorage.getItem('counter'));
+    if(count === 0) {
+        $('.edit_mode').hide();
+    } 
+    else {
+        $('.edit_mode').show();
+    }
+}   
+    
+    
+    
+    
+    
+    

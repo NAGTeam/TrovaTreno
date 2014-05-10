@@ -256,6 +256,7 @@ scrapeItalo = function(numeroTreno) {
 $(document).ready(function() {
   initDB();
   getTrains();
+  editMode();
 
   /* Using jQuery event-handler for the 'btn-search' object */
   $('#btn-search').click(function() {
@@ -302,6 +303,7 @@ $(document).ready(function() {
         removeTrain(toRemove);
         $('#cronologia').empty();
         getTrains();
+        editMode();
       }
     } else {
       numeroTreno = $(this).attr('id');
@@ -314,6 +316,7 @@ $(document).ready(function() {
     ClearData();
     $('#cronologia').empty();
     getTrains();
+    editMode();
   });
 
   /* If back-button is clicked, come back to the initial screen ... */
@@ -330,6 +333,7 @@ $(document).ready(function() {
      */
     $('#cronologia > li').remove();
     getTrains();
+    editMode();
     $('[data-position="current"]').attr('class', 'current');
     $('[data-position="right"]').attr('class', 'right');
     $('[data-position="left"]').attr('class', 'left');
