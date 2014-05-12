@@ -16,9 +16,9 @@ To-Do
 ----
 - Multilanguage
 - Notifications
-- catch if the app is running on Android or in Firefox OS
+[DONE!] catch if the app is running on Android or in Firefox OS
 
 Known bugs
 ----------
 - scrolling bug in Firefox for Android version
-- delegating to email and browser apps in Firefox for Android version
+[CORRECTED!] delegating to email and browser apps in Firefox for Android version
