@@ -6,8 +6,6 @@ A simple __FirefoxOS__ app that helps you to find the information you need about
 ![Screenshots](http://i.imgur.com/XcwcQXi.png)
 
 
-Actually working on __database__ branch.
-
 Link to Marketplace
 -------------------
 ![https://marketplace.firefox.com/app/trovatreno?src=search](https://marketplace.firefox.com/app/trovatreno?src=search)
