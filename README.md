@@ -18,5 +18,6 @@ To-Do
 
 Known bugs
 ----------
-- scrolling bug in Firefox for Android version
+- scrolling bug in Firefox for Android version (due to a Buildingblocks issue)
+- due to an Italo website issue the app can only shows Italo trains are actually traveling
 [CORRECTED!] delegating to email and browser apps in Firefox for Android version
