@@ -56,6 +56,7 @@ scrape = function(parameters) {
 			/* ... */
 			if ($scrapedSource.find('.errore').text().length > 0) {
 				alert('Nessun Treno trovato');
+				$('input[name=numeroTreno]').val('');
 				return;
 			}
 
@@ -190,6 +191,7 @@ scrapeItalo = function(numeroTreno) {
 			}
 			if (searchIndex === -1) {
 				alert('Nessun Treno trovato');
+				$('input[name=numeroTreno]').val('');
 				return;
 			}
 
