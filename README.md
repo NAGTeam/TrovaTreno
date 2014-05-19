@@ -3,7 +3,7 @@ TrovaTreno
 
 A simple __FirefoxOS__ app that helps you to find the information you need about __Italian trains__.
 
-![Screenshots](http://i.imgur.com/XcwcQXi.png)
+![Imgur](http://i.imgur.com/wHzNUt8.png)
 
 
 Link to Marketplace
