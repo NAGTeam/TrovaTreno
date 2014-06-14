@@ -393,9 +393,9 @@ $(document).ready(function() {
 		});
 	};
 
-		/* Sending trains' information by email ... */
-		document.querySelector("#btn-send")
-			.onclick = function () {
+	/* Sending trains' information by email ... */
+	document.querySelector("#btn-send")
+		.onclick = function () {
 			var testo = "-SITUAZIONE:" + situazioneCorrente + " -PARTENZA: " + stazionePartenza + " Partenza programmata: " + partenzaProgrammata + " Partenza effettiva: " + partenzaEffettiva + " Binario previsto: " + binarioPrevistoPartenza + " Binario reale: " + binarioRealePartenza + " -ARRIVO: " + stazioneArrivo + " Arrivo programmato: " + arrivoProgrammato + " Arrivo previsto: " + arrivoPrevisto + " Binario previsto: " + binarioPrevistoArrivo + " Binario reale: " + binarioRealeArrivo;
 			new MozActivity({
 				name: "new",
@@ -405,4 +405,9 @@ $(document).ready(function() {
 			}
 		});
 	};
+	
+	/* Check if not Firefox OS */
+	if (navigator.userAgent.indexOf("Android") > -1 || navigator.userAgent.indexOf("Mobile") === -1) {
+		$('.scrollable').css('overflow', 'auto');
+	}
 });
