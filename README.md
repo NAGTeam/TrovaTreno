@@ -10,6 +10,14 @@ Link to Marketplace
 -------------------
 [https://marketplace.firefox.com/app/trovatreno?src=search](https://marketplace.firefox.com/app/trovatreno?src=search)
 
+Link to APK version
+-------------------
+[http://bit.ly/1nd38Cg](http://bit.ly/1nd38Cg)
+
+Note that you have to install Firefox on your Android in order to use this application.
+This is because it works on Firefox framework.
+Please use the [http://bit.ly/1qeu1uG](stable version) of Firefox, not the Beta one.
+
 To-Do
 ----
 - Multilanguage

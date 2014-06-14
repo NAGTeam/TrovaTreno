@@ -342,98 +342,67 @@ $(document).ready(function() {
 	});
 
 	/* Delegating the opening of the links to the browser ...*/
-	document.querySelector("#git-link").onclick = function() {
-		if (navigator.userAgent.indexOf("Android") > -1 || navigator.userAgent.indexOf("Mobile") === -1) {
-			var win = window.open('https://github.com/nag-motherfuckers/TrovaTreno.git', '_blank');
-			win.focus();
-		} else {
-			new MozActivity({
-				name: "view",
-				data: {
-					type: "url",
-					url: "https://github.com/nag-motherfuckers/TrovaTreno.git"
-				}
-			});
-		}
+	document.querySelector("#git-link")
+		.onclick = function () {
+		new MozActivity({
+			name: "view",
+			data: {
+				type: "url",
+				url: "https://github.com/nag-motherfuckers/TrovaTreno.git"
+			}
+		});
 	};
-	document.querySelector("#ffoshackathon").onclick = function() {
-		if (navigator.userAgent.indexOf("Android") > -1 || navigator.userAgent.indexOf("Mobile") === -1) {
-			var win = window.open('http://www.mozillaitalia.org/home/2014/03/13/firefox-os-conference-hackaton-milano-27-28-marzo-2014/', '_blank');
-			win.focus();
-		} else {
-			new MozActivity({
-				name: "view",
-				data: {
-					type: "url",
-					url: "http://www.mozillaitalia.org/home/2014/03/13/firefox-os-conference-hackaton-milano-27-28-marzo-2014/"
-				}
-			});
-		}
+	document.querySelector("#ffoshackathon")
+		.onclick = function () {
+		new MozActivity({
+			name: "view",
+			data: {
+				type: "url",
+				url: "http://www.mozillaitalia.org/home/2014/03/13/firefox-os-conference-hackaton-milano-27-28-marzo-2014/"
+			}
+		});
 	};
-	document.querySelector("#aro94").onclick = function() {
-		if (navigator.userAgent.indexOf("Android") > -1 || navigator.userAgent.indexOf("Mobile") === -1) {
-			var win = window.open('http://twitter.com/aro94', '_blank');
-			win.focus();
-		} else {
-			new MozActivity({
-				name: "view",
-				data: {
-					type: "url",
-					url: "http://twitter.com/aro94"
-				}
-			});
-		}
+	document.querySelector("#aro94")
+		.onclick = function () {
+		new MozActivity({
+			name: "view",
+			data: {
+				type: "url",
+				url: "http://twitter.com/aro94"
+			}
+		});
 	};
-	document.querySelector("#nicokant").onclick = function() {
-		if (navigator.userAgent.indexOf("Android") > -1 || navigator.userAgent.indexOf("Mobile") === -1) {
-			var win = window.open('http://twitter.com/nicokant', '_blank');
-			win.focus();
-		} else {
-			new MozActivity({
-				name: "view",
-				data: {
-					type: "url",
-					url: "http://twitter.com/nicokant"
-				}
-			});
-		}
+	document.querySelector("#nicokant")
+		.onclick = function () {
+		new MozActivity({
+			name: "view",
+			data: {
+				type: "url",
+				url: "http://twitter.com/nicokant"
+			}
+		});
 	};
-	document.querySelector("#giuscri").onclick = function() {
-		if (navigator.userAgent.indexOf("Android") > -1 || navigator.userAgent.indexOf("Mobile") === -1) {
-			var win = window.open('http://twitter.com/giuscri', '_blank');
-			win.focus();
-		} else {
-			new MozActivity({
-				name: "view",
-				data: {
-					type: "url",
-					url: "http://twitter.com/giuscri"
-				}
-			});
-		}
+	document.querySelector("#giuscri")
+		.onclick = function () {
+		new MozActivity({
+			name: "view",
+			data: {
+				type: "url",
+				url: "http://twitter.com/giuscri"
+			}
+		});
 	};
 
-	/* Sending trains' information by email ... */
-	document.querySelector("#btn-send").onclick = function() {
-		var testo = "-SITUAZIONE:" + situazioneCorrente/*.textContent*/ + " -PARTENZA: " + stazionePartenza + " Partenza programmata: " + partenzaProgrammata + " Partenza effettiva: " + partenzaEffettiva + " Binario previsto: " + binarioPrevistoPartenza + " Binario reale: " + binarioRealePartenza + " -ARRIVO: " + stazioneArrivo + " Arrivo programmato: " + arrivoProgrammato + " Arrivo previsto: " + arrivoPrevisto + " Binario previsto: " + binarioPrevistoArrivo + " Binario reale: " + binarioRealeArrivo;
-		if (navigator.userAgent.indexOf("Android") > -1 || navigator.userAgent.indexOf("Mobile") === -1) {
-			document.location.href = "mailto:?body=" + testo + "&subject=" + nomeTreno;
-			var win = window.open("mailto:?body=" + testo + "&subject=" + nomeTreno, '_blank');
-			win.focus();
-		} else {
+		/* Sending trains' information by email ... */
+		document.querySelector("#btn-send")
+			.onclick = function () {
+			var testo = "-SITUAZIONE:" + situazioneCorrente + " -PARTENZA: " + stazionePartenza + " Partenza programmata: " + partenzaProgrammata + " Partenza effettiva: " + partenzaEffettiva + " Binario previsto: " + binarioPrevistoPartenza + " Binario reale: " + binarioRealePartenza + " -ARRIVO: " + stazioneArrivo + " Arrivo programmato: " + arrivoProgrammato + " Arrivo previsto: " + arrivoPrevisto + " Binario previsto: " + binarioPrevistoArrivo + " Binario reale: " + binarioRealeArrivo;
 			new MozActivity({
 				name: "new",
 				data: {
-					type: "mail",
-					url: "mailto:?body=" + testo + "&subject=" + nomeTreno
-				}
-			});
-		}
-		;
-	}
-
-	/* Check if not Firefox OS */
-	if (navigator.userAgent.indexOf("Android") > -1 || navigator.userAgent.indexOf("Mobile") === -1) {
-		$('.scrollable').css('overflow', 'auto');
-	}
+				type: "mail",
+				url: "mailto:?body=" + testo + "&subject=" + nomeTreno
+			}
+		});
+	};
 });
