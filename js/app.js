@@ -348,7 +348,7 @@ $(document).ready(function() {
 			name: "view",
 			data: {
 				type: "url",
-				url: "https://github.com/nag-motherfuckers/TrovaTreno.git"
+				url: "https://github.com/NAGTeam/TrovaTreno.git"
 			}
 		});
 	};
