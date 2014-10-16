@@ -12,6 +12,7 @@
 		<link rel="stylesheet" href="style/scrolling.css" />
 		<link rel="stylesheet" href="style/lists.css" />
 		<link rel="stylesheet" href="style/toolbars.css" />
+        <link rel="stylesheet" href="style/icons/octicons.css" />
 
 		<!-- ... then some extra tricks for FirefoxOS ... -->
 		<link rel="stylesheet" href="style/util.css" />
@@ -31,8 +32,8 @@
 			<header class="fixed">
 				<button></button>
 				<menu type="toolbar">
-					<button type="button" id="btn-about"><span>?</span></button>
-				</menu>
+                    <button type="button" id="btn-about"><span class="mega-octicon octicon-info"></span></button>
+                </menu>
 				<h1>TrovaTreno</h1>
 			</header>
 			<article class="content scrollable header">
@@ -58,7 +59,7 @@
 		<section role="region" id="resultsScreen" data-position="right">
 			<header class="fixed">
 				<button type="button" class='btn-back'>
-					<span class='icon icon-back'>Back</span>
+					<span class="mega-octicon octicon-chevron-left"></span>
 				</button>
 				<h1 id="nomeTreno"><span></span></h1>
 				<menu type="toolbar">
@@ -93,7 +94,7 @@
 		<section role="region" id="aboutScreen" data-position="right">
 			<header class="fixed">
 				<button type="button" class='btn-back'>
-					<span class='icon icon-back'>Back</span>
+					<span class="mega-octicon octicon-chevron-left"></span>
 				</button>
 				<h1>About</h1>
 				<menu type="toolbar">
@@ -110,7 +111,7 @@
 						<p>Con questa applicazione abbiamo vinto l'Hackathon di Milano su Firefox OS! (per maggiori informazioni sull'evento clicca <a href="#" id="ffoshackathon">qui</a>)</p>
 						<header>Versione</header>
 						<div>
-							<p>1.2.2</p>
+							<p>1.2.3</p>
 						</div>
 						<header>Developers</header>
 						<div>
