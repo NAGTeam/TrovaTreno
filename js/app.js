@@ -1,4 +1,4 @@
-var nomeTreno, stazionePartenza, stazioneArrivo, partenzaProgrammata, partenzaEffettiva, arrivoProgrammato, arrivoPrevisto, binarioRealePartenza, binarioRealeArrivo, binarioPrevistoPartenza, binarioPrevistoArrivo, el;
+var nomeTreno, stazionePartenza, stazioneArrivo, partenzaProgrammata, partenzaEffettiva, arrivoProgrammato, arrivoPrevisto, binarioRealePartenza, binarioRealeArrivo, binarioPrevistoPartenza, binarioPrevistoArrivo, el, numeroTreno;
 
 /* Adding a String method for uglyfing a HTML source -- useful for regex's matching */
 String.prototype.shrinkHTML = function() {
@@ -245,6 +245,7 @@ scrapeItalo = function(numeroTreno) {
 	else {
 		alert('Il treno cercato non esiste');
 		$('input[name=numeroTreno]').val('');
+        numeroTreno = 0;
 		return;
 	}
 };
@@ -317,6 +318,7 @@ $(document).ready(function() {
 	/* If back-button is clicked, come back to the initial screen ... */
 	$('.btn-back').click(function() {
 		$('input[name=numeroTreno]').val('');
+        numeroTreno = 0;
 		$('#partenza > p').remove();
 		$('#ultima > div').remove();
 		$('#arrivo > p').remove();
@@ -405,7 +407,22 @@ $(document).ready(function() {
 			}
 		});
 	};
-	
+
+   $(document).on('click', '#reload', function () {
+       parameters = "numeroTreno=" + numeroTreno;
+       $('#nomeTreno > span').empty();
+       $('#situazioneCorrente > span').empty();
+       $('#partenza').empty();
+       $('#arrivo').empty();
+       $('#ultima').empty();
+       utils.status.show('Reloading news...');
+       if (numeroTreno <= 9999 && numeroTreno >= 9900) {
+           scrapeItalo(numeroTreno);
+       } else {
+           scrape(parameters);
+       }
+    });
+
 	/* Check if not Firefox OS */
 	if (navigator.userAgent.indexOf("Android") > -1 || navigator.userAgent.indexOf("Mobile") === -1) {
 		$('.scrollable').css('overflow', 'auto');

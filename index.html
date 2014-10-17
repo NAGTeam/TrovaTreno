@@ -12,6 +12,7 @@
 		<link rel="stylesheet" href="style/scrolling.css" />
 		<link rel="stylesheet" href="style/lists.css" />
 		<link rel="stylesheet" href="style/toolbars.css" />
+        <link rel="stylesheet" href="style/status.css" />
         <link rel="stylesheet" href="style/icons/octicons.css" />
 
 		<!-- ... then some extra tricks for FirefoxOS ... -->
@@ -22,9 +23,10 @@
 		<link rel="stylesheet" href="style/transitions.css" />
 
 		<!-- Linking scripts ... -->
-		<script src="js/jquery-2.1.0.min.js"></script>
+		<script src="js/jquery-2.1.1.min.js"></script>
 		<script src='js/scriptDB.js'></script>
 		<script src="js/app.js"></script>
+        <script src="js/status.js"></script>
 	</head>
 
 	<body>
@@ -39,7 +41,7 @@
 			<article class="content scrollable header">
 				<div id='div1'>
 					<input type="text" name="numeroTreno" placeholder="Inserisci il numero del treno" />
-					<button type="button" id="btn-search">Cerca!</button>
+					<button type="button" id="btn-search">CERCA</button>
 					<br>
 				</div>
 				<section data-type="list">
@@ -61,10 +63,14 @@
 				<button type="button" class='btn-back'>
 					<span class="mega-octicon octicon-chevron-left"></span>
 				</button>
+                <button></button>
 				<h1 id="nomeTreno"><span></span></h1>
 				<menu type="toolbar">
+                    <button type="button" id="reload">
+						<span class="mega-octicon octicon-sync"></span>
+                    </button>
 					<button type="button" id="btn-send">
-						<span class='icon icon-send'>Share</span>
+						<span class="mega-octicon octicon-mail"></span>
                     </button>
 				</menu>
 			</header>

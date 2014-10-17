@@ -21,7 +21,7 @@ textarea {
   border: 0.1rem solid #ccc;
   border-radius: 0.3rem;
   box-shadow: none; /* override the box-shadow from the system (performance issue) */
-  background: #fff url(input_areas/images/ui/shadow.png) repeat-x;
+  background: #fff url(input_areas/shadow.png) repeat-x;
 }
 
 textarea {
@@ -73,14 +73,14 @@ form p textarea + button.reset {
   font-size: 0;
   opacity: 0;
   pointer-events: none;
-  background: transparent url(input_areas/images/icons/clear.png) no-repeat 50% 50% / 1.7rem auto;
+  background: transparent url(input_areas/clear.png) no-repeat 50% 50% / 1.7rem auto;
 }
 
 form.skin-dark p input + button[type="reset"],
 form.skin-dark p textarea + button[type="reset"],
 form.skin-dark p input + button.reset,
 form.skin-dark p textarea + button.reset {
-  background-image: url(input_areas/images/icons/clear-dark.png);
+  background-image: url(input_areas/clear-dark.png);
 }
 
 /* To avoid colission with BB butons */
@@ -125,7 +125,7 @@ fieldset {
   border: 0.1rem solid rgba(0,0,0,.2);
   font-size: 1.8rem;
   line-height: 1em;
-  background: #fff url(input_areas/images/ui/shadow.png) repeat-x left top;
+  background: #fff url(input_areas/shadow.png) repeat-x left top;
 }
 
 fieldset  + fieldset {
@@ -147,7 +147,7 @@ fieldset legend {
 }
 
 fieldset legend.action {
-  background: url(input_areas/images/icons/arrow.png) no-repeat 100% 100% / 1.2rem;
+  background: url(input_areas/arrow.png) no-repeat 100% 100% / 1.2rem;
 }
 
 fieldset legend:active {
@@ -194,7 +194,7 @@ form[role="search"] {
 }
 
 form[role="search"].skin-dark {
-  background: url(input_areas/images/ui/background-dark.png) repeat;
+  background: url(input_areas/background-dark.png) repeat;
   background-size: 2rem;
 }
 
@@ -209,7 +209,7 @@ form[role="search"]:before {
   left: 1rem;
   height: 1.6rem;
   width: 1.6rem;
-  background: url(input_areas/images/icons/search.png) no-repeat;
+  background: url(input_areas/search.png) no-repeat;
   background-size: 1.6rem;
 }
 
@@ -218,7 +218,7 @@ form[role="search"].bottom:before {
 }
 
 form[role="search"].skin-dark:before {
-  background-image: url(input_areas/images/icons/search-dark.png);
+  background-image: url(input_areas/search-dark.png);
 }
 
 form[role="search"]:after {
@@ -228,7 +228,7 @@ form[role="search"]:after {
   right: 0;
   left: 0;
   height: 0.4rem;
-  background: url(input_areas/images/ui/shadow-search.png) repeat-x left top;
+  background: url(input_areas/shadow-search.png) repeat-x left top;
   border-top: 0.1rem solid #fff;
 }
 
@@ -236,7 +236,7 @@ form[role="search"].bottom:after {
   content: "";
   position: absolute;
   top: -0.4rem;
-  background: url(input_areas/images/ui/shadow-invert.png) repeat-x 0 100%;
+  background: url(input_areas/shadow-invert.png) repeat-x 0 100%;
   border-color: transparent;
 }
 form[role="search"].skin-dark:after {
