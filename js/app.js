@@ -402,25 +402,25 @@ $(document).ready(function() {
 			new MozActivity({
 				name: "new",
 				data: {
-				type: "mail",
-				url: "mailto:?body=" + testo + "&subject=" + nomeTreno
-			}
-		});
-	};
+                    type: "mail",
+                    url: "mailto:?body=" + testo + "&subject=" + nomeTreno
+                }
+            });
+    };
 
-   $(document).on('click', '#reload', function () {
-       parameters = "numeroTreno=" + numeroTreno;
-       $('#nomeTreno > span').empty();
-       $('#situazioneCorrente > span').empty();
-       $('#partenza').empty();
-       $('#arrivo').empty();
-       $('#ultima').empty();
-       utils.status.show('Reloading news...');
-       if (numeroTreno <= 9999 && numeroTreno >= 9900) {
-           scrapeItalo(numeroTreno);
-       } else {
-           scrape(parameters);
-       }
+	$(document).on('click', '#reload', function () {
+		parameters = "numeroTreno=" + numeroTreno;
+    	$('#nomeTreno > span').empty();
+    	$('#situazioneCorrente > span').empty();
+    	$('#partenza').empty();
+    	$('#arrivo').empty();
+    	$('#ultima').empty();
+    	utils.status.show('Reloading news...');
+    	if (numeroTreno <= 9999 && numeroTreno >= 9900) {
+        	scrapeItalo(numeroTreno);
+    	} else {
+        	scrape(parameters);
+    	}
     });
 
 	/* Check if not Firefox OS */
