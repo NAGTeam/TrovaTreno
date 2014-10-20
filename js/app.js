@@ -410,13 +410,18 @@ $(document).ready(function() {
 		$('#share_am').addClass('hidden');
     };
 
-	// Share trains' information with Facebook and Twitter ...
+	// Share trains' information with Facebook, Twitter, Google+ ...
 	document.querySelector("#share-fb").onclick = function () {
 		alert("Funzione non ancora disponibile.");
 		$('#share_am').removeClass('onviewport');
 		$('#share_am').addClass('hidden');
 	};
 	document.querySelector("#share-twitter").onclick = function () {
+		alert("Funzione non ancora disponibile.");
+		$('#share_am').removeClass('onviewport');
+		$('#share_am').addClass('hidden');
+	};
+	document.querySelector("#share-gplus").onclick = function () {
 		alert("Funzione non ancora disponibile.");
 		$('#share_am').removeClass('onviewport');
 		$('#share_am').addClass('hidden');
