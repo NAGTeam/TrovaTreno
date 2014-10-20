@@ -395,8 +395,8 @@ $(document).ready(function() {
 		});
 	};
 
-	/* Sending trains' information by email ... */
-	document.querySelector("#btn-send")
+	// Sending trains' information by email ...
+	document.querySelector("#btn-send-email")
 		.onclick = function () {
 			var testo = "-SITUAZIONE:" + situazioneCorrente + " -PARTENZA: " + stazionePartenza + " Partenza programmata: " + partenzaProgrammata + " Partenza effettiva: " + partenzaEffettiva + " Binario previsto: " + binarioPrevistoPartenza + " Binario reale: " + binarioRealePartenza + " -ARRIVO: " + stazioneArrivo + " Arrivo programmato: " + arrivoProgrammato + " Arrivo previsto: " + arrivoPrevisto + " Binario previsto: " + binarioPrevistoArrivo + " Binario reale: " + binarioRealeArrivo;
 			new MozActivity({
@@ -408,6 +408,7 @@ $(document).ready(function() {
             });
     };
 
+	/* Function to reload train results screen */
 	$(document).on('click', '#reload', function () {
 		parameters = "numeroTreno=" + numeroTreno;
     	$('#nomeTreno > span').empty();
@@ -422,6 +423,17 @@ $(document).ready(function() {
         	scrape(parameters);
     	}
     });
+
+	/* Trying to use action menu in order to share trains' information */
+	$(document).on('click', '#btn-send', function () {
+		$('#share_am').removeClass('hidden');
+		$('#share_am').addClass('onviewport');
+	});
+
+	document.querySelector('#exit_am').onclick = function () {
+		$('#share_am').removeClass('onviewport');
+		$('#share_am').addClass('hidden');
+	};
 
 	/* Check if not Firefox OS */
 	if (navigator.userAgent.indexOf("Android") > -1 || navigator.userAgent.indexOf("Mobile") === -1) {
