@@ -406,7 +406,21 @@ $(document).ready(function() {
                     url: "mailto:?body=" + testo + "&subject=" + nomeTreno
                 }
             });
+		$('#share_am').removeClass('onviewport');
+		$('#share_am').addClass('hidden');
     };
+
+	// Share trains' information with Facebook and Twitter ...
+	document.querySelector("#share-fb").onclick = function () {
+		alert("Funzione non ancora disponibile.");
+		$('#share_am').removeClass('onviewport');
+		$('#share_am').addClass('hidden');
+	};
+	document.querySelector("#share-twitter").onclick = function () {
+		alert("Funzione non ancora disponibile.");
+		$('#share_am').removeClass('onviewport');
+		$('#share_am').addClass('hidden');
+	};
 
 	/* Function to reload train results screen */
 	$(document).on('click', '#reload', function () {
