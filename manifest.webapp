@@ -3,7 +3,8 @@
     "description": "A simple app that helps you to find the information you need about Italian trains",
     "version": "1.2.4",
     "developer": {
-        "name": "nag"
+        "name": "nag",
+        "url": "https://github.com/NAGTeam"
     },
     "launch_path": "/index.html",
     "type": "privileged",
@@ -17,5 +18,26 @@
         "128": "/style/icons/icon_128.png",
         "90": "/style/icons/icon_90.png",
         "120": "/style/icons/icon_120.png"
+    },
+    "default_locale": "en",
+    "locales": {
+        "eo": {
+            "name": "TroviTrajnojn",
+            "description": "Simpla aplikaĵo, kiu helpas vin trovi informojn, kiujn vi bezonas, pri Italajn trajnoj",
+            "permissions": {
+                "systemXHR": {
+                    "description": "Bezonata por obteni datumojn pri trajnoj el mobile.viaggiatreno.it kaj italotreno.it"
+                }
+            }
+        },
+        "it": {
+            "name": "TrovaTreno",
+            "description": "Una semplice app che ti aiuta a trovare le informazioni che hai bisogno sui treni in Italia",
+            "permissions": {
+                "systemXHR": {
+                    "description": "Necessario per ottenere i dati sui treni da mobile.viaggiatreno.it e da italotreno.it"
+                }
+            }
+        }
     }
 }
