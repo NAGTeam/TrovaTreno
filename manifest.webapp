@@ -8,6 +8,22 @@
     },
     "launch_path": "/index.html",
     "type": "privileged",
+    "activities": {
+       "view": {
+         "href": "./show.html",
+         "disposition": "inline",
+         "filters": {
+                 "type": [
+                   "show_train_info"
+                 ],
+                 "train_number": {
+                     "pattern": "/[0-9]{4}/",
+                      "regexp": "/[0-9]{4}/"   
+                 }
+         },
+        "return": false
+       }
+    },
     "permissions": {
         "systemXHR": {
             "description": "Used to retrive trains data from mobile.viaggiatreno.it and italotreno.it"
